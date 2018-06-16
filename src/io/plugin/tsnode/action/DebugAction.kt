@@ -1,25 +1,22 @@
 package io.plugin.tsnode.action
 
-import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
-import com.intellij.openapi.vfs.VirtualFile
 import icons.TypeScriptIcons
-import io.plugin.tsnode.execution.TypeScriptUtil
+import io.plugin.tsnode.execution.tsUtil
 
-class DebugAction : AnAction(TypeScriptIcons.Debug)
+class DebugAction : Action(TypeScriptIcons.Debug)
 {
-	private fun _getText(virtualFile: VirtualFile): String
-	{
-		return "Debug '${virtualFile.name}'"
-	}
+	override val _debug = true
 
 	override fun actionPerformed(event: AnActionEvent)
 	{
+		LOG.info("888")
+
 		val project = event.project
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
 		if (project == null || virtualFile == null) return
-		TypeScriptUtil.execute(project, virtualFile, true)
+		tsUtil.execute(project, virtualFile, true)
 	}
 
 	/*
@@ -27,7 +24,7 @@ class DebugAction : AnAction(TypeScriptIcons.Debug)
 	{
 		val project = event!!.project
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
-		if (project != null && virtualFile != null && TypeScriptUtil.executable(project, virtualFile))
+		if (project != null && virtualFile != null && tsUtil.executable(project, virtualFile))
 		{
 			event.presentation.isEnabledAndVisible = true
 			event.presentation.setText(_getText(virtualFile))

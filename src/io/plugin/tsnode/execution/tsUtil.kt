@@ -10,11 +10,10 @@ import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
-import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
 import io.plugin.tsnode.log.LogPlugin
 import java.util.*
 
-object TypeScriptUtil
+object tsUtil
 {
 	public val TypeScriptFileType = "com.intellij.lang.javascript.TypeScriptFileType"
 
@@ -24,7 +23,7 @@ object TypeScriptUtil
 
 	fun isTypeScript(virtualFile: VirtualFile): Boolean
 	{
-		return TypeScriptFileType == virtualFile.fileType.name
+		return TypeScriptFileType == virtualFile.fileType.javaClass.name
 	}
 
 	fun compatibleFiles(event: AnActionEvent): List<VirtualFile>
@@ -34,7 +33,7 @@ object TypeScriptUtil
 		logger2.debug("[tsnode][compatibleFiles]" + files.size)
 
 		return files
-			.filter { it -> TypeScriptUtil.isTypeScript(it) }
+			.filter { it -> tsUtil.isTypeScript(it) }
 	}
 
 	fun executable(project: Project, virtualFile: VirtualFile): Boolean
@@ -44,12 +43,26 @@ object TypeScriptUtil
 		LogPlugin.logger.debug(virtualFile.fileType.javaClass.name)
 
 		return TypeScriptFileType == virtualFile.fileType.name
+			//&& getConfiguration(project, virtualFile) != null
 	}
 
 	private fun getConfiguration(project: Project, virtualFile: VirtualFile): RunnerAndConfigurationSettingsImpl?
 	{
 		val tsPath = virtualFile.canonicalPath
 		val configuration: RunnerAndConfigurationSettingsImpl? = configurations[tsPath]
+
+		if (configuration == null)
+		{
+			if (tsPath == null) return null
+
+			if (virtualFile.exists())
+			{
+				val runManager = RunManager.getInstance(project)
+
+				//runManager.addConfiguration(configuration)
+			}
+
+		}
 
 		return configuration
 	}
@@ -63,7 +76,7 @@ object TypeScriptUtil
 
 		if (configuration != null)
 		{
-			val configurationsList = runManager.getConfigurationsList(NodeJsRunConfigurationType.getInstance())
+			val configurationsList = runManager.getConfigurationsList(TypeScriptConfigurationType.getInstance())
 			if (!configurationsList.contains(configuration.configuration))
 			{
 				runManager.addConfiguration(configuration)
