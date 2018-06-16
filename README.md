@@ -2,6 +2,12 @@
 
     idea-run-typescript
 
+## need help
+
+1. can't save run conf field change
+2. action can't show for typescript only
+3. can't print debug log
+
 ## link
 
 - https://github.com/t3hnar/CmdSupport

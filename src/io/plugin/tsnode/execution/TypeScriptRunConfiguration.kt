@@ -33,5 +33,24 @@ class TypeScriptRunConfiguration(project: Project, factory: ConfigurationFactory
 	{
 		_typescriptPackage = nodePackage
 	}
-}
 
+	fun getWorkingDirectory(): String
+	{
+		return typescriptRunSettings.workingDir
+	}
+
+	fun setWorkingDirectory(workingDirectory: String)
+	{
+		typescriptRunSettings.workingDir = workingDirectory
+	}
+
+	fun getScriptName(): String
+	{
+		return typescriptRunSettings.typescriptFile
+	}
+
+	fun setScriptName(typescriptFile: String)
+	{
+		typescriptRunSettings.typescriptFile = typescriptFile
+	}
+}

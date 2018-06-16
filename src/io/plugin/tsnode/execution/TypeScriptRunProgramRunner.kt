@@ -29,3 +29,13 @@ object TypeScriptRunProgramRunner : GenericProgramRunner<RunnerSettings>()
 		return descriptor
 	}
 }
+
+class TypeScriptRunRunner : DefaultProgramRunner()
+{
+	override fun getRunnerId() = "TypeScriptRunnerRun"
+
+	override fun canRun(executorId: String, profile: RunProfile): Boolean
+	{
+		return DefaultRunExecutor.EXECUTOR_ID == executorId && profile is TypeScriptRunConfiguration
+	}
+}

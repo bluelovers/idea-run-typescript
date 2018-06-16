@@ -22,7 +22,8 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <configurationType implementation="io.plugin.tsnode.execution.TypeScriptConfigurationType"/>
-    <programRunner implementation="io.plugin.tsnode.execution.TypeScriptRunProgramRunner"/>
+    <programRunner implementation="io.plugin.tsnode.execution.TypeScriptRunRunner"/>
+    <runConfigurationProducer implementation="io.plugin.tsnode.execution.TypeScriptRunConfigurationProducer"/>
   </extensions>
 
   <application-components>
