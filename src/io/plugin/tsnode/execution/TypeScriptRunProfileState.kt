@@ -8,9 +8,7 @@ import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessTerminatedListener
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.execution.testframework.TestConsoleProperties
-import com.intellij.execution.testframework.sm.SMTestRunnerConnectionUtil
 import com.intellij.execution.testframework.sm.runner.SMTRunnerConsoleProperties
-import com.intellij.execution.ui.ConsoleView
 import com.intellij.openapi.project.Project
 import com.intellij.util.execution.ParametersListUtil
 import org.apache.commons.lang.StringUtils
@@ -65,11 +63,13 @@ class TypeScriptRunProfileState(private var project: Project,
 		return processHandler
 	}
 
+	/*
 	override fun createConsole(executor: Executor): ConsoleView?
 	{
 		val props = TypeScriptConsoleProperties(runConfig, this.executor)
 		return SMTestRunnerConnectionUtil.createConsole("TypeScript", props)
 	}
+	*/
 
 	private fun tsnodePath(runConfig: TypeScriptRunConfiguration): String
 	{
