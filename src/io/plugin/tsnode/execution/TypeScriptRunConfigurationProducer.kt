@@ -9,34 +9,39 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiUtilCore
 import com.intellij.util.ObjectUtils.tryCast
 
-class TypeScriptRunConfigurationProducer : JsTestRunConfigurationProducer<TypeScriptRunConfiguration>(TypeScriptConfigurationType.getInstance(), ImmutableList.of("typescript")) {
-    override fun isConfigurationFromCompatibleContext(runConfig: TypeScriptRunConfiguration, context: ConfigurationContext): Boolean {
-        return findTestFile(runConfig, context) != null
-    }
+class TypeScriptRunConfigurationProducer : JsTestRunConfigurationProducer<TypeScriptRunConfiguration>(TypeScriptConfigurationType.getInstance(), ImmutableList.of("typescript"))
+{
+	override fun isConfigurationFromCompatibleContext(runConfig: TypeScriptRunConfiguration, context: ConfigurationContext): Boolean
+	{
+		return findTestFile(runConfig, context) != null
+	}
 
-    override fun setupConfigurationFromCompatibleContext(runConfig: TypeScriptRunConfiguration, context: ConfigurationContext, sourceElement: Ref<PsiElement>): Boolean {
-        val jsFile = findTestFile(runConfig, context) ?: return false
-        sourceElement.set(jsFile)
-        runConfig.setGeneratedName()
+	override fun setupConfigurationFromCompatibleContext(runConfig: TypeScriptRunConfiguration, context: ConfigurationContext, sourceElement: Ref<PsiElement>): Boolean
+	{
+		val jsFile = findTestFile(runConfig, context) ?: return false
+		sourceElement.set(jsFile)
+		runConfig.setGeneratedName()
 
-        return true
-    }
+		return true
+	}
 
-    private fun findTestFile(runConfig: TypeScriptRunConfiguration, context: ConfigurationContext): JSFile? {
-        val element = context.psiLocation ?: return null
-        val currentFile = PsiUtilCore.getVirtualFile(element) ?: return null
-        if (currentFile.isDirectory) {
-            // not sure the right way to run a dir
-            return null
-        }
+	private fun findTestFile(runConfig: TypeScriptRunConfiguration, context: ConfigurationContext): JSFile?
+	{
+		val element = context.psiLocation ?: return null
+		val currentFile = PsiUtilCore.getVirtualFile(element) ?: return null
+		if (currentFile.isDirectory)
+		{
+			// not sure the right way to run a dir
+			return null
+		}
 
-        val psiFile = tryCast(element.containingFile, JSFile::class.java) ?: return null
-        psiFile.testFileType ?: return null
+		val psiFile = tryCast(element.containingFile, JSFile::class.java) ?: return null
+		psiFile.testFileType ?: return null
 
-        runConfig.typescriptRunSettings = runConfig.typescriptRunSettings.copy(
-                specFile = currentFile.path
-        )
+		runConfig.typescriptRunSettings = runConfig.typescriptRunSettings.copy(
+			typescriptFile = currentFile.path
+		)
 
-        return psiFile
-    }
+		return psiFile
+	}
 }

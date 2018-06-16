@@ -10,7 +10,7 @@ import com.intellij.openapi.fileEditor.FileDocumentManager
 
 object TypeScriptRunProgramRunner : GenericProgramRunner<RunnerSettings>()
 {
-	override fun getRunnerId() = "TypeScriptJavascriptTestRunnerRun"
+	override fun getRunnerId() = "TypeScriptRunnerRun"
 
 	override fun canRun(executorId: String, profile: RunProfile): Boolean
 	{

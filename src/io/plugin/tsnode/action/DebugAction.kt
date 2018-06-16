@@ -7,27 +7,19 @@ import com.intellij.openapi.vfs.VirtualFile
 import icons.TypeScriptIcons
 import io.plugin.tsnode.execution.TypeScriptUtil
 
-class RunAction : AnAction(TypeScriptIcons.TypeScript)
+class DebugAction : AnAction(TypeScriptIcons.Debug)
 {
-	//val logger2 = Logger.getInstance(javaClass)
-
 	private fun _getText(virtualFile: VirtualFile): String
 	{
-		return "Run '${virtualFile.name}'"
+		return "Debug '${virtualFile.name}'"
 	}
 
 	override fun actionPerformed(event: AnActionEvent)
 	{
-		//val project = event.getData(PlatformDataKeys.PROJECT) as Project
 		val project = event.project
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
-
-		//logger2.info("[tsnode][actionPerformed]")
-
-		//LogPlugin.logger.info("[actionPerformed]" + project.toString())
-		//LogPlugin.logger.info("[actionPerformed]" + virtualFile.toString())
 		if (project == null || virtualFile == null) return
-		TypeScriptUtil.execute(project, virtualFile, false)
+		TypeScriptUtil.execute(project, virtualFile, true)
 	}
 
 	/*
@@ -35,11 +27,6 @@ class RunAction : AnAction(TypeScriptIcons.TypeScript)
 	{
 		val project = event!!.project
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
-
-		//logger2.info("[tsnode][update]" + project.toString())
-
-		//LogPlugin.logger.info("[update]" + virtualFile.toString())
-
 		if (project != null && virtualFile != null && TypeScriptUtil.executable(project, virtualFile))
 		{
 			event.presentation.isEnabledAndVisible = true

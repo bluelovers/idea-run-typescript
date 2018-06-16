@@ -27,8 +27,10 @@ class TypeScriptConfigurationEditor(private var project: Project) : SettingsEdit
 {
 	private var nodeJsInterpreterField: NodeJsInterpreterField = NodeJsInterpreterField(project, false)
 	private var nodeOptionsField: RawCommandLineEditor = RawCommandLineEditor()
+
 	private var workingDirectoryField = createWorkingDirectoryField()
 	private var envVars: EnvironmentVariablesTextFieldWithBrowseButton = EnvironmentVariablesTextFieldWithBrowseButton()
+
 	private var tsnodePackageField: NodePackageField = NodePackageField(nodeJsInterpreterField, "ts-node")
 	private var typescriptOptionsField = createTypeScriptOptionsField()
 	private var typescriptConfigFileField = createTypeScriptConfigFileField()
@@ -49,7 +51,7 @@ class TypeScriptConfigurationEditor(private var project: Project) : SettingsEdit
 
 			.addLabeledComponent("&TypeScript Node package:", tsnodePackageField)
 			.addLabeledComponent("ts&config file:", typescriptConfigFileField)
-			.addLabeledComponent("E&xtra TypeScript options:", typescriptOptionsField)
+			.addLabeledComponent("E&xtra ts-node options:", typescriptOptionsField)
 
 			.addLabeledComponent("TypeScript &file:", typescriptFileField)
 			.addLabeledComponent("&Application parameters:", typescriptFileOptionsField)
@@ -79,7 +81,7 @@ class TypeScriptConfigurationEditor(private var project: Project) : SettingsEdit
 
 		if (field is ComponentWithEmptyText)
 		{
-			(field as ComponentWithEmptyText).emptyText.text = "CLI options, e.g. --transpileOnly --skip-project"
+			(field as ComponentWithEmptyText).emptyText.text = "CLI options"
 		}
 
 		return editor
@@ -96,7 +98,7 @@ class TypeScriptConfigurationEditor(private var project: Project) : SettingsEdit
 	private fun createTypeScriptOptionsField(): RawCommandLineEditor
 	{
 		val editor = RawCommandLineEditor()
-		editor.dialogCaption = "Extra TypeScript Options"
+		editor.dialogCaption = "Extra ts-node Options"
 		val field = editor.textField
 		if (field is ExpandableTextField)
 		{
@@ -105,7 +107,7 @@ class TypeScriptConfigurationEditor(private var project: Project) : SettingsEdit
 
 		if (field is ComponentWithEmptyText)
 		{
-			(field as ComponentWithEmptyText).emptyText.text = "CLI options, e.g. --fail-fast=true"
+			(field as ComponentWithEmptyText).emptyText.text = "CLI options, e.g. --transpileOnly --skip-project"
 		}
 
 		return editor

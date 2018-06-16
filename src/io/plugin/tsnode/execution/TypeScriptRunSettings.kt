@@ -13,6 +13,5 @@ data class TypeScriptRunSettings(
 	var typescriptFileOptions: String = "",
 
 	var extraTypeScriptOptions: String = "",
-	var typescriptConfigFile: String = "",
-	var specFile: String = ""
+	var typescriptConfigFile: String = ""
 )

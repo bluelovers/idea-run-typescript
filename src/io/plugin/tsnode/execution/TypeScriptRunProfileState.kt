@@ -52,12 +52,12 @@ class TypeScriptRunProfileState(private var project: Project,
 
 		if (!StringUtils.isBlank(runSettings.typescriptConfigFile))
 		{
-			commandLine.addParameter("--config=${runSettings.typescriptConfigFile}")
+			commandLine.addParameter("--project ${runSettings.typescriptConfigFile}")
 		}
 
-		if (!StringUtils.isBlank(runSettings.specFile))
+		if (!StringUtils.isBlank(runSettings.typescriptFile))
 		{
-			commandLine.addParameter(runSettings.specFile)
+			commandLine.addParameter(runSettings.typescriptFile)
 		}
 
 		val processHandler = KillableColoredProcessHandler(commandLine)

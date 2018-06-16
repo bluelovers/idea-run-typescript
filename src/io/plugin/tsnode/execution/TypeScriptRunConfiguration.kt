@@ -22,7 +22,7 @@ class TypeScriptRunConfiguration(project: Project, factory: ConfigurationFactory
 		if (_typescriptPackage == null)
 		{
 			val interpreter = NodeJsLocalInterpreter.tryCast(typescriptRunSettings.nodeJs.resolve(project))
-			val pkg = NodePackage.findPreferredPackage(project, "TypeScript", interpreter)
+			val pkg = NodePackage.findPreferredPackage(project, "ts-node", interpreter)
 			_typescriptPackage = pkg
 			return pkg
 		}

@@ -22,6 +22,7 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <configurationType implementation="io.plugin.tsnode.execution.TypeScriptConfigurationType"/>
+    <programRunner implementation="io.plugin.tsnode.execution.TypeScriptRunProgramRunner"/>
   </extensions>
 
   <application-components>
@@ -35,13 +36,13 @@
   <actions>
     <!-- Add your actions here -->
     <action id="io.plugin.tsnode.action.RunAction" class="io.plugin.tsnode.action.RunAction"
-            text="Run TS" description="run ts">
+            text="Run TypeScript" description="run ts">
             <add-to-group group-id="ProjectViewPopupMenuRunGroup" anchor="first"/>
             <add-to-group group-id="EditorPopupMenu.Run" anchor="first"/>
         </action>
 
-    <action id="io.plugin.tsnode.action.DebugAction" class="io.plugin.tsnode.action.RunAction"
-            text="Debug TS" description="debug ts">
+    <action id="io.plugin.tsnode.action.DebugAction" class="io.plugin.tsnode.action.DebugAction"
+            text="Debug TypeScript" description="debug ts">
             <add-to-group group-id="ProjectViewPopupMenuRunGroup" anchor="after" relative-to-action="io.plugin.tsnode.action.RunAction"/>
             <add-to-group group-id="EditorPopupMenu.Run" anchor="after" relative-to-action="io.plugin.tsnode.action.RunAction"/>
         </action>
