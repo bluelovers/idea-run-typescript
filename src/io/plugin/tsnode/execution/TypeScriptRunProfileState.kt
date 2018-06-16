@@ -7,8 +7,6 @@ import com.intellij.execution.process.KillableColoredProcessHandler
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessTerminatedListener
 import com.intellij.execution.runners.ExecutionEnvironment
-import com.intellij.execution.testframework.TestConsoleProperties
-import com.intellij.execution.testframework.sm.runner.SMTRunnerConsoleProperties
 import com.intellij.openapi.project.Project
 import com.intellij.util.execution.ParametersListUtil
 import org.apache.commons.lang.StringUtils
@@ -56,6 +54,11 @@ class TypeScriptRunProfileState(private var project: Project,
 		if (!StringUtils.isBlank(runSettings.typescriptFile))
 		{
 			commandLine.addParameter(runSettings.typescriptFile)
+
+			if (!StringUtils.isBlank(runSettings.typescriptFileOptions))
+			{
+				commandLine.addParameter(runSettings.typescriptFileOptions)
+			}
 		}
 
 		val processHandler = KillableColoredProcessHandler(commandLine)
@@ -76,21 +79,6 @@ class TypeScriptRunProfileState(private var project: Project,
 		val typescriptPath = Paths.get(runConfig.selectedTsNodePackage().systemDependentPath)
 			.resolve("""dist${File.separatorChar}bin.js""")
 		return typescriptPath.toAbsolutePath().toString()
-	}
-
-	private class TypeScriptConsoleProperties(configuration: TypeScriptRunConfiguration, executor: Executor) : SMTRunnerConsoleProperties(configuration, "TypeScript", executor)
-	{
-
-		init
-		{
-			isUsePredefinedMessageFilter = true
-			setIfUndefined(TestConsoleProperties.HIDE_PASSED_TESTS, false)
-			setIfUndefined(TestConsoleProperties.HIDE_IGNORED_TEST, true)
-			setIfUndefined(TestConsoleProperties.SCROLL_TO_SOURCE, true)
-			setIfUndefined(TestConsoleProperties.SELECT_FIRST_DEFECT, true)
-			isIdBasedTestTree = true
-			isPrintTestingStartedTime = false
-		}
 	}
 
 }
