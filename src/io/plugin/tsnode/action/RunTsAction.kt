@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.DataKeys
 import io.plugin.tsnode.execution.tsUtil
 import io.plugin.tsnode.execution.tsUtil.compatibleFiles
 
-class RunAction : Action()
+class RunTsAction : tsAction()
 {
 	override val _debug = false
 

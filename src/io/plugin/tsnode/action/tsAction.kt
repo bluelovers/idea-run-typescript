@@ -9,7 +9,7 @@ import icons.TypeScriptIcons
 import io.plugin.tsnode.execution.tsUtil
 import javax.swing.Icon
 
-public abstract class Action(icon: Icon = TypeScriptIcons.TypeScript): AnAction(icon)
+public abstract class tsAction(icon: Icon = TypeScriptIcons.TypeScript): AnAction(icon)
 {
 	public val LOG = Logger.getInstance(javaClass)
 

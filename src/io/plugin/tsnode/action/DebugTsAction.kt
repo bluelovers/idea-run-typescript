@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.DataKeys
 import icons.TypeScriptIcons
 import io.plugin.tsnode.execution.tsUtil
 
-class DebugAction : Action(TypeScriptIcons.Debug)
+class DebugTsAction : tsAction(TypeScriptIcons.Debug)
 {
 	override val _debug = true
 
