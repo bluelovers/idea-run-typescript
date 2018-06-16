@@ -3,13 +3,15 @@ package io.plugin.tsnode.action
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
+import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.vfs.VirtualFile
 import icons.TypeScriptIcons
 import io.plugin.tsnode.execution.TypeScriptUtil
+import io.plugin.tsnode.execution.TypeScriptUtil.compatibleFiles
 
 class RunAction : AnAction(TypeScriptIcons.TypeScript)
 {
-	//val logger2 = Logger.getInstance(javaClass)
+	val logger2 = Logger.getInstance(javaClass)
 
 	private fun _getText(virtualFile: VirtualFile): String
 	{
@@ -22,11 +24,16 @@ class RunAction : AnAction(TypeScriptIcons.TypeScript)
 		val project = event.project
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
 
+		val files = compatibleFiles(event)
+
 		//logger2.info("[tsnode][actionPerformed]")
 
 		//LogPlugin.logger.info("[actionPerformed]" + project.toString())
 		//LogPlugin.logger.info("[actionPerformed]" + virtualFile.toString())
 		if (project == null || virtualFile == null) return
+
+		logger2.info("[tsnode][update]" + TypeScriptUtil.executable(project, virtualFile))
+
 		TypeScriptUtil.execute(project, virtualFile, false)
 	}
 
@@ -51,5 +58,4 @@ class RunAction : AnAction(TypeScriptIcons.TypeScript)
 		}
 	}
 	*/
-
 }
