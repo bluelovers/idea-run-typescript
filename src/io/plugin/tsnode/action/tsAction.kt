@@ -15,8 +15,28 @@ public abstract class tsAction(icon: Icon = TypeScriptIcons.TypeScript): AnActio
 
 	protected abstract val _debug: Boolean
 
+	override fun actionPerformed(event: AnActionEvent)
+	{
+		LOG.info("""[actionPerformed]""")
+		/*
+		LOG.info("""[actionPerformed]
+event.inputEvent.isAltDown: ${event.inputEvent.isAltDown.toString()}
+event.inputEvent.isMetaDown: ${event.inputEvent.isMetaDown.toString()}
+event.inputEvent.isConsumed: ${event.inputEvent.isConsumed.toString()}
+event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
+""")
+		*/
+
+		val project = event.project
+		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
+		if (project == null || virtualFile == null) return
+		tsUtil.execute(project, virtualFile, isDebugAction())
+	}
+
 	override fun update(event: AnActionEvent)
 	{
+		LOG.info("""[update]""")
+
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE) as VirtualFile
 
 		if (tsUtil.isTypeScript(virtualFile))
@@ -30,11 +50,16 @@ public abstract class tsAction(icon: Icon = TypeScriptIcons.TypeScript): AnActio
 		}
 	}
 
+	protected fun isDebugAction(): Boolean
+	{
+		return _debug
+	}
+
 	protected fun _getText(virtualFile: VirtualFile): String
 	{
 		val prefix: String
 
-		if (_debug)
+		if (isDebugAction())
 		{
 			prefix = "Debug"
 		}

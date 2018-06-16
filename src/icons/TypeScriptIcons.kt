@@ -14,9 +14,10 @@ object TypeScriptIcons
 	//val Debug = IconLoader.getIcon("/actions/startDebugger.png")
 	//val Json = IconLoader.getIcon("/fileTypes/json.png")
 
-	val TypeScript = load("/io/plugin/tsnode/icons/typescript@16.png") // 16x16
+	val TypeScript = load("/io/plugin/tsnode/icons/typescript@16.png")
+	val TypeScriptDebug = load("/io/plugin/tsnode/icons/typescript-debug@16.png")
 
-	val NPM = JavaScriptLanguageIcons.BuildTools.Npm.Npm_16
+	val Npm = JavaScriptLanguageIcons.BuildTools.Npm.Npm_16
 	val Nodejs = NodeJSIcons.Nodejs_16
 	val Mocha = NodeJSIcons.Mocha
 
