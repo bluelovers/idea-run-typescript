@@ -65,7 +65,7 @@ class TypeScriptConfigurationEditor(private var project: Project) : SettingsEdit
 	{
 		val field = TextFieldWithBrowseButton()
 		SwingHelper.installFileCompletionAndBrowseDialog(project, field, "TypeScript file",
-			FileChooserDescriptorFactory.createSingleFolderDescriptor())
+			FileChooserDescriptorFactory.createSingleFileDescriptor())
 		return field
 	}
 
@@ -187,4 +187,5 @@ class TypeScriptConfigurationEditor(private var project: Project) : SettingsEdit
 		typescriptFileOptionsField.text = runSettings.typescriptFileOptions
 
 	}
+
 }
