@@ -44,8 +44,6 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 	{
 		val location = context.location ?: return false
 
-		//fixme file checks needs to check the properties
-
 		val virtualFile = location.virtualFile
 
 		return virtualFile != null && FileUtil.pathsEqual(virtualFile.path, runConfig.getScriptName())
