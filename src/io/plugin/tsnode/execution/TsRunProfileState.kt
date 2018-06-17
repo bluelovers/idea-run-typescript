@@ -13,8 +13,8 @@ import org.apache.commons.lang.StringUtils
 import java.io.File
 import java.nio.file.Paths
 
-class tsRunProfileState(private var project: Project,
-	private var runConfig: tsRunConfiguration,
+class TsRunProfileState(private var project: Project,
+	private var runConfig: TsRunConfiguration,
 	private var executor: Executor,
 	environment: ExecutionEnvironment) : CommandLineState(environment)
 {
@@ -74,7 +74,7 @@ class tsRunProfileState(private var project: Project,
 	}
 	*/
 
-	private fun tsnodePath(runConfig: tsRunConfiguration): String
+	private fun tsnodePath(runConfig: TsRunConfiguration): String
 	{
 		val typescriptPath = Paths.get(runConfig.selectedTsNodePackage().systemDependentPath)
 			.resolve("""dist${File.separatorChar}bin.js""")

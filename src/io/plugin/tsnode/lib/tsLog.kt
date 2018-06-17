@@ -1,9 +1,8 @@
-package io.plugin.tsnode.log
+package io.plugin.tsnode.lib
 
 import com.intellij.openapi.diagnostic.Logger
 
-object LogPlugin
+object tsLog
 {
 	val logger = Logger.getInstance(javaClass)
 }
-

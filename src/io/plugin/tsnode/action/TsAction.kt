@@ -5,11 +5,11 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.vfs.VirtualFile
-import icons.tsIcons
-import io.plugin.tsnode.execution.tsUtil
+import icons.TsIcons
+import io.plugin.tsnode.execution.TsUtil
 import javax.swing.Icon
 
-public abstract class tsAction(icon: Icon = tsIcons.TypeScript): AnAction(icon)
+public abstract class TsAction(icon: Icon = TsIcons.TypeScript): AnAction(icon)
 {
 	public val LOG = Logger.getInstance(javaClass)
 
@@ -30,7 +30,7 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 		val project = event.project
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
 		if (project == null || virtualFile == null) return
-		tsUtil.execute(project, virtualFile, isDebugAction())
+		TsUtil.execute(project, virtualFile, isDebugAction())
 	}
 
 	override fun update(event: AnActionEvent)
@@ -39,7 +39,7 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE) as VirtualFile
 
-		if (tsUtil.isTypeScript(virtualFile))
+		if (TsUtil.isTypeScript(virtualFile))
 		{
 			event.presentation.isEnabledAndVisible = true
 			event.presentation.text = _getText(virtualFile)

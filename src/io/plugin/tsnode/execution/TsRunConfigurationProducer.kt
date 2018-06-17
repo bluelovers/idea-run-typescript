@@ -10,9 +10,9 @@ import com.intellij.psi.util.PsiUtil
 import com.intellij.psi.util.PsiUtilCore
 
 
-class tsRunConfigurationProducer : RunConfigurationProducer<tsRunConfiguration>(tsConfigurationType.getInstance())
+class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(TsConfigurationType.getInstance())
 {
-	override fun setupConfigurationFromContext(runConfig: tsRunConfiguration, context: ConfigurationContext, sourceElement: Ref<PsiElement>): Boolean
+	override fun setupConfigurationFromContext(runConfig: TsRunConfiguration, context: ConfigurationContext, sourceElement: Ref<PsiElement>): Boolean
 	{
 		val location = context.location ?: return false
 
@@ -44,12 +44,12 @@ class tsRunConfigurationProducer : RunConfigurationProducer<tsRunConfiguration>(
 		return true
 	}
 
-	override fun isConfigurationFromContext(runConfig: tsRunConfiguration, context: ConfigurationContext): Boolean
+	override fun isConfigurationFromContext(runConfig: TsRunConfiguration, context: ConfigurationContext): Boolean
 	{
 		return findTestFile(runConfig, context) != null
 	}
 
-	private fun findTestFile(runConfig: tsRunConfiguration, context: ConfigurationContext): PsiFile?
+	private fun findTestFile(runConfig: TsRunConfiguration, context: ConfigurationContext): PsiFile?
 	{
 		val element = context.psiLocation ?: return null
 		val currentFile = PsiUtilCore.getVirtualFile(element) ?: return null

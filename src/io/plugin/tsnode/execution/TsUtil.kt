@@ -10,12 +10,13 @@ import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
-import io.plugin.tsnode.log.LogPlugin
+import io.plugin.tsnode.lib.TsData
+import io.plugin.tsnode.lib.tsLog
 import java.util.*
 
-object tsUtil
+object TsUtil
 {
-	public val TypeScriptFileType = "com.intellij.lang.javascript.TypeScriptFileType"
+	public val TypeScriptFileType = TsData.FileTypeClassName
 
 	val logger2 = Logger.getInstance(javaClass)
 
@@ -33,14 +34,14 @@ object tsUtil
 		logger2.debug("[tsnode][compatibleFiles]" + files.size)
 
 		return files
-			.filter { it -> tsUtil.isTypeScript(it) }
+			.filter { it -> TsUtil.isTypeScript(it) }
 	}
 
 	fun executable(project: Project, virtualFile: VirtualFile): Boolean
 	{
-		LogPlugin.logger.debug("virtualFile.fileType.name=" + virtualFile.fileType.name)
-		LogPlugin.logger.debug(virtualFile.fileType.defaultExtension)
-		LogPlugin.logger.debug(virtualFile.fileType.javaClass.name)
+		tsLog.logger.debug("virtualFile.fileType.name=" + virtualFile.fileType.name)
+		tsLog.logger.debug(virtualFile.fileType.defaultExtension)
+		tsLog.logger.debug(virtualFile.fileType.javaClass.name)
 
 		return TypeScriptFileType == virtualFile.fileType.name
 			//&& getConfiguration(project, virtualFile) != null
@@ -76,7 +77,7 @@ object tsUtil
 
 		if (configuration != null)
 		{
-			val configurationsList = runManager.getConfigurationsList(tsConfigurationType.getInstance())
+			val configurationsList = runManager.getConfigurationsList(TsConfigurationType.getInstance())
 			if (!configurationsList.contains(configuration.configuration))
 			{
 				runManager.addConfiguration(configuration)

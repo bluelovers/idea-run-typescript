@@ -5,7 +5,7 @@ import com.intellij.openapi.util.IconLoader
 import javax.swing.Icon
 //import icons.NodeJSIcons
 
-object tsIcons
+object TsIcons
 {
 	val Run = AllIcons.General.Run
 	val Debug = AllIcons.General.Debug
@@ -23,6 +23,6 @@ object tsIcons
 
 	private fun load(path: String): Icon
 	{
-		return IconLoader.getIcon(path, tsIcons::class.java)
+		return IconLoader.getIcon(path, TsIcons::class.java)
 	}
 }

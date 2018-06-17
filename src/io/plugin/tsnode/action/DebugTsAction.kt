@@ -1,8 +1,8 @@
 package io.plugin.tsnode.action
 
-import icons.tsIcons
+import icons.TsIcons
 
-class DebugTsAction : tsAction(tsIcons.TypeScriptDebug)
+class DebugTsAction : TsAction(TsIcons.TypeScriptDebug)
 {
 	override val _debug = true
 }

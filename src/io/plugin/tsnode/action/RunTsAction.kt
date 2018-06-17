@@ -1,6 +1,6 @@
 package io.plugin.tsnode.action
 
-class RunTsAction : tsAction()
+class RunTsAction : TsAction()
 {
 	override val _debug = false
 }

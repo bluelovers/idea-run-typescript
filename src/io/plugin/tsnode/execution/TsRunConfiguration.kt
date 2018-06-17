@@ -1,21 +1,20 @@
 package io.plugin.tsnode.execution
 
 import com.intellij.execution.Executor
-import com.intellij.execution.configurations.ConfigurationFactory
 import com.intellij.execution.configurations.LocatableConfigurationBase
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
 import com.intellij.javascript.nodejs.util.NodePackage
 import com.intellij.openapi.project.Project
 
-class tsRunConfiguration(project: Project, factory: ConfigurationFactory, name: String) : LocatableConfigurationBase(project, factory, name)
+class TsRunConfiguration(project: Project, factory: TsConfigurationFactory, name: String) : LocatableConfigurationBase(project, factory, name)
 {
-	var tsRunSettings = tsRunSettings()
+	var tsRunSettings = TsRunSettings()
 	private var _tsPackage: NodePackage? = null
 
-	override fun getConfigurationEditor() = tsConfigurationEditor(project)
+	override fun getConfigurationEditor() = TsConfigurationEditor(project)
 
-	override fun getState(executor: Executor, environment: ExecutionEnvironment) = tsRunProfileState(project, this, executor, environment)
+	override fun getState(executor: Executor, environment: ExecutionEnvironment) = TsRunProfileState(project, this, executor, environment)
 
 	fun selectedTsNodePackage(): NodePackage
 	{
