@@ -1,12 +1,10 @@
 package io.plugin.tsnode.execution
 
-import com.intellij.execution.configuration.EnvironmentVariablesTextFieldWithBrowseButton
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField
 import com.intellij.javascript.nodejs.util.NodePackageField
 import com.intellij.json.JsonFileType
 import com.intellij.lang.javascript.library.JSLibraryUtil
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
-import com.intellij.openapi.options.SettingsEditor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.openapi.util.io.FileUtil
@@ -20,16 +18,15 @@ import com.intellij.ui.components.fields.ExpandableTextField
 import com.intellij.util.ui.ComponentWithEmptyText
 import com.intellij.util.ui.FormBuilder
 import com.intellij.util.ui.SwingHelper
+import io.plugin.base.runner._ConfigurationEditor
 import javax.swing.JComponent
 import javax.swing.JPanel
 
-class TsConfigurationEditor(private var project: Project) : SettingsEditor<TsRunConfiguration>()
+class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _ConfigurationEditor<TsRunConfiguration>(runConfig, project)
 {
+
 	private var nodeJsInterpreterField: NodeJsInterpreterField = NodeJsInterpreterField(project, false)
 	private var nodeOptionsField: RawCommandLineEditor = RawCommandLineEditor()
-
-	private var workingDirectoryField = createWorkingDirectoryField()
-	private var envVars: EnvironmentVariablesTextFieldWithBrowseButton = EnvironmentVariablesTextFieldWithBrowseButton()
 
 	private var tsnodePackageField: NodePackageField = NodePackageField(nodeJsInterpreterField, "ts-node")
 	private var typescriptOptionsField = createTypeScriptOptionsField()
@@ -38,12 +35,12 @@ class TsConfigurationEditor(private var project: Project) : SettingsEditor<TsRun
 	private var typescriptFileField = createTypeScriptFileField()
 	private var typescriptFileOptionsField = createTypeScriptFileOptionsField()
 
-	private var rootForm: JPanel
+	override val form: JPanel
 
 	init
 	{
 		nodeOptionsField.dialogCaption = "Node Options"
-		rootForm = FormBuilder()
+		form = FormBuilder()
 			.setAlignLabelOnRight(false)
 			.addLabeledComponent("Node &interpreter:", nodeJsInterpreterField)
 			.addLabeledComponent("Node &options:", nodeOptionsField)
@@ -85,14 +82,6 @@ class TsConfigurationEditor(private var project: Project) : SettingsEditor<TsRun
 		}
 
 		return editor
-	}
-
-	private fun createWorkingDirectoryField(): TextFieldWithBrowseButton
-	{
-		val field = TextFieldWithBrowseButton()
-		SwingHelper.installFileCompletionAndBrowseDialog(project, field, "TypeScript Working Directory",
-			FileChooserDescriptorFactory.createSingleFolderDescriptor())
-		return field
 	}
 
 	private fun createTypeScriptOptionsField(): RawCommandLineEditor
@@ -153,18 +142,18 @@ class TsConfigurationEditor(private var project: Project) : SettingsEditor<TsRun
 		return filename.startsWith("tsconfig", true)
 	}
 
-	override fun createEditor(): JComponent = rootForm
+	override fun createEditor(): JComponent = form
 
 	override fun applyEditorTo(config: TsRunConfiguration)
 	{
 		config.tsRunSettings = config.tsRunSettings.copy(
-			nodeJs = nodeJsInterpreterField.interpreterRef,
-			nodeOptions = nodeOptionsField.text,
-			workingDir = workingDirectoryField.text,
+			interpreterPath = nodeJsInterpreterField.interpreterRef,
+			interpreterOptions = nodeOptionsField.text,
+			workingDirectory = workingDirectoryField.text,
 			envData = envVars.data,
 
-			typescriptFile = typescriptFileField.text,
-			typescriptFileOptions = typescriptFileOptionsField.text,
+			scriptName = typescriptFileField.text,
+			scriptOptions = typescriptFileOptionsField.text,
 
 			typescriptConfigFile = typescriptConfigFileField.text,
 			extraTypeScriptOptions = typescriptOptionsField.text)
@@ -175,16 +164,16 @@ class TsConfigurationEditor(private var project: Project) : SettingsEditor<TsRun
 	override fun resetEditorFrom(config: TsRunConfiguration)
 	{
 		val runSettings = config.tsRunSettings
-		nodeJsInterpreterField.interpreterRef = runSettings.nodeJs
-		nodeOptionsField.text = runSettings.nodeOptions
-		workingDirectoryField.text = FileUtil.toSystemDependentName(runSettings.workingDir)
+		nodeJsInterpreterField.interpreterRef = runSettings.interpreterPath
+		nodeOptionsField.text = runSettings.interpreterOptions
+		workingDirectoryField.text = FileUtil.toSystemDependentName(runSettings.workingDirectory)
 		envVars.data = runSettings.envData
 		tsnodePackageField.selected = config.selectedTsNodePackage()
 		typescriptConfigFileField.text = runSettings.typescriptConfigFile
 		typescriptOptionsField.text = runSettings.extraTypeScriptOptions
 
-		typescriptFileField.text = runSettings.typescriptFile
-		typescriptFileOptionsField.text = runSettings.typescriptFileOptions
+		typescriptFileField.text = runSettings.scriptName
+		typescriptFileOptionsField.text = runSettings.scriptOptions
 
 	}
 

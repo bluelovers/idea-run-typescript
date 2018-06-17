@@ -14,6 +14,8 @@ class TsConfigurationType : ConfigurationTypeBase(TsData.RunnerId, TsData.name, 
 
 	companion object
 	{
+		val NAME: String = TsData.name
+
 		fun getInstance(): TsConfigurationType
 		{
 			return ConfigurationTypeUtil.findConfigurationType(TsConfigurationType::class.java)

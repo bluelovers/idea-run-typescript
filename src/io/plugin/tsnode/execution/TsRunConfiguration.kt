@@ -1,18 +1,39 @@
 package io.plugin.tsnode.execution
 
 import com.intellij.execution.Executor
-import com.intellij.execution.configurations.LocatableConfigurationBase
+import com.intellij.execution.configuration.AbstractRunConfiguration
+import com.intellij.execution.configurations.RunConfigurationModule
+import com.intellij.execution.configurations.RunConfigurationWithSuppressedDefaultDebugAction
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
 import com.intellij.javascript.nodejs.util.NodePackage
-import com.intellij.openapi.project.Project
+import com.intellij.openapi.module.Module
 
-class TsRunConfiguration(project: Project, factory: TsConfigurationFactory, name: String) : LocatableConfigurationBase(project, factory, name)
+class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory: TsConfigurationFactory, name: String) :
+	//RunConfigurationBase(project, factory, name),
+	AbstractRunConfiguration(name, runConfigurationModule, factory),
+	//_NodeJsRunConfigurationParams,
+	RunConfigurationWithSuppressedDefaultDebugAction
 {
 	var tsRunSettings = TsRunSettings()
 	private var _tsPackage: NodePackage? = null
 
-	override fun getConfigurationEditor() = TsConfigurationEditor(project)
+	override fun getValidModules(): Collection<Module>
+	{
+		return allModules
+	}
+
+	override fun isCompileBeforeLaunchAddedByDefault(): Boolean
+	{
+		return false
+	}
+
+	override fun excludeCompileBeforeLaunchOption(): Boolean
+	{
+		return false
+	}
+
+	override fun getConfigurationEditor() = TsConfigurationEditor(this, project)
 
 	override fun getState(executor: Executor, environment: ExecutionEnvironment) = TsRunProfileState(project, this, executor, environment)
 
@@ -20,7 +41,7 @@ class TsRunConfiguration(project: Project, factory: TsConfigurationFactory, name
 	{
 		if (_tsPackage == null)
 		{
-			val interpreter = NodeJsLocalInterpreter.tryCast(tsRunSettings.nodeJs.resolve(project))
+			val interpreter = NodeJsLocalInterpreter.tryCast(tsRunSettings.interpreterPath.resolve(project))
 			val pkg = NodePackage.findPreferredPackage(project, "ts-node", interpreter)
 			_tsPackage = pkg
 			return pkg
@@ -35,21 +56,21 @@ class TsRunConfiguration(project: Project, factory: TsConfigurationFactory, name
 
 	fun getWorkingDirectory(): String
 	{
-		return tsRunSettings.workingDir
+		return tsRunSettings.workingDirectory
 	}
 
 	fun setWorkingDirectory(workingDirectory: String)
 	{
-		tsRunSettings.workingDir = workingDirectory
+		tsRunSettings.workingDirectory = workingDirectory
 	}
 
 	fun getScriptName(): String
 	{
-		return tsRunSettings.typescriptFile
+		return tsRunSettings.scriptName
 	}
 
 	fun setScriptName(typescriptFile: String)
 	{
-		tsRunSettings.typescriptFile = typescriptFile
+		tsRunSettings.scriptName = typescriptFile
 	}
 }

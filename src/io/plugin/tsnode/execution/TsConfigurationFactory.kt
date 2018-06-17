@@ -3,6 +3,7 @@ package io.plugin.tsnode.execution
 import com.intellij.execution.RunManagerEx
 import com.intellij.execution.configuration.ConfigurationFactoryEx
 import com.intellij.execution.configurations.RunConfiguration
+import com.intellij.execution.configurations.RunConfigurationModule
 import com.intellij.openapi.project.Project
 import java.util.*
 
@@ -18,8 +19,13 @@ class TsConfigurationFactory(configurationType: TsConfigurationType) : Configura
 
 	override fun createTemplateConfiguration(project: Project): RunConfiguration
 	{
-		val configuration = TsRunConfiguration(project, this, "")
+		val configuration = TsRunConfiguration(getModule(project), this, "")
 
 		return configuration
+	}
+
+	fun getModule(project: Project): RunConfigurationModule
+	{
+		return RunConfigurationModule(project)
 	}
 }

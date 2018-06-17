@@ -22,23 +22,23 @@ class TsRunProfileState(private var project: Project,
 	override fun startProcess(): ProcessHandler
 	{
 		val runSettings = runConfig.tsRunSettings
-		val interpreter = runSettings.nodeJs.resolveAsLocal(project)
+		val interpreter = runSettings.interpreterPath.resolveAsLocal(project)
 		val commandLine = GeneralCommandLine()
 
-		if (StringUtils.isBlank(runSettings.workingDir))
+		if (StringUtils.isBlank(runSettings.workingDirectory))
 		{
 			commandLine.withWorkDirectory(project.baseDir.path)
 		}
 		else
 		{
-			commandLine.withWorkDirectory(runSettings.workingDir)
+			commandLine.withWorkDirectory(runSettings.workingDirectory)
 		}
 
 		commandLine.exePath = interpreter.interpreterSystemDependentPath
 
 		runSettings.envData.configureCommandLine(commandLine, true)
 
-		val nodeOptionsList = ParametersListUtil.parse(runSettings.nodeOptions.trim())
+		val nodeOptionsList = ParametersListUtil.parse(runSettings.interpreterOptions.trim())
 		commandLine.addParameters(nodeOptionsList)
 
 		commandLine.addParameter(tsnodePath(runConfig))
@@ -51,13 +51,13 @@ class TsRunProfileState(private var project: Project,
 			commandLine.addParameter("--project ${runSettings.typescriptConfigFile}")
 		}
 
-		if (!StringUtils.isBlank(runSettings.typescriptFile))
+		if (!StringUtils.isBlank(runSettings.scriptName))
 		{
-			commandLine.addParameter(runSettings.typescriptFile)
+			commandLine.addParameter(runSettings.scriptName)
 
-			if (!StringUtils.isBlank(runSettings.typescriptFileOptions))
+			if (!StringUtils.isBlank(runSettings.scriptOptions))
 			{
-				commandLine.addParameter(runSettings.typescriptFileOptions)
+				commandLine.addParameter(runSettings.scriptOptions)
 			}
 		}
 

@@ -2,13 +2,10 @@ package io.plugin.tsnode.execution
 
 import com.intellij.execution.actions.ConfigurationContext
 import com.intellij.execution.actions.RunConfigurationProducer
+import com.intellij.lang.javascript.TypeScriptFileType
 import com.intellij.openapi.util.Ref
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
-import com.intellij.psi.util.PsiUtil
-import com.intellij.psi.util.PsiUtilCore
-
 
 class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(TsConfigurationType.getInstance())
 {
@@ -23,18 +20,17 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 		}
 
 		val psiFile = psiElement.containingFile
-		if (psiFile == null)
+		if (psiFile == null || psiFile !is TypeScriptFileType)
 		{
 			return false
 		}
 
 		val virtualFile = location.virtualFile ?: return false
 
-		val jsFile = findTestFile(runConfig, context) ?: return false
-		sourceElement.set(jsFile)
-		runConfig.setGeneratedName()
+		sourceElement.set(psiFile)
 
-		runConfig.tsRunSettings.typescriptFile = virtualFile.path
+		runConfig.setName(virtualFile.presentableName)
+		runConfig.setScriptName(virtualFile.path)
 
 		if (virtualFile.parent != null)
 		{
@@ -46,32 +42,12 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 
 	override fun isConfigurationFromContext(runConfig: TsRunConfiguration, context: ConfigurationContext): Boolean
 	{
-		return findTestFile(runConfig, context) != null
-	}
+		val location = context.location ?: return false
 
-	private fun findTestFile(runConfig: TsRunConfiguration, context: ConfigurationContext): PsiFile?
-	{
-		val element = context.psiLocation ?: return null
-		val currentFile = PsiUtilCore.getVirtualFile(element) ?: return null
-		if (currentFile.isDirectory)
-		{
-			// not sure the right way to run a dir
-			return null
-		}
+		//fixme file checks needs to check the properties
 
-		val psiFile = PsiUtil.getPsiFile(runConfig.project, currentFile) ?: return null
-		//val psiFile = tryCast(element.containingFile, JSFile::class.java) ?: return null
-		//psiFile.testFileType ?: return null
+		val virtualFile = location.virtualFile
 
-		if (psiFile == null || !FileUtil.pathsEqual(currentFile.path, runConfig.getScriptName()))
-		{
-			return null
-		}
-
-		runConfig.tsRunSettings = runConfig.tsRunSettings.copy(
-			typescriptFile = currentFile.path
-		)
-
-		return psiFile
+		return virtualFile != null && FileUtil.pathsEqual(virtualFile.path, runConfig.getScriptName())
 	}
 }
