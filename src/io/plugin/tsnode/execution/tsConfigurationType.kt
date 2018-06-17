@@ -5,15 +5,15 @@ import com.intellij.execution.configurations.ConfigurationTypeBase
 import com.intellij.execution.configurations.ConfigurationTypeUtil
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
-import icons.TypeScriptIcons
+import icons.tsIcons
 
-class TypeScriptConfigurationType : ConfigurationTypeBase("TypeScriptRunner", "TypeScript", "TypeScript", TypeScriptIcons.TypeScript), DumbAware
+class tsConfigurationType : ConfigurationTypeBase("tsRunnerRun", "TypeScript", "TypeScript", tsIcons.TypeScript), DumbAware
 {
 	init
 	{
 		addFactory(object : ConfigurationFactory(this)
 		{
-			override fun createTemplateConfiguration(project: Project) = TypeScriptRunConfiguration(project, this, "TypeScript")
+			override fun createTemplateConfiguration(project: Project) = tsRunConfiguration(project, this, "TypeScript")
 			override fun isConfigurationSingletonByDefault() = true
 			override fun canConfigurationBeSingleton() = false
 		})
@@ -21,7 +21,7 @@ class TypeScriptConfigurationType : ConfigurationTypeBase("TypeScriptRunner", "T
 
 	companion object
 	{
-		fun getInstance(): TypeScriptConfigurationType
+		fun getInstance(): tsConfigurationType
 		{
 			return Holder.INSTANCE
 		}
@@ -29,6 +29,6 @@ class TypeScriptConfigurationType : ConfigurationTypeBase("TypeScriptRunner", "T
 
 	private object Holder
 	{
-		val INSTANCE = ConfigurationTypeUtil.findConfigurationType<TypeScriptConfigurationType>(TypeScriptConfigurationType::class.java)
+		val INSTANCE = ConfigurationTypeUtil.findConfigurationType<tsConfigurationType>(tsConfigurationType::class.java)
 	}
 }

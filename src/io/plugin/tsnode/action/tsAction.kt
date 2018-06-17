@@ -5,11 +5,11 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.vfs.VirtualFile
-import icons.TypeScriptIcons
+import icons.tsIcons
 import io.plugin.tsnode.execution.tsUtil
 import javax.swing.Icon
 
-public abstract class tsAction(icon: Icon = TypeScriptIcons.TypeScript): AnAction(icon)
+public abstract class tsAction(icon: Icon = tsIcons.TypeScript): AnAction(icon)
 {
 	public val LOG = Logger.getInstance(javaClass)
 

@@ -23,7 +23,7 @@ import com.intellij.util.ui.SwingHelper
 import javax.swing.JComponent
 import javax.swing.JPanel
 
-class TypeScriptConfigurationEditor(private var project: Project) : SettingsEditor<TypeScriptRunConfiguration>()
+class tsConfigurationEditor(private var project: Project) : SettingsEditor<tsRunConfiguration>()
 {
 	private var nodeJsInterpreterField: NodeJsInterpreterField = NodeJsInterpreterField(project, false)
 	private var nodeOptionsField: RawCommandLineEditor = RawCommandLineEditor()
@@ -155,9 +155,9 @@ class TypeScriptConfigurationEditor(private var project: Project) : SettingsEdit
 
 	override fun createEditor(): JComponent = rootForm
 
-	override fun applyEditorTo(config: TypeScriptRunConfiguration)
+	override fun applyEditorTo(config: tsRunConfiguration)
 	{
-		config.typescriptRunSettings = config.typescriptRunSettings.copy(
+		config.tsRunSettings = config.tsRunSettings.copy(
 			nodeJs = nodeJsInterpreterField.interpreterRef,
 			nodeOptions = nodeOptionsField.text,
 			workingDir = workingDirectoryField.text,
@@ -172,9 +172,9 @@ class TypeScriptConfigurationEditor(private var project: Project) : SettingsEdit
 		config.setTypeScriptPackage(tsnodePackageField.selected)
 	}
 
-	override fun resetEditorFrom(config: TypeScriptRunConfiguration)
+	override fun resetEditorFrom(config: tsRunConfiguration)
 	{
-		val runSettings = config.typescriptRunSettings
+		val runSettings = config.tsRunSettings
 		nodeJsInterpreterField.interpreterRef = runSettings.nodeJs
 		nodeOptionsField.text = runSettings.nodeOptions
 		workingDirectoryField.text = FileUtil.toSystemDependentName(runSettings.workingDir)

@@ -1,20 +1,17 @@
 package io.plugin.tsnode.execution
 
 import com.intellij.execution.configurations.RunProfile
-import com.intellij.execution.configurations.RunProfileState
-import com.intellij.execution.configurations.RunnerSettings
 import com.intellij.execution.executors.DefaultRunExecutor
-import com.intellij.execution.runners.*
-import com.intellij.execution.ui.RunContentDescriptor
-import com.intellij.openapi.fileEditor.FileDocumentManager
+import com.intellij.execution.runners.DefaultProgramRunner
 
+/*
 object TypeScriptRunProgramRunner : GenericProgramRunner<RunnerSettings>()
 {
 	override fun getRunnerId() = "TypeScriptRunnerRun"
 
 	override fun canRun(executorId: String, profile: RunProfile): Boolean
 	{
-		return DefaultRunExecutor.EXECUTOR_ID == executorId && profile is TypeScriptRunConfiguration
+		return DefaultRunExecutor.EXECUTOR_ID == executorId && profile is tsRunConfiguration
 	}
 
 	override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor?
@@ -29,13 +26,14 @@ object TypeScriptRunProgramRunner : GenericProgramRunner<RunnerSettings>()
 		return descriptor
 	}
 }
+*/
 
-class TypeScriptRunRunner : DefaultProgramRunner()
+class tsRunRunner : DefaultProgramRunner()
 {
-	override fun getRunnerId() = "TypeScriptRunnerRun"
+	override fun getRunnerId() = "tsRunnerRun"
 
 	override fun canRun(executorId: String, profile: RunProfile): Boolean
 	{
-		return DefaultRunExecutor.EXECUTOR_ID == executorId && profile is TypeScriptRunConfiguration
+		return DefaultRunExecutor.EXECUTOR_ID == executorId && profile is tsRunConfiguration
 	}
 }

@@ -76,7 +76,7 @@ object tsUtil
 
 		if (configuration != null)
 		{
-			val configurationsList = runManager.getConfigurationsList(TypeScriptConfigurationType.getInstance())
+			val configurationsList = runManager.getConfigurationsList(tsConfigurationType.getInstance())
 			if (!configurationsList.contains(configuration.configuration))
 			{
 				runManager.addConfiguration(configuration)

@@ -21,9 +21,9 @@
   <depends optional="true">JavaScript</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <configurationType implementation="io.plugin.tsnode.execution.TypeScriptConfigurationType"/>
-    <programRunner implementation="io.plugin.tsnode.execution.TypeScriptRunRunner"/>
-    <runConfigurationProducer implementation="io.plugin.tsnode.execution.TypeScriptRunConfigurationProducer"/>
+    <configurationType implementation="io.plugin.tsnode.execution.tsConfigurationType"/>
+    <programRunner implementation="io.plugin.tsnode.execution.tsRunRunner"/>
+    <runConfigurationProducer implementation="io.plugin.tsnode.execution.tsRunConfigurationProducer"/>
   </extensions>
 
   <application-components>
