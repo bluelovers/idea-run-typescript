@@ -1,10 +1,15 @@
 package io.plugin.tsnode.execution
 
+import com.intellij.execution.RunManager
+import com.intellij.execution.RunnerAndConfigurationSettings
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
+import com.jetbrains.nodejs.run.NodeJsRunConfiguration
+import com.jetbrains.nodejs.run.NodeJsRunConfigurationState
+import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
 import io.plugin.tsnode.lib.TsLog
 
 object TsExecutor
@@ -39,12 +44,39 @@ object TsExecutor
 		return true
 	}
 
-	fun run(event: AnActionEvent, debug: Boolean)
+	class run(val event: AnActionEvent, val debug: Boolean)
 	{
-		LOG.info("[execute:run] debug=$debug")
+		var runConf: RunnerAndConfigurationSettings? = null
 
-		val project = event.project as Project
-		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE) as VirtualFile
-		val module = event.getData(DataKeys.MODULE) as Module
+		init
+		{
+			LOG.info("[execute:run] debug=$debug")
+
+			val project = event.project as Project
+			val virtualFile = event.getData(DataKeys.VIRTUAL_FILE) as VirtualFile
+			val module = event.getData(DataKeys.MODULE) as Module
+
+			//val runManager = RunManagerEx.getInstanceEx(project)
+			val runManager = RunManager.getInstance(project)
+
+			val settings = runManager.createConfiguration(virtualFile.name,
+				NodeJsRunConfigurationType.getInstance().factory)
+
+			val configuration = settings.configuration
+
+			val getOptions = NodeJsRunConfiguration::class.java
+				.getDeclaredMethod("getOptions")
+			getOptions!!.isAccessible = true
+
+			val state = getOptions
+				.invoke(configuration) as NodeJsRunConfigurationState
+
+			state.workingDir = virtualFile.parent.path
+			state.pathToJsFile = virtualFile.path
+
+			runManager.addConfiguration(settings)
+
+			this.runConf = settings
+		}
 	}
 }

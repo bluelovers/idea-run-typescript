@@ -1,11 +1,14 @@
 package io.plugin.tsnode.execution
 
+import com.intellij.execution.configurations.ConfigurationType
 import com.intellij.execution.configurations.ConfigurationTypeBase
 import com.intellij.execution.configurations.ConfigurationTypeUtil
 import com.intellij.openapi.project.DumbAware
 import io.plugin.tsnode.lib.TsData
 
-class TsConfigurationType : ConfigurationTypeBase(TsData.RunnerId, TsData.name, TsData.description, TsData.icon), DumbAware
+class TsConfigurationType : ConfigurationTypeBase(TsData.RunnerId, TsData.name, TsData.description, TsData.icon)
+	, DumbAware
+	, ConfigurationType
 {
 	init
 	{
