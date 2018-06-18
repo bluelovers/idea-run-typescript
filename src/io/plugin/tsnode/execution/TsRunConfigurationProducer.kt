@@ -8,6 +8,9 @@ import com.intellij.openapi.util.io.FileUtil
 import com.intellij.psi.PsiElement
 import io.plugin.tsnode.lib.TsLog
 
+/**
+ * @todo 不知道如何支援 Debug 模式
+ */
 class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(TsConfigurationType.getInstance())
 {
 	protected val LOG = TsLog(javaClass)
