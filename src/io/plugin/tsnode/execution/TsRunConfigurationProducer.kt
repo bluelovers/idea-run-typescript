@@ -6,38 +6,56 @@ import com.intellij.lang.javascript.TypeScriptFileType
 import com.intellij.openapi.util.Ref
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.psi.PsiElement
+import io.plugin.tsnode.lib.TsLog
 
 class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(TsConfigurationType.getInstance())
 {
+	protected val LOG = TsLog(javaClass)
+
 	override fun setupConfigurationFromContext(runConfig: TsRunConfiguration, context: ConfigurationContext, sourceElement: Ref<PsiElement>): Boolean
 	{
-		val location = context.location ?: return false
-
-		val psiElement = location.psiElement
-		if (!psiElement.isValid)
+		val bool = fun (): Boolean
 		{
-			return false
-		}
+			val location = context.location ?: return false
 
-		val psiFile = psiElement.containingFile
-		if (psiFile == null || psiFile !is TypeScriptFileType)
-		{
-			return false
-		}
+			val psiElement = location.psiElement
+			if (!psiElement.isValid)
+			{
+				LOG.info("$psiElement ${psiElement.isValid}")
 
-		val virtualFile = location.virtualFile ?: return false
+				return false
+			}
 
-		sourceElement.set(psiFile)
+			val psiFile = psiElement.containingFile
+			if (psiFile == null || psiFile.fileType !is TypeScriptFileType)
+			{
+				return false
+			}
 
-		runConfig.setName(virtualFile.presentableName)
-		runConfig.setScriptName(virtualFile.path)
+			val virtualFile = location.virtualFile ?: return false
 
-		if (virtualFile.parent != null)
-		{
-			runConfig.setWorkingDirectory(virtualFile.parent.path)
-		}
+			sourceElement.set(psiFile)
 
-		return true
+			runConfig.setName(virtualFile.presentableName)
+			runConfig.setScriptName(virtualFile.path)
+
+			if (virtualFile.parent != null)
+			{
+				runConfig.setWorkingDirectory(virtualFile.parent.path)
+			}
+
+			val module = context.module
+			if (module != null)
+			{
+				runConfig.setModule(module)
+			}
+
+			return true
+		}.invoke()
+
+		LOG.info("[setupConfigurationFromContext] $bool")
+
+		return bool
 	}
 
 	override fun isConfigurationFromContext(runConfig: TsRunConfiguration, context: ConfigurationContext): Boolean
@@ -46,6 +64,10 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 
 		val virtualFile = location.virtualFile
 
-		return virtualFile != null && FileUtil.pathsEqual(virtualFile.path, runConfig.getScriptName())
+		val bool = virtualFile != null && FileUtil.pathsEqual(virtualFile.path, runConfig.getScriptName())
+
+		LOG.info("[isConfigurationFromContext] $bool")
+
+		return bool
 	}
 }

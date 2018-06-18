@@ -5,7 +5,7 @@ import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.execution.runners.DefaultProgramRunner
 import io.plugin.tsnode.lib.TsData
 
-class tsRunRunner : DefaultProgramRunner()
+class TsProgramRunner : DefaultProgramRunner()
 {
 	override fun getRunnerId() = TsData.RunnerId
 

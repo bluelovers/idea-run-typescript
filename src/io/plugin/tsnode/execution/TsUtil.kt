@@ -45,9 +45,9 @@ object TsUtil
 
 	fun executable(project: Project, virtualFile: VirtualFile): Boolean
 	{
-		TsLog.logger.debug("virtualFile.fileType.name=" + virtualFile.fileType.name)
-		TsLog.logger.debug(virtualFile.fileType.defaultExtension)
-		TsLog.logger.debug(virtualFile.fileType.javaClass.name)
+		TsLog.debug("virtualFile.fileType.name=" + virtualFile.fileType.name)
+		TsLog.debug(virtualFile.fileType.defaultExtension)
+		TsLog.debug(virtualFile.fileType.javaClass.name)
 
 		return TypeScriptFileType == virtualFile.fileType.name
 			//&& getConfiguration(project, virtualFile) != null

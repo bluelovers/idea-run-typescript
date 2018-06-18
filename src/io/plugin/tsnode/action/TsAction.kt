@@ -4,8 +4,10 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.diagnostic.Logger
+import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
 import icons.TsIcons
+import io.plugin.tsnode.execution.TsExecutor
 import io.plugin.tsnode.execution.TsUtil
 import javax.swing.Icon
 
@@ -13,7 +15,16 @@ public abstract class TsAction(icon: Icon = TsIcons.TypeScript): AnAction(icon)
 {
 	public val LOG = Logger.getInstance(javaClass)
 
-	protected abstract val _debug: Boolean
+	protected open val _debug: Boolean = false
+	protected open var _prefix: String = ""
+
+	init
+	{
+		if (StringUtil.isEmpty(_prefix))
+		{
+			_prefix = if (_debug) "Debug" else "Run"
+		}
+	}
 
 	override fun actionPerformed(event: AnActionEvent)
 	{
@@ -27,10 +38,7 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 """)
 		*/
 
-		val project = event.project
-		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
-		if (project == null || virtualFile == null) return
-		TsUtil.execute(project, virtualFile, isDebugAction())
+		TsExecutor.execute(event, isDebugAction())
 	}
 
 	override fun update(event: AnActionEvent)
@@ -46,7 +54,8 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 		}
 		else
 		{
-			event.presentation.isVisible = false
+			event.presentation.isEnabledAndVisible = false
+			//event.presentation.isVisible = false
 		}
 	}
 
@@ -57,17 +66,6 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 
 	protected fun _getText(virtualFile: VirtualFile): String
 	{
-		val prefix: String
-
-		if (isDebugAction())
-		{
-			prefix = "Debug"
-		}
-		else
-		{
-			prefix = "Run"
-		}
-
-		return "$prefix '${virtualFile.name}'"
+		return "${_prefix} '${virtualFile.name}'"
 	}
 }

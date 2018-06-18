@@ -22,9 +22,4 @@ class TsConfigurationType : ConfigurationTypeBase(TsData.RunnerId, TsData.name, 
 			//return Holder.INSTANCE
 		}
 	}
-
-	private object Holder
-	{
-		val INSTANCE = ConfigurationTypeUtil.findConfigurationType<TsConfigurationType>(TsConfigurationType::class.java)
-	}
 }

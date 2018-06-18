@@ -58,7 +58,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 			.panel
 
-		TsLog.logger.info("runConfig.suggestedName()" + runConfig.suggestedName())
+		TsLog.info("runConfig.suggestedName()" + runConfig.suggestedName())
 	}
 
 	private fun createTypeScriptFileField(): TextFieldWithBrowseButton
