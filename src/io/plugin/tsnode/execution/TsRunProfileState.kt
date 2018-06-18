@@ -11,15 +11,14 @@ import com.intellij.openapi.project.Project
 import com.intellij.util.execution.ParametersListUtil
 import org.apache.commons.lang.StringUtils
 import java.io.File
-import java.nio.file.Paths
 
-class TsRunProfileState(private var project: Project,
-	private var runConfig: TsRunConfiguration,
-	private var executor: Executor,
+class TsRunProfileState(protected var project: Project,
+	protected var runConfig: TsRunConfiguration,
+	protected var executor: Executor,
 	environment: ExecutionEnvironment) : CommandLineState(environment)
 {
 
-	override fun startProcess(): ProcessHandler
+	fun createCommandLine(): GeneralCommandLine
 	{
 		val runSettings = runConfig.runSettings
 		val commandLine = GeneralCommandLine()
@@ -60,6 +59,13 @@ class TsRunProfileState(private var project: Project,
 			}
 		}
 
+		return commandLine
+	}
+
+	override fun startProcess(): ProcessHandler
+	{
+		val commandLine = createCommandLine()
+
 		val processHandler = KillableColoredProcessHandler(commandLine)
 		ProcessTerminatedListener.attach(processHandler)
 		return processHandler
@@ -73,11 +79,11 @@ class TsRunProfileState(private var project: Project,
 	}
 	*/
 
-	private fun tsnodePath(runConfig: TsRunConfiguration): String
+	protected fun tsnodePath(runConfig: TsRunConfiguration): String
 	{
-		val typescriptPath = Paths.get(runConfig.selectedTsNodePackage().systemDependentPath)
-			.resolve("""dist${File.separatorChar}bin.js""")
-		return typescriptPath.toAbsolutePath().toString()
+		return TsUtil.NodePackagePathResolve(runConfig.selectedTsNodePackage(), """dist${File.separatorChar}bin.js""")
+			.toAbsolutePath()
+			.toString()
 	}
 
 }

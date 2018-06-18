@@ -6,6 +6,7 @@ import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.executors.DefaultDebugExecutor
 import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl
+import com.intellij.javascript.nodejs.util.NodePackage
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.diagnostic.Logger
@@ -15,6 +16,8 @@ import com.intellij.openapi.vfs.VirtualFile
 import io.plugin.tsnode.lib.TsData
 import io.plugin.tsnode.lib.TsLog
 import java.io.File
+import java.nio.file.Path
+import java.nio.file.Paths
 import java.util.*
 
 object TsUtil
@@ -119,5 +122,11 @@ object TsUtil
 		}
 
 		return true
+	}
+
+	fun NodePackagePathResolve(pkg: NodePackage, path: String): Path
+	{
+		return Paths.get(pkg.systemDependentPath)
+			.resolve(path)
 	}
 }
