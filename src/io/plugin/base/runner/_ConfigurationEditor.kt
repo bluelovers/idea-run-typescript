@@ -9,6 +9,7 @@ import com.intellij.util.ui.SwingHelper
 import javax.swing.JPanel
 
 public abstract class _ConfigurationEditor<T>(var runConfig: T, var project: Project) : SettingsEditor<T>()
+	//, RunConfigurationSettingsEditor
 {
 	protected abstract val form: JPanel
 

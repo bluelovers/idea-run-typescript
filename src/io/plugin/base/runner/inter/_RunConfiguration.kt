@@ -9,6 +9,7 @@ import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
 import com.intellij.javascript.nodejs.util.NodePackage
 import com.intellij.openapi.module.Module
 import io.plugin.tsnode.execution.TsUtil
+import io.plugin.tsnode.lib.TsLog
 import java.io.File
 
 abstract class _RunConfiguration<T>(runConfigurationModule: RunConfigurationModule, factory: ConfigurationFactory, name: String, var runSettings: T) :
@@ -20,6 +21,7 @@ abstract class _RunConfiguration<T>(runConfigurationModule: RunConfigurationModu
 	RunConfiguration,
 	RunConfigurationWithSuppressedDefaultDebugAction
 {
+	val LOG = TsLog(javaClass)
 
 	override fun getValidModules(): Collection<Module>
 	{
@@ -38,7 +40,10 @@ abstract class _RunConfiguration<T>(runConfigurationModule: RunConfigurationModu
 
 	override fun suggestedName(): String?
 	{
-		return File(getScriptName()).name
+		val name = File(getScriptName()).name
+		LOG.info("[suggestedName] $name")
+
+		return name
 	}
 
 	abstract fun getInterpreterRef(): NodeJsInterpreterRef

@@ -25,6 +25,7 @@ import javax.swing.JPanel
 
 class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _ConfigurationEditor<TsRunConfiguration>(runConfig, project)
 {
+	val LOG = TsLog(javaClass)
 
 	private var nodeJsInterpreterField: NodeJsInterpreterField = NodeJsInterpreterField(project, false)
 	private var nodeOptionsField: RawCommandLineEditor = RawCommandLineEditor()
@@ -40,6 +41,8 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	init
 	{
+		LOG.info("[init] $this")
+
 		nodeOptionsField.dialogCaption = "Node Options"
 		form = FormBuilder()
 			.setAlignLabelOnRight(false)
@@ -57,8 +60,6 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			.addLabeledComponent("&Environment variables:", envVars)
 
 			.panel
-
-		TsLog.info("runConfig.suggestedName()" + runConfig.suggestedName())
 	}
 
 	private fun createTypeScriptFileField(): TextFieldWithBrowseButton
@@ -145,11 +146,18 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		return filename.startsWith("tsconfig", true)
 	}
 
-	override fun createEditor(): JComponent = form
+	override fun createEditor(): JComponent
+	{
+		LOG.info("[createEditor] $form")
+
+		return form
+	}
 
 	override fun applyEditorTo(config: TsRunConfiguration)
 	{
-		config.runSettings = config.runSettings.copy(
+		LOG.info("[applyEditorTo] $config")
+
+		config.runSettings.copy(
 			interpreterRef = nodeJsInterpreterField.interpreterRef,
 			interpreterOptions = nodeOptionsField.text,
 			workingDirectory = workingDirectoryField.text,
@@ -162,10 +170,14 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			extraTypeScriptOptions = typescriptOptionsField.text)
 
 		config.setTypeScriptPackage(tsnodePackageField.selected)
+
+		LOG.info("config.runSettings=${config.runSettings}")
 	}
 
 	override fun resetEditorFrom(config: TsRunConfiguration)
 	{
+		LOG.info("[resetEditorFrom] $config")
+
 		val runSettings = config.runSettings
 		nodeJsInterpreterField.interpreterRef = runSettings.interpreterRef
 		nodeOptionsField.text = runSettings.interpreterOptions
