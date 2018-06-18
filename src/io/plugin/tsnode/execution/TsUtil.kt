@@ -129,4 +129,11 @@ object TsUtil
 		return Paths.get(pkg.systemDependentPath)
 			.resolve(path)
 	}
+
+	fun tsnodePath(runConfig: TsRunConfiguration): String
+	{
+		return TsUtil.NodePackagePathResolve(runConfig.selectedTsNodePackage(), """dist${File.separatorChar}bin.js""")
+			.toAbsolutePath()
+			.toString()
+	}
 }

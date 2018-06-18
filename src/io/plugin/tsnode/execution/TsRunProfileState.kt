@@ -8,9 +8,9 @@ import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessTerminatedListener
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.text.StringUtil
 import com.intellij.util.execution.ParametersListUtil
-import org.apache.commons.lang.StringUtils
-import java.io.File
+import io.plugin.tsnode.execution.TsUtil.tsnodePath
 
 class TsRunProfileState(protected var project: Project,
 	protected var runConfig: TsRunConfiguration,
@@ -23,7 +23,7 @@ class TsRunProfileState(protected var project: Project,
 		val runSettings = runConfig.runSettings
 		val commandLine = GeneralCommandLine()
 
-		if (StringUtils.isBlank(runSettings.workingDirectory))
+		if (StringUtil.isEmptyOrSpaces(runSettings.workingDirectory))
 		{
 			commandLine.withWorkDirectory(project.baseDir.path)
 		}
@@ -32,28 +32,35 @@ class TsRunProfileState(protected var project: Project,
 			commandLine.withWorkDirectory(runSettings.workingDirectory)
 		}
 
-		commandLine.exePath = runConfig.getInterpreterSystemDependentPath()
-
 		runSettings.envData.configureCommandLine(commandLine, true)
+
+		commandLine.exePath = runConfig.getInterpreterSystemDependentPath()
 
 		val nodeOptionsList = ParametersListUtil.parse(runSettings.interpreterOptions.trim())
 		commandLine.addParameters(nodeOptionsList)
 
-		commandLine.addParameter(tsnodePath(runConfig))
+		val tsnode = tsnodePath(runConfig)
+
+		if (StringUtil.isEmptyOrSpaces(tsnode))
+		{
+			return commandLine
+		}
+
+		commandLine.addParameter(tsnode)
 
 		val typescriptOptionsList = ParametersListUtil.parse(runSettings.extraTypeScriptOptions.trim())
 		commandLine.addParameters(typescriptOptionsList)
 
-		if (!StringUtils.isBlank(runSettings.typescriptConfigFile))
+		if (!StringUtil.isEmptyOrSpaces(runSettings.typescriptConfigFile))
 		{
 			commandLine.addParameter("--project ${runSettings.typescriptConfigFile}")
 		}
 
-		if (!StringUtils.isBlank(runSettings.scriptName))
+		if (!StringUtil.isEmptyOrSpaces(runSettings.scriptName))
 		{
 			commandLine.addParameter(runSettings.scriptName)
 
-			if (!StringUtils.isBlank(runSettings.programParameters))
+			if (!StringUtil.isEmptyOrSpaces(runSettings.programParameters))
 			{
 				commandLine.addParameter(runSettings.programParameters)
 			}
@@ -78,12 +85,5 @@ class TsRunProfileState(protected var project: Project,
 		return SMTestRunnerConnectionUtil.createConsole("TypeScript", props)
 	}
 	*/
-
-	protected fun tsnodePath(runConfig: TsRunConfiguration): String
-	{
-		return TsUtil.NodePackagePathResolve(runConfig.selectedTsNodePackage(), """dist${File.separatorChar}bin.js""")
-			.toAbsolutePath()
-			.toString()
-	}
 
 }
