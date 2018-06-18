@@ -1,37 +1,16 @@
 package io.plugin.tsnode.execution
 
 import com.intellij.execution.Executor
-import com.intellij.execution.configuration.AbstractRunConfiguration
 import com.intellij.execution.configurations.RunConfigurationModule
-import com.intellij.execution.configurations.RunConfigurationWithSuppressedDefaultDebugAction
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
 import com.intellij.javascript.nodejs.util.NodePackage
-import com.intellij.openapi.module.Module
+import io.plugin.base.runner.inter._RunConfiguration
 
 class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory: TsConfigurationFactory, name: String) :
-	//RunConfigurationBase(project, factory, name),
-	AbstractRunConfiguration(name, runConfigurationModule, factory),
-	//_NodeJsRunConfigurationParams,
-	RunConfigurationWithSuppressedDefaultDebugAction
+	_RunConfiguration<TsRunSettings>(runConfigurationModule, factory, name, TsRunSettings())
 {
-	var tsRunSettings = TsRunSettings()
 	private var _tsPackage: NodePackage? = null
-
-	override fun getValidModules(): Collection<Module>
-	{
-		return allModules
-	}
-
-	override fun isCompileBeforeLaunchAddedByDefault(): Boolean
-	{
-		return false
-	}
-
-	override fun excludeCompileBeforeLaunchOption(): Boolean
-	{
-		return false
-	}
 
 	override fun getConfigurationEditor() = TsConfigurationEditor(this, project)
 
@@ -41,7 +20,7 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 	{
 		if (_tsPackage == null)
 		{
-			val interpreter = NodeJsLocalInterpreter.tryCast(tsRunSettings.interpreterPath.resolve(project))
+			val interpreter = NodeJsLocalInterpreter.tryCast(runSettings.interpreterPath.resolve(project))
 			val pkg = NodePackage.findPreferredPackage(project, "ts-node", interpreter)
 			_tsPackage = pkg
 			return pkg
@@ -54,23 +33,23 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 		_tsPackage = nodePackage
 	}
 
-	fun getWorkingDirectory(): String
+	override fun getWorkingDirectory() = runSettings.workingDirectory
+
+	override fun setWorkingDirectory(workingDirectory: String?)
 	{
-		return tsRunSettings.workingDirectory
+		runSettings.workingDirectory = workingDirectory!!
 	}
 
-	fun setWorkingDirectory(workingDirectory: String)
+	override fun getScriptName() = runSettings.scriptName
+
+	override fun setScriptName(typescriptFile: String)
 	{
-		tsRunSettings.workingDirectory = workingDirectory
+		runSettings.scriptName = typescriptFile
 	}
 
-	fun getScriptName(): String
+	override fun getProgramParameters() = runSettings.programParameters
+	override fun setProgramParameters(value: String?)
 	{
-		return tsRunSettings.scriptName
-	}
-
-	fun setScriptName(typescriptFile: String)
-	{
-		tsRunSettings.scriptName = typescriptFile
+		runSettings.programParameters = value!!
 	}
 }

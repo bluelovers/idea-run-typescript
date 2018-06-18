@@ -11,7 +11,7 @@ import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import io.plugin.tsnode.lib.TsData
-import io.plugin.tsnode.lib.tsLog
+import io.plugin.tsnode.lib.TsLog
 import java.util.*
 
 object TsUtil
@@ -39,9 +39,9 @@ object TsUtil
 
 	fun executable(project: Project, virtualFile: VirtualFile): Boolean
 	{
-		tsLog.logger.debug("virtualFile.fileType.name=" + virtualFile.fileType.name)
-		tsLog.logger.debug(virtualFile.fileType.defaultExtension)
-		tsLog.logger.debug(virtualFile.fileType.javaClass.name)
+		TsLog.logger.debug("virtualFile.fileType.name=" + virtualFile.fileType.name)
+		TsLog.logger.debug(virtualFile.fileType.defaultExtension)
+		TsLog.logger.debug(virtualFile.fileType.javaClass.name)
 
 		return TypeScriptFileType == virtualFile.fileType.name
 			//&& getConfiguration(project, virtualFile) != null

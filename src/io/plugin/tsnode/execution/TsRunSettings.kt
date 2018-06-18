@@ -12,7 +12,7 @@ data class TsRunSettings(
 	var envData: EnvironmentVariablesData = EnvironmentVariablesData.DEFAULT,
 
 	var scriptName: String = "",
-	var scriptOptions: String = "",
+	var programParameters: String = "",
 
 	var extraTypeScriptOptions: String = "",
 	var typescriptConfigFile: String = ""

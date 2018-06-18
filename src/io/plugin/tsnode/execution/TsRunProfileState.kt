@@ -21,7 +21,7 @@ class TsRunProfileState(private var project: Project,
 
 	override fun startProcess(): ProcessHandler
 	{
-		val runSettings = runConfig.tsRunSettings
+		val runSettings = runConfig.runSettings
 		val interpreter = runSettings.interpreterPath.resolveAsLocal(project)
 		val commandLine = GeneralCommandLine()
 
@@ -55,9 +55,9 @@ class TsRunProfileState(private var project: Project,
 		{
 			commandLine.addParameter(runSettings.scriptName)
 
-			if (!StringUtils.isBlank(runSettings.scriptOptions))
+			if (!StringUtils.isBlank(runSettings.programParameters))
 			{
-				commandLine.addParameter(runSettings.scriptOptions)
+				commandLine.addParameter(runSettings.programParameters)
 			}
 		}
 

@@ -19,6 +19,7 @@ import com.intellij.util.ui.ComponentWithEmptyText
 import com.intellij.util.ui.FormBuilder
 import com.intellij.util.ui.SwingHelper
 import io.plugin.base.runner._ConfigurationEditor
+import io.plugin.tsnode.lib.TsLog
 import javax.swing.JComponent
 import javax.swing.JPanel
 
@@ -56,6 +57,8 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			.addLabeledComponent("&Environment variables:", envVars)
 
 			.panel
+
+		TsLog.logger.info("runConfig.suggestedName()" + runConfig.suggestedName())
 	}
 
 	private fun createTypeScriptFileField(): TextFieldWithBrowseButton
@@ -146,14 +149,14 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	override fun applyEditorTo(config: TsRunConfiguration)
 	{
-		config.tsRunSettings = config.tsRunSettings.copy(
+		config.runSettings = config.runSettings.copy(
 			interpreterPath = nodeJsInterpreterField.interpreterRef,
 			interpreterOptions = nodeOptionsField.text,
 			workingDirectory = workingDirectoryField.text,
 			envData = envVars.data,
 
 			scriptName = typescriptFileField.text,
-			scriptOptions = typescriptFileOptionsField.text,
+			programParameters = typescriptFileOptionsField.text,
 
 			typescriptConfigFile = typescriptConfigFileField.text,
 			extraTypeScriptOptions = typescriptOptionsField.text)
@@ -163,7 +166,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	override fun resetEditorFrom(config: TsRunConfiguration)
 	{
-		val runSettings = config.tsRunSettings
+		val runSettings = config.runSettings
 		nodeJsInterpreterField.interpreterRef = runSettings.interpreterPath
 		nodeOptionsField.text = runSettings.interpreterOptions
 		workingDirectoryField.text = FileUtil.toSystemDependentName(runSettings.workingDirectory)
@@ -173,7 +176,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		typescriptOptionsField.text = runSettings.extraTypeScriptOptions
 
 		typescriptFileField.text = runSettings.scriptName
-		typescriptFileOptionsField.text = runSettings.scriptOptions
+		typescriptFileOptionsField.text = runSettings.programParameters
 
 	}
 
