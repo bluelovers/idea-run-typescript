@@ -4,7 +4,7 @@ import com.intellij.execution.configuration.EnvironmentVariablesData
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 
 data class TsRunSettings(
-	var interpreterPath: NodeJsInterpreterRef = NodeJsInterpreterRef.createProjectRef(),
+	var interpreterRef: NodeJsInterpreterRef = NodeJsInterpreterRef.createProjectRef(),
 	var interpreterOptions: String = "",
 
 	var workingDirectory: String = "",

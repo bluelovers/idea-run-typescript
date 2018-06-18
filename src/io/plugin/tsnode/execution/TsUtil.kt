@@ -2,6 +2,7 @@ package io.plugin.tsnode.execution
 
 import com.intellij.execution.ProgramRunnerUtil
 import com.intellij.execution.RunManager
+import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.executors.DefaultDebugExecutor
 import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl
@@ -9,9 +10,11 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
 import io.plugin.tsnode.lib.TsData
 import io.plugin.tsnode.lib.TsLog
+import java.io.File
 import java.util.*
 
 object TsUtil
@@ -89,5 +92,32 @@ object TsUtil
 			ProgramRunnerUtil.executeConfiguration(configuration,
 				if (debug) DefaultDebugExecutor.getDebugExecutorInstance() else DefaultRunExecutor.getRunExecutorInstance())
 		}
+	}
+
+	@Throws(RuntimeConfigurationException::class)
+	fun expectFile(file: String, throwError: Boolean = false, name: String = "path"): Boolean
+	{
+		if (StringUtil.isEmptyOrSpaces(file))
+		{
+			if (throwError)
+			{
+				throw RuntimeConfigurationException("No $name given.")
+			}
+
+			return false
+		}
+
+		val interpreterFile = File(file)
+		if (!interpreterFile.isFile || !interpreterFile.canRead())
+		{
+			if (throwError)
+			{
+				throw RuntimeConfigurationException("$name is invalid or not readable.")
+			}
+
+			return false
+		}
+
+		return true
 	}
 }

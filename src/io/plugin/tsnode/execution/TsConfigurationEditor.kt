@@ -150,7 +150,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 	override fun applyEditorTo(config: TsRunConfiguration)
 	{
 		config.runSettings = config.runSettings.copy(
-			interpreterPath = nodeJsInterpreterField.interpreterRef,
+			interpreterRef = nodeJsInterpreterField.interpreterRef,
 			interpreterOptions = nodeOptionsField.text,
 			workingDirectory = workingDirectoryField.text,
 			envData = envVars.data,
@@ -167,7 +167,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 	override fun resetEditorFrom(config: TsRunConfiguration)
 	{
 		val runSettings = config.runSettings
-		nodeJsInterpreterField.interpreterRef = runSettings.interpreterPath
+		nodeJsInterpreterField.interpreterRef = runSettings.interpreterRef
 		nodeOptionsField.text = runSettings.interpreterOptions
 		workingDirectoryField.text = FileUtil.toSystemDependentName(runSettings.workingDirectory)
 		envVars.data = runSettings.envData

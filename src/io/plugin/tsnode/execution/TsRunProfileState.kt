@@ -22,7 +22,6 @@ class TsRunProfileState(private var project: Project,
 	override fun startProcess(): ProcessHandler
 	{
 		val runSettings = runConfig.runSettings
-		val interpreter = runSettings.interpreterPath.resolveAsLocal(project)
 		val commandLine = GeneralCommandLine()
 
 		if (StringUtils.isBlank(runSettings.workingDirectory))
@@ -34,7 +33,7 @@ class TsRunProfileState(private var project: Project,
 			commandLine.withWorkDirectory(runSettings.workingDirectory)
 		}
 
-		commandLine.exePath = interpreter.interpreterSystemDependentPath
+		commandLine.exePath = runConfig.getInterpreterSystemDependentPath()
 
 		runSettings.envData.configureCommandLine(commandLine, true)
 

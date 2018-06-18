@@ -5,7 +5,7 @@ import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 
 interface _NodeJsRunConfigurationParams : CommonProgramRunConfigurationParameters
 {
-	var interpreterPath: NodeJsInterpreterRef
+	var interpreterRef: NodeJsInterpreterRef
 
 	var interpreterOptions: String
 

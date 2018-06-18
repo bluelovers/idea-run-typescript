@@ -3,7 +3,7 @@ package io.plugin.tsnode.execution
 import com.intellij.execution.Executor
 import com.intellij.execution.configurations.RunConfigurationModule
 import com.intellij.execution.runners.ExecutionEnvironment
-import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
+import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 import com.intellij.javascript.nodejs.util.NodePackage
 import io.plugin.base.runner.inter._RunConfiguration
 
@@ -20,8 +20,7 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 	{
 		if (_tsPackage == null)
 		{
-			val interpreter = NodeJsLocalInterpreter.tryCast(runSettings.interpreterPath.resolve(project))
-			val pkg = NodePackage.findPreferredPackage(project, "ts-node", interpreter)
+			val pkg = findPreferredPackage("ts-node")
 			_tsPackage = pkg
 			return pkg
 		}
@@ -38,6 +37,13 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 	override fun setWorkingDirectory(workingDirectory: String?)
 	{
 		runSettings.workingDirectory = workingDirectory!!
+	}
+
+	override fun getInterpreterRef() = runSettings.interpreterRef
+
+	override fun setInterpreterRef(value: NodeJsInterpreterRef)
+	{
+		runSettings.interpreterRef = value
 	}
 
 	override fun getScriptName() = runSettings.scriptName
