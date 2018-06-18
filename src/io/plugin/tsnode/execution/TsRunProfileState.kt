@@ -11,12 +11,14 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.util.execution.ParametersListUtil
 import io.plugin.tsnode.execution.TsUtil.tsnodePath
+import io.plugin.tsnode.lib.TsLog
 
 class TsRunProfileState(protected var project: Project,
 	protected var runConfig: TsRunConfiguration,
 	protected var executor: Executor,
 	environment: ExecutionEnvironment) : CommandLineState(environment)
 {
+	val LOG = TsLog(javaClass)
 
 	fun createCommandLine(): GeneralCommandLine
 	{
@@ -41,30 +43,30 @@ class TsRunProfileState(protected var project: Project,
 
 		val tsnode = tsnodePath(runConfig)
 
-		if (StringUtil.isEmptyOrSpaces(tsnode))
+		if (!StringUtil.isEmptyOrSpaces(tsnode))
 		{
-			return commandLine
-		}
+			commandLine.addParameter(tsnode)
 
-		commandLine.addParameter(tsnode)
+			val typescriptOptionsList = ParametersListUtil.parse(runSettings.extraTypeScriptOptions.trim())
+			commandLine.addParameters(typescriptOptionsList)
 
-		val typescriptOptionsList = ParametersListUtil.parse(runSettings.extraTypeScriptOptions.trim())
-		commandLine.addParameters(typescriptOptionsList)
-
-		if (!StringUtil.isEmptyOrSpaces(runSettings.typescriptConfigFile))
-		{
-			commandLine.addParameter("--project ${runSettings.typescriptConfigFile}")
-		}
-
-		if (!StringUtil.isEmptyOrSpaces(runSettings.scriptName))
-		{
-			commandLine.addParameter(runSettings.scriptName)
-
-			if (!StringUtil.isEmptyOrSpaces(runSettings.programParameters))
+			if (!StringUtil.isEmptyOrSpaces(runSettings.typescriptConfigFile))
 			{
-				commandLine.addParameter(runSettings.programParameters)
+				commandLine.addParameter("--project ${runSettings.typescriptConfigFile}")
+			}
+
+			if (!StringUtil.isEmptyOrSpaces(runSettings.scriptName))
+			{
+				commandLine.addParameter(runSettings.scriptName)
+
+				if (!StringUtil.isEmptyOrSpaces(runSettings.programParameters))
+				{
+					commandLine.addParameter(runSettings.programParameters)
+				}
 			}
 		}
+
+		LOG.info("[createCommandLine] $commandLine")
 
 		return commandLine
 	}
@@ -75,6 +77,9 @@ class TsRunProfileState(protected var project: Project,
 
 		val processHandler = KillableColoredProcessHandler(commandLine)
 		ProcessTerminatedListener.attach(processHandler)
+
+		LOG.info("[startProcess] $processHandler")
+
 		return processHandler
 	}
 

@@ -36,7 +36,7 @@
 
   <actions>
     <!-- Add your actions here -->
-    <!--action id="io.plugin.tsnode.action.RunTsAction"
+    <action id="io.plugin.tsnode.action.RunTsAction"
             class="io.plugin.tsnode.action.RunTsAction"
             text="Run TypeScript"
             description="Run TypeScript">
@@ -50,7 +50,7 @@
             description="Debug TypeScript">
             <add-to-group group-id="ProjectViewPopupMenuRunGroup" anchor="after" relative-to-action="io.plugin.tsnode.action.RunTsAction"/>
             <add-to-group group-id="EditorPopupMenu.Run" anchor="after" relative-to-action="io.plugin.tsnode.action.RunTsAction"/>
-        </action-->
+        </action>
 
     <group id="MyPlugin.TestMeu"
            text="Greeting"

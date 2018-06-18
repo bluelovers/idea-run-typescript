@@ -2,10 +2,7 @@ package io.plugin.base.runner.inter
 
 import com.intellij.execution.CommonProgramRunConfigurationParameters
 import com.intellij.execution.configuration.AbstractRunConfiguration
-import com.intellij.execution.configurations.ConfigurationFactory
-import com.intellij.execution.configurations.RunConfigurationModule
-import com.intellij.execution.configurations.RunConfigurationWithSuppressedDefaultDebugAction
-import com.intellij.execution.configurations.RuntimeConfigurationException
+import com.intellij.execution.configurations.*
 import com.intellij.execution.util.ProgramParametersUtil
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
@@ -19,6 +16,8 @@ abstract class _RunConfiguration<T>(runConfigurationModule: RunConfigurationModu
 	AbstractRunConfiguration(name, runConfigurationModule, factory),
 	//_NodeJsRunConfigurationParams,
 	CommonProgramRunConfigurationParameters,
+	//DebuggableRunConfiguration,
+	RunConfiguration,
 	RunConfigurationWithSuppressedDefaultDebugAction
 {
 
@@ -74,7 +73,7 @@ abstract class _RunConfiguration<T>(runConfigurationModule: RunConfigurationModu
 	@Throws(RuntimeConfigurationException::class)
 	override fun checkConfiguration()
 	{
-		super.checkConfiguration()
+		super<AbstractRunConfiguration>.checkConfiguration()
 
 		val module = configurationModule.module
 		if (module != null)

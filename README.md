@@ -10,6 +10,7 @@
 
 ## link
 
+- https://github.com/JetBrains/intellij-community
 - https://zh.wikipedia.org/wiki/Kotlin
 - https://www.kotlincn.net/
 - https://github.com/t3hnar/CmdSupport
