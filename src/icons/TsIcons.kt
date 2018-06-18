@@ -7,8 +7,8 @@ import javax.swing.Icon
 
 object TsIcons
 {
-	val Run = AllIcons.General.Run
-	val Debug = AllIcons.General.Debug
+	val Run = AllIcons.Actions.Execute
+	val Debug = AllIcons.Actions.StartDebugger
 
 	//val Run = IconLoader.getIcon("/actions/execute.png")
 	//val Debug = IconLoader.getIcon("/actions/startDebugger.png")
