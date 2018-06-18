@@ -2,10 +2,13 @@ package io.plugin.tsnode.execution
 
 import com.intellij.execution.Executor
 import com.intellij.execution.configurations.RunConfigurationModule
+import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 import com.intellij.javascript.nodejs.util.NodePackage
+import com.intellij.openapi.util.text.StringUtil
 import io.plugin.base.runner.inter._RunConfiguration
+import java.io.File
 
 class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory: TsConfigurationFactory, name: String) :
 	_RunConfiguration<TsRunSettings>(runConfigurationModule, factory, name, TsRunSettings())
@@ -15,6 +18,20 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 	override fun getConfigurationEditor() = TsConfigurationEditor(this, project)
 
 	override fun getState(executor: Executor, environment: ExecutionEnvironment) = TsRunProfileState(project, this, executor, environment)
+
+	@Throws(RuntimeConfigurationException::class)
+	override fun checkConfiguration()
+	{
+		super.checkConfiguration()
+
+		if (!StringUtil.isEmptyOrSpaces(runSettings.workingDirectory))
+		{
+			if (!File(runSettings.workingDirectory).exists())
+			{
+				throw RuntimeConfigurationException("Working directory not exists")
+			}
+		}
+	}
 
 	fun selectedTsNodePackage(): NodePackage
 	{

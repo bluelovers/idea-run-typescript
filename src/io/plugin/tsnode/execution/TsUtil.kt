@@ -98,9 +98,9 @@ object TsUtil
 	}
 
 	@Throws(RuntimeConfigurationException::class)
-	fun expectFile(file: String, throwError: Boolean = false, name: String = "path"): Boolean
+	fun expectFile(path: String, throwError: Boolean = false, name: String = "path"): Boolean
 	{
-		if (StringUtil.isEmptyOrSpaces(file))
+		if (StringUtil.isEmptyOrSpaces(path))
 		{
 			if (throwError)
 			{
@@ -110,8 +110,9 @@ object TsUtil
 			return false
 		}
 
-		val interpreterFile = File(file)
-		if (!interpreterFile.isFile || !interpreterFile.canRead())
+		val file = File(path)
+
+		if (!file.isFile || !file.canRead())
 		{
 			if (throwError)
 			{
