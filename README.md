@@ -10,6 +10,8 @@
 
 ## link
 
+- https://zh.wikipedia.org/wiki/Kotlin
+- https://www.kotlincn.net/
 - https://github.com/t3hnar/CmdSupport
 - https://github.com/jasmine/IdeaJasmine
 - https://github.com/jansorg/BashSupport
