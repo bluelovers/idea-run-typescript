@@ -69,7 +69,7 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 
 		val bool = virtualFile != null && FileUtil.pathsEqual(virtualFile.path, runConfig.getScriptName())
 
-		LOG.info("[isConfigurationFromContext] $bool")
+		LOG.info("[isConfigurationFromContext] ${runConfig.name} $bool")
 
 		return bool
 	}
