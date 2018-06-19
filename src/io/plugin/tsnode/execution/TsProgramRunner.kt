@@ -5,6 +5,7 @@ import com.intellij.execution.executors.DefaultRunExecutor
 //import com.intellij.execution.runners.DefaultProgramRunner
 import com.intellij.javascript.debugger.execution.DebuggableProgramRunner
 import io.plugin.tsnode.lib.TsData
+import io.plugin.tsnode.lib.TsLog
 
 class TsProgramRunner : DebuggableProgramRunner()
 {
@@ -12,6 +13,10 @@ class TsProgramRunner : DebuggableProgramRunner()
 
 	override fun canRun(executorId: String, profile: RunProfile): Boolean
 	{
-		return DefaultRunExecutor.EXECUTOR_ID == executorId && profile is TsRunConfiguration
+		val bool = DefaultRunExecutor.EXECUTOR_ID == executorId && profile is TsRunConfiguration
+
+		TsLog(javaClass).info("[canRun] $bool $executorId $profile")
+
+		return bool
 	}
 }

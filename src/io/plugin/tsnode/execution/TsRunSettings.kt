@@ -17,3 +17,7 @@ data class TsRunSettings(
 	var extraTypeScriptOptions: String = "",
 	var typescriptConfigFile: String = ""
 )
+{
+	var isPassParentEnvs: Boolean = envData.isPassParentEnvs
+		get() = envData.isPassParentEnvs
+}
