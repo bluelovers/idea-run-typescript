@@ -9,12 +9,17 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.ui.RawCommandLineEditor
 import com.intellij.ui.TextAccessor
+import com.intellij.util.ui.ComponentWithEmptyText
 import com.intellij.util.ui.FormBuilder
+import com.intellij.util.ui.StatusText
 import com.intellij.util.ui.SwingHelper
 import javax.swing.JComponent
+import javax.swing.JTextField
 
 class TsForm
 {
+	val LOG = TsLog(javaClass)
+
 	open class TsFormBuilder : com.intellij.util.ui.FormBuilder()
 	{
 		fun append(field: Field<*>) = field.appendTo(this) as TsFormBuilder
@@ -43,8 +48,14 @@ class TsForm
 		override abstract fun toString(): String
 	}
 
-	open class TextField<Comp : TextAccessor>(override val field: Comp, override val label: String) : Field<Comp>
+	open class TextField<Comp : TextAccessor>(override val field: Comp, override val label: String, options: Options? = null) : Field<Comp>
 	{
+		companion object Options
+		{
+			var emptyText: String? = null
+			var dialogCaption: String? = null
+		}
+
 		var text
 			get() = this.field.text
 			set(value)
@@ -57,7 +68,7 @@ class TsForm
 
 	open class TextFieldWithBrowseSingleFolderButton<Comp : com.intellij.openapi.ui.TextFieldWithBrowseButton>(
 		override val field: Comp
-		, override val label: String
+		, override val label: String, options: Options? = null
 	) : TextField<Comp>(field, label)
 	{
 		var defaultFileChooserDescriptor: FileChooserDescriptor? = null
@@ -69,6 +80,34 @@ class TsForm
 			if (defaultProject != null && defaultProject is Project)
 			{
 				installFileCompletionAndBrowseDialog(defaultProject, defaultBrowseDialogTitle, defaultFileChooserDescriptor)
+			}
+
+			if (
+				(field is com.intellij.openapi.ui.TextFieldWithBrowseButton)
+				|| (field is com.intellij.ui.RawCommandLineEditor)
+			)
+			{
+				val textField: JTextField? = field.textField
+
+				if (textField != null && textField is ComponentWithEmptyText)
+				{
+					val emptyText = textField.emptyText
+
+					/**
+					 * @FIXME 不知道為什麼要寫成這樣才能成功更新文字
+					 */
+					if (StringUtil.isEmptyOrSpaces(emptyText?.text))
+					{
+						if (!StringUtil.isEmptyOrSpaces(options?.emptyText))
+						{
+							emptyText?.text = options?.emptyText as String
+						}
+						else if (!StringUtil.isEmptyOrSpaces(label))
+						{
+							emptyText?.text = Util.stripTitle(label)
+						}
+					}
+				}
 			}
 		}
 
@@ -94,15 +133,74 @@ class TsForm
 
 			return this
 		}
+
+		val textField
+			get() = field.textField
+
+		val emptyText: StatusText?
+			get()
+			{
+				val field = this.field
+
+				if (field.textField != null && field.textField is ComponentWithEmptyText)
+				{
+					val emptyText = field.textField as ComponentWithEmptyText
+
+					return emptyText?.emptyText
+				}
+
+				return null
+			}
 	}
 
-	open class RawCommandLineEditorField<Comp : RawCommandLineEditor>(override val field: Comp, override val label: String) : TextField<Comp>(field, label)
+	open class RawCommandLineEditorField<Comp : RawCommandLineEditor>(override val field: Comp, override val label: String, options: Options? = null) : TextField<Comp>(field, label)
 	{
+		//val LOG = TsLog(javaClass)
+
 		init
 		{
-			if (StringUtil.isEmptyOrSpaces(field.dialogCaption))
+			val text = if (StringUtil.isEmptyOrSpaces(field.dialogCaption!!))
+				Util.stripTitle(
+					options?.dialogCaption
+						?: label
+				)
+			else field.dialogCaption as String
+
+			field.dialogCaption = text
+
+			/*
+			if (textField is ExpandableTextField)
 			{
-				field.dialogCaption = Util.stripTitle(label)
+				textField?.putClientProperty("monospaced", false)
+			}
+			*/
+
+			if (
+				(field is com.intellij.openapi.ui.TextFieldWithBrowseButton)
+				|| (field is com.intellij.ui.RawCommandLineEditor)
+			)
+			{
+				val textField: JTextField? = field.textField
+
+				if (textField != null && textField is ComponentWithEmptyText)
+				{
+					val emptyText = textField.emptyText
+
+					/**
+					 * @FIXME 不知道為什麼要寫成這樣才能成功更新文字
+					 */
+					if (StringUtil.isEmptyOrSpaces(emptyText?.text))
+					{
+						if (!StringUtil.isEmptyOrSpaces(options?.emptyText))
+						{
+							emptyText?.text = options?.emptyText as String
+						}
+						else if (!StringUtil.isEmptyOrSpaces(label))
+						{
+							emptyText?.text = Util.stripTitle(label)
+						}
+					}
+				}
 			}
 		}
 
@@ -111,6 +209,24 @@ class TsForm
 			set(value)
 			{
 				this.field.dialogCaption = value
+			}
+
+		val textField
+			get() = field.textField
+
+		val emptyText: StatusText?
+			get()
+			{
+				val field = this.field
+
+				if (field.textField != null && field.textField is ComponentWithEmptyText)
+				{
+					val emptyText = field.textField as ComponentWithEmptyText
+
+					return emptyText?.emptyText
+				}
+
+				return null
 			}
 	}
 
@@ -185,11 +301,13 @@ class TsForm
 
 		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton) = TextField(fieldFactory, label)
 
-		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, project: Project, browseDialogTitle: String, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton = Util.createWorkingDirectoryField(project, browseDialogTitle)) = TextFieldWithBrowseSingleFolderButton(fieldFactory, label)
+		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, project: Project, browseDialogTitle: String, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton = Util.createWorkingDirectoryField(project, browseDialogTitle)) = TsForm.TextFieldWithBrowseSingleFolderButton(fieldFactory, label)
 
 		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, project: Project, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton = Util.createWorkingDirectoryField(project, label)) = TextFieldWithBrowseSingleFolderButton(fieldFactory, label)
 
 		fun LazyRawCommandLineEditor(label: String, fieldFactory: RawCommandLineEditor = com.intellij.ui.RawCommandLineEditor()) = RawCommandLineEditorField(fieldFactory, label)
+
+		fun LazyRawCommandLineEditor(label: String, fieldFactory: RawCommandLineEditor = com.intellij.ui.RawCommandLineEditor(), options: TextField.Options? = null) = RawCommandLineEditorField(fieldFactory, label, options)
 
 		fun LazyNodePackageField(label: String, interpreterField: com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField, packageName: String, fieldFactory: com.intellij.javascript.nodejs.util.NodePackageField = com.intellij.javascript.nodejs.util.NodePackageField(interpreterField, packageName)) = NodePackageField(fieldFactory, label)
 

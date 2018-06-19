@@ -27,11 +27,21 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	val nodeJsInterpreterField = TsForm.LazyNodeJsInterpreterField("Node &interpreter:", project)
 
+	var interpreterRef
+	get() = nodeJsInterpreterField.interpreterRef
+	set(value)
+	{
+		nodeJsInterpreterField.interpreterRef = value
+	}
+
 	val nodeOptionsField = TsForm.LazyRawCommandLineEditor("Node &options:")
 
 	val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", nodeJsInterpreterField, "ts-node")
 
-	private var typescriptOptionsField = createTypeScriptOptionsField()
+	val typescriptOptionsField = TsForm.LazyRawCommandLineEditor("E&xtra ts-node options:")
+
+	//private var typescriptOptionsField = createTypeScriptOptionsField()
+
 	private var typescriptConfigFileField = createTypeScriptConfigFileField()
 
 	private var typescriptFileField = createTypeScriptFileField()
@@ -51,12 +61,12 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			.addLabeledComponent(nodeJsInterpreterField)
 			.addLabeledComponent(nodeOptionsField)
 
-			.addLabeledComponent("&Working directory:", workingDirectoryField)
+			.addLabeledComponent(workingDirectoryField)
 
 			.addLabeledComponent(tsnodePackageField)
 
 			.addLabeledComponent("ts&config file:", typescriptConfigFileField)
-			.addLabeledComponent("E&xtra ts-node options:", typescriptOptionsField)
+			.addLabeledComponent(typescriptOptionsField)
 
 			.addLabeledComponent("TypeScript &file:", typescriptFileField)
 			.addLabeledComponent("&Application parameters:", typescriptFileOptionsField)
