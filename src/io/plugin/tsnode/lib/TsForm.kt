@@ -2,6 +2,7 @@ package io.plugin.tsnode.lib
 
 //import com.intellij.javascript.nodejs.util.NodePackageField
 import com.intellij.execution.configuration.EnvironmentVariablesTextFieldWithBrowseButton
+import com.intellij.openapi.fileChooser.FileChooserDescriptor
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
@@ -38,6 +39,8 @@ class TsForm
 
 		fun appendTo(form: FormBuilder) = form.addLabeledComponent(label, field as JComponent)
 		fun <F : TsFormBuilder> appendTo(form: F) = form.addLabeledComponent(label, field as JComponent) as F
+
+		override abstract fun toString(): String
 	}
 
 	open class TextField<Comp : TextAccessor>(override val field: Comp, override val label: String) : Field<Comp>
@@ -48,6 +51,49 @@ class TsForm
 			{
 				this.field.text = value
 			}
+
+		override fun toString() = field.toString()
+	}
+
+	open class TextFieldWithBrowseSingleFolderButton<Comp : com.intellij.openapi.ui.TextFieldWithBrowseButton>(
+		override val field: Comp
+		, override val label: String
+	) : TextField<Comp>(field, label)
+	{
+		var defaultFileChooserDescriptor: FileChooserDescriptor? = null
+		var defaultProject: Project? = null
+		var defaultBrowseDialogTitle: String? = null
+
+		init
+		{
+			if (defaultProject != null && defaultProject is Project)
+			{
+				installFileCompletionAndBrowseDialog(defaultProject, defaultBrowseDialogTitle, defaultFileChooserDescriptor)
+			}
+		}
+
+		fun createFileChooserDescriptor(fn: FileChooserDescriptor?): FileChooserDescriptor
+		{
+			return fn
+				?: defaultFileChooserDescriptor
+				?: FileChooserDescriptorFactory.createSingleFolderDescriptor()
+		}
+
+		fun installFileCompletionAndBrowseDialog(project: Project? = null, browseDialogTitle: String? = null, fn: com.intellij.openapi.fileChooser.FileChooserDescriptor? = null): TextFieldWithBrowseSingleFolderButton<Comp>
+		{
+			val project = project
+				?: defaultProject
+
+			val browseDialogTitle = browseDialogTitle
+				?: defaultBrowseDialogTitle
+				?: Util.stripTitle(this.label)
+
+			SwingHelper
+				.installFileCompletionAndBrowseDialog(project, this.field, browseDialogTitle,
+					createFileChooserDescriptor(fn))
+
+			return this
+		}
 	}
 
 	open class RawCommandLineEditorField<Comp : RawCommandLineEditor>(override val field: Comp, override val label: String) : TextField<Comp>(field, label)
@@ -83,6 +129,8 @@ class TsForm
 			{
 				this.field.selectedRef = value
 			}
+
+		override fun toString() = field.toString()
 	}
 
 	open class NodeJsInterpreterField<Comp : com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField>(override val field: Comp, override val label: String) : Field<Comp>
@@ -100,6 +148,8 @@ class TsForm
 			{
 				this.field.interpreterRef = value
 			}
+
+		override fun toString() = field.toString()
 	}
 
 	open class EnvironmentVariablesTextFieldWithBrowseButtonField<Comp : com.intellij.execution.configuration.EnvironmentVariablesTextFieldWithBrowseButton>(override val field: Comp, override val label: String) : Field<Comp>
@@ -107,7 +157,7 @@ class TsForm
 		//fun isPassParentEnvs() = field.isPassParentEnvs
 
 		val isPassParentEnvs
-		get() = field.isPassParentEnvs
+			get() = field.isPassParentEnvs
 
 		var data
 			get() = this.field.data
@@ -122,6 +172,8 @@ class TsForm
 			{
 				this.field.envs = value
 			}
+
+		override fun toString() = field.toString()
 	}
 
 	companion object
@@ -129,13 +181,13 @@ class TsForm
 
 		fun LazyNodeJsInterpreterField(label: String, project: Project, withRemote: Boolean = false, fieldFactory: com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField = com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField(project, withRemote)) = NodeJsInterpreterField(fieldFactory, label)
 
-		fun LazyTextFieldWithBrowseButton(label: String, fieldFactory: TextFieldWithBrowseButton = TextFieldWithBrowseButton()) = TextField(fieldFactory, label)
+		fun LazyTextFieldWithBrowseButton(label: String, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton = TextFieldWithBrowseButton()) = TextField(fieldFactory, label)
 
-		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, fieldFactory: TextFieldWithBrowseButton) = TextField(fieldFactory, label)
+		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton) = TextField(fieldFactory, label)
 
-		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, project: Project, browseDialogTitle: String, fieldFactory: TextFieldWithBrowseButton = Util.createWorkingDirectoryField(project, browseDialogTitle)) = TextField(fieldFactory, label)
+		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, project: Project, browseDialogTitle: String, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton = Util.createWorkingDirectoryField(project, browseDialogTitle)) = TextFieldWithBrowseSingleFolderButton(fieldFactory, label)
 
-		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, project: Project, fieldFactory: TextFieldWithBrowseButton = Util.createWorkingDirectoryField(project, label)) = TextField(fieldFactory, label)
+		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, project: Project, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton = Util.createWorkingDirectoryField(project, label)) = TextFieldWithBrowseSingleFolderButton(fieldFactory, label)
 
 		fun LazyRawCommandLineEditor(label: String, fieldFactory: RawCommandLineEditor = com.intellij.ui.RawCommandLineEditor()) = RawCommandLineEditorField(fieldFactory, label)
 
@@ -159,7 +211,18 @@ class TsForm
 
 	object Util
 	{
-		fun createWorkingDirectoryField(project: Project, browseDialogTitle: String = "Select Path"): TextFieldWithBrowseButton
+		fun <T : com.intellij.openapi.ui.TextFieldWithBrowseButton> installFileCompletionAndBrowseDialog(project: Project, field: T, browseDialogTitle: String, fileChooserDescriptor: com.intellij.openapi.fileChooser.FileChooserDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor()): T
+		{
+			SwingHelper
+				.installFileCompletionAndBrowseDialog(project, field, browseDialogTitle,
+					fileChooserDescriptor)
+
+			return field
+		}
+
+		fun <T : com.intellij.openapi.ui.TextFieldWithBrowseButton> installFileCompletionAndBrowseDialog(project: Project, field: TextField<T>, browseDialogTitle: String, fileChooserDescriptor: com.intellij.openapi.fileChooser.FileChooserDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor()) = installFileCompletionAndBrowseDialog(project, field.field, browseDialogTitle, fileChooserDescriptor)
+
+		fun createWorkingDirectoryField(project: Project, browseDialogTitle: String = "Select Path"): com.intellij.openapi.ui.TextFieldWithBrowseButton
 		{
 			val field = TextFieldWithBrowseButton()
 
