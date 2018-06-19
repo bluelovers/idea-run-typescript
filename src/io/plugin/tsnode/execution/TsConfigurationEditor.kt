@@ -1,7 +1,5 @@
 package io.plugin.tsnode.execution
 
-import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField
-import com.intellij.javascript.nodejs.util.NodePackageField
 import com.intellij.json.JsonFileType
 import com.intellij.lang.javascript.library.JSLibraryUtil
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
@@ -16,9 +14,9 @@ import com.intellij.ui.RawCommandLineEditor
 import com.intellij.ui.TextFieldWithHistoryWithBrowseButton
 import com.intellij.ui.components.fields.ExpandableTextField
 import com.intellij.util.ui.ComponentWithEmptyText
-import com.intellij.util.ui.FormBuilder
 import com.intellij.util.ui.SwingHelper
 import io.plugin.base.runner._ConfigurationEditor
+import io.plugin.tsnode.lib.TsForm
 import io.plugin.tsnode.lib.TsLog
 import javax.swing.JComponent
 import javax.swing.JPanel
@@ -27,10 +25,12 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 {
 	val LOG = TsLog(javaClass)
 
-	private var nodeJsInterpreterField: NodeJsInterpreterField = NodeJsInterpreterField(project, false)
-	private var nodeOptionsField: RawCommandLineEditor = RawCommandLineEditor()
+	val nodeJsInterpreterField = TsForm.LazyNodeJsInterpreterField("Node &interpreter:", project)
 
-	private var tsnodePackageField: NodePackageField = NodePackageField(nodeJsInterpreterField, "ts-node")
+	val nodeOptionsField = TsForm.LazyRawCommandLineEditor("Node &options:")
+
+	val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", nodeJsInterpreterField, "ts-node")
+
 	private var typescriptOptionsField = createTypeScriptOptionsField()
 	private var typescriptConfigFileField = createTypeScriptConfigFileField()
 
@@ -43,14 +43,18 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 	{
 		LOG.info("[init] $this")
 
-		nodeOptionsField.dialogCaption = "Node Options"
-		form = FormBuilder()
+		//nodeOptionsField.dialogCaption = "Node Options"
+
+		form = TsForm.TsFormBuilder()
 			.setAlignLabelOnRight(false)
-			.addLabeledComponent("Node &interpreter:", nodeJsInterpreterField)
-			.addLabeledComponent("Node &options:", nodeOptionsField)
+
+			.addLabeledComponent(nodeJsInterpreterField)
+			.addLabeledComponent(nodeOptionsField)
+
 			.addLabeledComponent("&Working directory:", workingDirectoryField)
 
-			.addLabeledComponent("&TypeScript Node package:", tsnodePackageField)
+			.addLabeledComponent(tsnodePackageField)
+
 			.addLabeledComponent("ts&config file:", typescriptConfigFileField)
 			.addLabeledComponent("E&xtra ts-node options:", typescriptOptionsField)
 
