@@ -5,6 +5,7 @@
   <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">bluelovers</vendor>
 
   <category>JavaScript</category>
+  <idea-version since-build="173.0"/>
 
   <description><![CDATA[
     IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
@@ -16,6 +17,7 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
 <p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run001.jpg" alt="run001.jpg" class="absent" style="max-width:100%;" />
 <p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run002.jpg" alt="run002.jpg" class="absent" style="max-width:100%;" />
 <p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run003.jpg" alt="run003.jpg" class="absent" style="max-width:100%;" />
+
 <p>this is my first time touch kotlin/java</p>
 <p>this plugin made by</p>
 <ol>
@@ -24,6 +26,7 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
   <li>google lol</li>
   <li>fuck u, noob official plugin dev doc/demo</li>
 </ol>
+
 <h2>link</h2>
 <ul>
   <li><a href="https://github.com/JetBrains/intellij-community">https://github.com/JetBrains/intellij-community</a></li>
@@ -39,7 +42,9 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
 
     ]]></description>
 
-  <change-notes>Initial commit</change-notes>
+  <change-notes><![CDATA[
+  Initial commit
+  ]]></change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
