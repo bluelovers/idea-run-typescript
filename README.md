@@ -2,6 +2,13 @@
 
     IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
 
+# install
+
+1. via jetbrains https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript
+2. github [idea-run-typescript.jar](releases/idea-run-typescript.jar)
+
+# screenshot
+
 ![run001.jpg](readme/run001.jpg)
 ![run002.jpg](readme/run002.jpg)
 ![run003.jpg](readme/run003.jpg)
