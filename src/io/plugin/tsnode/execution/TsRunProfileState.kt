@@ -52,7 +52,9 @@ class TsRunProfileState(protected var project: Project,
 
 			if (!StringUtil.isEmptyOrSpaces(runSettings.typescriptConfigFile))
 			{
-				commandLine.addParameter("--project ${runSettings.typescriptConfigFile}")
+				//commandLine.addParameter("--project ${runSettings.typescriptConfigFile}")
+				commandLine.addParameter("--project")
+				commandLine.addParameter(runSettings.typescriptConfigFile)
 			}
 
 			if (!StringUtil.isEmptyOrSpaces(runSettings.scriptName))
