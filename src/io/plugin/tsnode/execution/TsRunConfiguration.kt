@@ -53,7 +53,7 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 
 	override fun setWorkingDirectory(workingDirectory: String?)
 	{
-		runSettings.workingDirectory = workingDirectory!!
+		runSettings.workingDirectory = workingDirectory ?: ""
 	}
 
 	override fun getInterpreterRef() = runSettings.interpreterRef
@@ -65,9 +65,9 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 
 	override fun getScriptName() = runSettings.scriptName
 
-	override fun setScriptName(typescriptFile: String)
+	override fun setScriptName(typescriptFile: String?)
 	{
-		runSettings.scriptName = typescriptFile
+		runSettings.scriptName = typescriptFile ?: ""
 	}
 
 	override fun getProgramParameters() = runSettings.programParameters

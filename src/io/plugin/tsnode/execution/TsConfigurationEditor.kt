@@ -46,9 +46,24 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	val typescriptOptionsField = TsForm.LazyRawCommandLineEditor("E&xtra ts-node options:")
 
+	var extraTypeScriptOptions
+		get() = typescriptOptionsField.text
+		set(value)
+		{
+			typescriptOptionsField.text = value
+		}
+
 	//private var typescriptOptionsField = createTypeScriptOptionsField()
 
 	val typescriptConfigFileField = TsForm.LazyTextFieldWithBrowseSingleFileButton("ts&config file:", project)
+
+	var typescriptConfigFile
+		get() = typescriptConfigFileField.text
+		set(value)
+		{
+			typescriptConfigFileField.text = value
+		}
+
 
 	//private var typescriptConfigFileField = createTypeScriptConfigFileField()
 
@@ -196,19 +211,25 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	override fun applyEditorTo(config: TsRunConfiguration)
 	{
-		LOG.info("[applyEditorTo] $config")
+		LOG.info("[applyEditorTo] $this $config")
 
-		config.runSettings.copy(
+		val runSettings = config.runSettings
+
+		config.runSettings = config.runSettings.copy(
 			interpreterRef = nodeJsInterpreterField.interpreterRef,
 			interpreterOptions = nodeOptionsField.text,
 			workingDirectory = workingDirectoryField.text,
 			envData = envVars.data,
 
 			scriptName = typescriptFileField.text,
-			programParameters = typescriptFileOptionsField.text,
+			programParameters = this.scriptParameters,
 
 			typescriptConfigFile = typescriptConfigFileField.text,
 			extraTypeScriptOptions = typescriptOptionsField.text)
+
+
+		config.envs2.clear()
+		config.envs2.putAll(envVars.envs)
 
 		config.setTypeScriptPackage(tsnodePackageField.selected)
 
@@ -217,13 +238,17 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	override fun resetEditorFrom(config: TsRunConfiguration)
 	{
-		LOG.info("[resetEditorFrom] $config")
+		LOG.info("[resetEditorFrom] $this $config")
 
 		val runSettings = config.runSettings
 		nodeJsInterpreterField.interpreterRef = runSettings.interpreterRef
 		nodeOptionsField.text = runSettings.interpreterOptions
 		workingDirectoryField.text = FileUtil.toSystemDependentName(runSettings.workingDirectory)
-		envVars.data = runSettings.envData
+
+
+		//envVars.data = runSettings.envData
+		envVars.envs = config.envs2
+
 		tsnodePackageField.selected = config.selectedTsNodePackage()
 		typescriptConfigFileField.text = runSettings.typescriptConfigFile
 		typescriptOptionsField.text = runSettings.extraTypeScriptOptions

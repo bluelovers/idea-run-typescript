@@ -11,6 +11,7 @@ import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
 import com.intellij.javascript.nodejs.util.NodePackage
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.util.InvalidDataException
+import com.intellij.openapi.util.JDOMExternalizerUtil
 import com.intellij.openapi.util.WriteExternalException
 import io.plugin.tsnode.execution.TsRunSettings
 import io.plugin.tsnode.execution.TsUtil
@@ -30,6 +31,8 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 {
 
 	val LOG = TsLog(javaClass)
+
+	var envs2: MutableMap<String, String> = mutableMapOf()
 
 	override fun getValidModules(): Collection<Module>
 	{
@@ -64,7 +67,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 	abstract fun setInterpreterRef(value: NodeJsInterpreterRef)
 
 	abstract fun getScriptName(): String
-	abstract fun setScriptName(value: String)
+	abstract fun setScriptName(value: String?)
 
 	fun getInterpreter(): NodeJsLocalInterpreter?
 	{
@@ -127,12 +130,22 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 	override fun getEnvs(): Map<String, String>
 	{
-		return runSettings.envData.envs
+		return envs2
+		//return runSettings.envData.envs
 	}
 
 	override fun setEnvs(value: Map<String, String>)
 	{
-		runSettings.envData.envs
+		//runSettings.envData.envs?.clear()
+
+		LOG.info("[setEnvs] $value ")
+
+		//envs2 = value
+
+		envs2.clear()
+		envs2.putAll(value)
+
+		//runSettings.envData.envs.putAll(value)
 	}
 
 	override fun isPassParentEnvs(): Boolean
@@ -156,9 +169,24 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		super<AbstractRunConfiguration>.readExternal(element)
 
-		EnvironmentVariablesComponent.readExternal(element, envs)
+		//var mapenv: MutableMap<String, String> = mutableMapOf()
+
+		EnvironmentVariablesComponent.readExternal(element, envs2)
+
+		//setEnvs(mapenv)
 
 		configurationModule.readExternal(element)
+
+		setScriptName(JDOMExternalizerUtil.readField(element, "scriptName"))
+		setWorkingDirectory(JDOMExternalizerUtil.readField(element, "workingDirectory"))
+
+		runSettings.interpreterOptions = JDOMExternalizerUtil.readField(element, "interpreterOptions") ?: ""
+
+		runSettings.typescriptConfigFile = JDOMExternalizerUtil.readField(element, "typescriptConfigFile") ?: ""
+
+		runSettings.extraTypeScriptOptions = JDOMExternalizerUtil.readField(element, "extraTypeScriptOptions") ?: ""
+
+		runSettings.programParameters = JDOMExternalizerUtil.readField(element, "programParameters") ?: ""
 
 		LOG.info("[readExternal:2] $element ${element.name} ${element.attributes}")
 
@@ -174,9 +202,26 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		EnvironmentVariablesComponent.writeExternal(element, envs)
 
+		runSettings.envData.writeExternal(element)
+
+		JDOMExternalizerUtil.writeField(element, "scriptName", getScriptName())
+		JDOMExternalizerUtil.writeField(element, "workingDirectory", getWorkingDirectory())
+
+		JDOMExternalizerUtil.writeField(element, "interpreterOptions", getInterpreterOptions())
+
+		JDOMExternalizerUtil.writeField(element, "interpreterRef", getInterpreterRef().toString())
+
+		JDOMExternalizerUtil.writeField(element, "programParameters", runSettings.programParameters)
+
+		JDOMExternalizerUtil.writeField(element, "typescriptConfigFile", runSettings.typescriptConfigFile)
+		JDOMExternalizerUtil.writeField(element, "extraTypeScriptOptions", runSettings.extraTypeScriptOptions)
+
 		configurationModule.writeExternal(element)
 
-		LOG.info("[writeExternal:2] $element ${element.name} ${element.attributes}")
+		LOG.info("""[writeExternal:2] $element ${element.name}
+${element.attributes}
+${element.children}
+""".trimMargin())
 
 		LOG.info(envs.toString())
 	}
