@@ -50,11 +50,11 @@ class TsRunProfileState(protected var project: Project,
 			val typescriptOptionsList = ParametersListUtil.parse(runSettings.extraTypeScriptOptions.trim())
 			commandLine.addParameters(typescriptOptionsList)
 
-			if (!StringUtil.isEmptyOrSpaces(runSettings.typescriptConfigFile))
+			if (!StringUtil.isEmptyOrSpaces(runSettings.tsconfigFile))
 			{
-				//commandLine.addParameter("--project ${runSettings.typescriptConfigFile}")
+				//commandLine.addParameter("--project ${runSettings.tsconfigFile}")
 				commandLine.addParameter("--project")
-				commandLine.addParameter(runSettings.typescriptConfigFile)
+				commandLine.addParameter(runSettings.tsconfigFile)
 			}
 
 			if (!StringUtil.isEmptyOrSpaces(runSettings.scriptName))

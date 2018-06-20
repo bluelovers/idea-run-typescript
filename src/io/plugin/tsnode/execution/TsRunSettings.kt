@@ -15,7 +15,7 @@ data class TsRunSettings(
 	var programParameters: String = "",
 
 	var extraTypeScriptOptions: String = "",
-	var typescriptConfigFile: String = ""
+	var tsconfigFile: String = ""
 )
 {
 	var isPassParentEnvs: Boolean = envData.isPassParentEnvs

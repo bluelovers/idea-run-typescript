@@ -16,6 +16,6 @@ interface TsRunConfigurationParams
 
 	var scriptName: String
 
-	var scriptParameters: String
+	var programParameters: String
 
 }

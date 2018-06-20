@@ -5,7 +5,7 @@ import icons.TsIcons
 object TsData
 {
 	val FileTypeClassName = "com.intellij.lang.javascript.TypeScriptFileType"
-	val RunnerId = "tsRunnerRun"
+	val RunnerId = "TypeScriptProgramRunner"
 
 	val name = "TypeScript"
 	val description = "TypeScript"

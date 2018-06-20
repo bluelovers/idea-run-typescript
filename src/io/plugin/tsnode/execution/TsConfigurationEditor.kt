@@ -24,68 +24,70 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 {
 	val LOG = TsLog(javaClass)
 
-	val nodeJsInterpreterField = TsForm.LazyNodeJsInterpreterField("Node &interpreter:", project)
+	val interpreterField = TsForm.LazyNodeJsInterpreterField("Node &interpreter:", project)
 
 	var interpreterRef
-		get() = nodeJsInterpreterField.interpreterRef
+		get() = interpreterField.interpreterRef
 		set(value)
 		{
-			nodeJsInterpreterField.interpreterRef = value
+			interpreterField.interpreterRef = value
 		}
 
-	val nodeOptionsField = TsForm.LazyRawCommandLineEditor("Node &options:")
+	val interpreterOptionsField = TsForm.LazyRawCommandLineEditor("Node &options:")
 
 	override var interpreterOptions
-		get() = nodeOptionsField.text
+		get() = interpreterOptionsField.text
 		set(value)
 		{
-			nodeOptionsField.text = value
+			interpreterOptionsField.text = value
 		}
 
-	val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", nodeJsInterpreterField, "ts-node")
+	val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", interpreterField, "ts-node")
 
-	val typescriptOptionsField = TsForm.LazyRawCommandLineEditor("E&xtra ts-node options:")
+
+
+	val extraTypeScriptOptionsField = TsForm.LazyRawCommandLineEditor("E&xtra ts-node options:")
 
 	var extraTypeScriptOptions
-		get() = typescriptOptionsField.text
+		get() = extraTypeScriptOptionsField.text
 		set(value)
 		{
-			typescriptOptionsField.text = value
+			extraTypeScriptOptionsField.text = value
 		}
 
-	//private var typescriptOptionsField = createTypeScriptOptionsField()
+	//private var extraTypeScriptOptionsField = createTypeScriptOptionsField()
 
-	val typescriptConfigFileField = TsForm.LazyTextFieldWithBrowseSingleFileButton("ts&config file:", project)
+	val tsconfigFileField = TsForm.LazyTextFieldWithBrowseSingleFileButton("ts&config file:", project)
 
-	var typescriptConfigFile
-		get() = typescriptConfigFileField.text
+	var tsconfigFile
+		get() = tsconfigFileField.text
 		set(value)
 		{
-			typescriptConfigFileField.text = value
+			tsconfigFileField.text = value
 		}
 
 
-	//private var typescriptConfigFileField = createTypeScriptConfigFileField()
+	//private var tsconfigFileField = createTsconfigFileField()
 
-	val typescriptFileField = TsForm.LazyTextFieldWithBrowseSingleFileButton("TypeScript &file:", project)
-	val typescriptFileOptionsField = TsForm.LazyRawCommandLineEditor("&Application parameters:")
+	val scriptNameField = TsForm.LazyTextFieldWithBrowseSingleFileButton("TypeScript &file:", project)
+	val programParametersField = TsForm.LazyRawCommandLineEditor("&Application parameters:")
 
 	override var scriptName
-		get() = typescriptFileField.text
+		get() = scriptNameField.text
 		set(value)
 		{
-			typescriptFileField.text = value
+			scriptNameField.text = value
 		}
 
-	override var scriptParameters
-		get() = typescriptFileOptionsField.text
+	override var programParameters
+		get() = programParametersField.text
 		set(value)
 		{
-			typescriptFileOptionsField.text = value
+			programParametersField.text = value
 		}
 
-	//private var typescriptFileField = createTypeScriptFileField()
-	//private var typescriptFileOptionsField = createTypeScriptFileOptionsField()
+	//private var scriptNameField = createTypeScriptFileField()
+	//private var programParametersField = createTypeScriptFileOptionsField()
 
 	override val form: JPanel
 
@@ -93,23 +95,23 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 	{
 		LOG.info("[init] $this")
 
-		//nodeOptionsField.dialogCaption = "Node Options"
+		//interpreterOptionsField.dialogCaption = "Node Options"
 
 		form = TsForm.TsFormBuilder()
 			.setAlignLabelOnRight(false)
 
-			.addLabeledComponent(nodeJsInterpreterField)
-			.addLabeledComponent(nodeOptionsField)
+			.addLabeledComponent(interpreterField)
+			.addLabeledComponent(interpreterOptionsField)
 
 			.addLabeledComponent(workingDirectoryField)
 
 			.addLabeledComponent(tsnodePackageField)
 
-			.addLabeledComponent(typescriptConfigFileField)
-			.addLabeledComponent(typescriptOptionsField)
+			.addLabeledComponent(tsconfigFileField)
+			.addLabeledComponent(extraTypeScriptOptionsField)
 
-			.addLabeledComponent(typescriptFileField)
-			.addLabeledComponent(typescriptFileOptionsField)
+			.addLabeledComponent(scriptNameField)
+			.addLabeledComponent(programParametersField)
 
 			.addLabeledComponent(envVars)
 
@@ -160,7 +162,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		return editor
 	}
 
-	private fun createTypeScriptConfigFileField(): com.intellij.openapi.ui.TextFieldWithBrowseButton
+	private fun createTsconfigFileField(): com.intellij.openapi.ui.TextFieldWithBrowseButton
 	{
 		//val fullField = TextFieldWithHistoryWithBrowseButton()
 		val fullField = com.intellij.openapi.ui.TextFieldWithBrowseButton()
@@ -194,10 +196,10 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 		val files = FileTypeIndex.getFiles(jsonFileType, scope)
 
-		return files.filter { it != null && it.isValid && !it.isDirectory && isTypeScriptConfigFile(it.nameSequence) && !JSLibraryUtil.isProbableLibraryFile(it) }
+		return files.filter { it != null && it.isValid && !it.isDirectory && isTsconfigFile(it.nameSequence) && !JSLibraryUtil.isProbableLibraryFile(it) }
 	}
 
-	private fun isTypeScriptConfigFile(filename: CharSequence): Boolean
+	private fun isTsconfigFile(filename: CharSequence): Boolean
 	{
 		return filename.startsWith("tsconfig", true)
 	}
@@ -216,16 +218,16 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		val runSettings = config.runSettings
 
 		config.runSettings = config.runSettings.copy(
-			interpreterRef = nodeJsInterpreterField.interpreterRef,
-			interpreterOptions = nodeOptionsField.text,
+			interpreterRef = interpreterField.interpreterRef,
+			interpreterOptions = interpreterOptionsField.text,
 			workingDirectory = workingDirectoryField.text,
 			envData = envVars.data,
 
-			scriptName = typescriptFileField.text,
-			programParameters = this.scriptParameters,
+			scriptName = scriptNameField.text,
+			programParameters = this.programParameters,
 
-			typescriptConfigFile = typescriptConfigFileField.text,
-			extraTypeScriptOptions = typescriptOptionsField.text)
+			tsconfigFile = tsconfigFileField.text,
+			extraTypeScriptOptions = extraTypeScriptOptionsField.text)
 
 
 		//config.envs2.clear()
@@ -243,8 +245,8 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		LOG.info("[resetEditorFrom] $this $config")
 
 		val runSettings = config.runSettings
-		nodeJsInterpreterField.interpreterRef = runSettings.interpreterRef
-		nodeOptionsField.text = runSettings.interpreterOptions
+		interpreterField.interpreterRef = runSettings.interpreterRef
+		interpreterOptionsField.text = runSettings.interpreterOptions
 		workingDirectoryField.text = FileUtil.toSystemDependentName(runSettings.workingDirectory)
 
 
@@ -252,11 +254,11 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		envVars.envs = config.envs2
 
 		tsnodePackageField.selected = config.selectedTsNodePackage()
-		typescriptConfigFileField.text = runSettings.typescriptConfigFile
-		typescriptOptionsField.text = runSettings.extraTypeScriptOptions
+		tsconfigFileField.text = runSettings.tsconfigFile
+		extraTypeScriptOptionsField.text = runSettings.extraTypeScriptOptions
 
-		typescriptFileField.text = runSettings.scriptName
-		typescriptFileOptionsField.text = runSettings.programParameters
+		scriptNameField.text = runSettings.scriptName
+		programParametersField.text = runSettings.programParameters
 
 	}
 

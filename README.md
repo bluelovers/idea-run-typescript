@@ -1,12 +1,19 @@
-# idea-run-typescript README
+# Run Configuration for TypeScript
 
-    idea-run-typescript
+    IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
 
-## need help
+![run001.jpg](readme/run001.jpg)
+![run002.jpg](readme/run002.jpg)
+![run003.jpg](readme/run003.jpg)
 
-1. can't save run conf field change
-2. action can't show for typescript only
-3. can't print debug log
+this is my first time touch kotlin/java
+
+this plugin made by
+
+1. copy / paste form many plugin
+2. idea auto complete api
+3. google lol
+4. fuck u, noob official plugin dev doc/demo
 
 ## link
 

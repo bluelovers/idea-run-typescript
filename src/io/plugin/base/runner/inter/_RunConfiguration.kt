@@ -164,6 +164,9 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 		runSettings.workingDirectory = if (value != null) value else ""
 	}
 
+	/**
+	 * 讀取設定檔 .idea/workspace.xml
+	 */
 	@Throws(InvalidDataException::class)
 	override fun readExternal(element: Element)
 	{
@@ -184,7 +187,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		runSettings.interpreterOptions = JDOMExternalizerUtil.readField(element, "interpreterOptions") ?: ""
 
-		runSettings.typescriptConfigFile = JDOMExternalizerUtil.readField(element, "typescriptConfigFile") ?: ""
+		runSettings.tsconfigFile = JDOMExternalizerUtil.readField(element, "tsconfigFile") ?: ""
 
 		runSettings.extraTypeScriptOptions = JDOMExternalizerUtil.readField(element, "extraTypeScriptOptions") ?: ""
 
@@ -195,6 +198,9 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 		LOG.info(envs.toString())
 	}
 
+	/**
+	 * 將設定寫入 .idea/workspace.xml
+	 */
 	@Throws(WriteExternalException::class)
 	override fun writeExternal(element: Element)
 	{
@@ -202,21 +208,23 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		super<AbstractRunConfiguration>.writeExternal(element)
 
-		EnvironmentVariablesComponent.writeExternal(element, envs)
+		EnvironmentVariablesComponent.writeExternal(element, envs2)
 
-		runSettings.envData.writeExternal(element)
-
-		JDOMExternalizerUtil.writeField(element, "scriptName", getScriptName())
-		JDOMExternalizerUtil.writeField(element, "workingDirectory", getWorkingDirectory())
-
-		JDOMExternalizerUtil.writeField(element, "interpreterOptions", getInterpreterOptions())
+		//runSettings.envData.writeExternal(element)
 
 		JDOMExternalizerUtil.writeField(element, "interpreterRef", getInterpreterRef().toString())
 
-		JDOMExternalizerUtil.writeField(element, "programParameters", runSettings.programParameters)
+		JDOMExternalizerUtil.writeField(element, "interpreterOptions", getInterpreterOptions())
 
-		JDOMExternalizerUtil.writeField(element, "typescriptConfigFile", runSettings.typescriptConfigFile)
+		JDOMExternalizerUtil.writeField(element, "workingDirectory", getWorkingDirectory())
+
+		JDOMExternalizerUtil.writeField(element, "tsconfigFile", runSettings.tsconfigFile)
+
 		JDOMExternalizerUtil.writeField(element, "extraTypeScriptOptions", runSettings.extraTypeScriptOptions)
+
+		JDOMExternalizerUtil.writeField(element, "scriptName", getScriptName())
+
+		JDOMExternalizerUtil.writeField(element, "programParameters", runSettings.programParameters)
 
 		configurationModule.writeExternal(element)
 

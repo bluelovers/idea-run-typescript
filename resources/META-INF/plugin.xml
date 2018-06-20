@@ -1,12 +1,11 @@
 <idea-plugin url="www.jetbrains.com">
   <id>io.plugin.tsnode</id>
-  <name>Run TypeScript</name>
+  <name>Run Configuration for TypeScript</name>
   <version>1.0</version>
-  <vendor email="support@jetbrains.com" url="http://www.jetbrains.com">JetBrains</vendor>
+  <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">bluelovers</vendor>
 
   <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
     ]]></description>
 
   <change-notes>Initial commit</change-notes>
@@ -36,7 +35,7 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="io.plugin.tsnode.action.RunTsAction"
+    <!--action id="io.plugin.tsnode.action.RunTsAction"
             class="io.plugin.tsnode.action.RunTsAction"
             text="Run TypeScript"
             description="Run TypeScript">
@@ -57,7 +56,7 @@
            description="Greeting menu">
       <add-to-group group-id="MainMenu" anchor="last"/>
       <action id="io.plugin.tsnode.action.HelloAction" class="io.plugin.tsnode.action.HelloAction" text="Hello" description="Says hello"/>
-    </group>
+    </group-->
   </actions>
 
 </idea-plugin>
