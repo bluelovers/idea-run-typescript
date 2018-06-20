@@ -142,8 +142,10 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		//envs2 = value
 
-		envs2.clear()
-		envs2.putAll(value)
+		//envs2.clear()
+		//envs2.putAll(value)
+
+		envs2 = value.toMutableMap()
 
 		//runSettings.envData.envs.putAll(value)
 	}

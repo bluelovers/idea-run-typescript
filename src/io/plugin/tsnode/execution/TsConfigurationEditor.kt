@@ -228,8 +228,10 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			extraTypeScriptOptions = typescriptOptionsField.text)
 
 
-		config.envs2.clear()
-		config.envs2.putAll(envVars.envs)
+		//config.envs2.clear()
+		//config.envs2.putAll(envVars.envs)
+
+		config.envs2 = envVars.envs.toMutableMap()
 
 		config.setTypeScriptPackage(tsnodePackageField.selected)
 
