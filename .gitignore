@@ -122,3 +122,8 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 /_/
+!/.idea/runConfigurations/
+!/idea-run-typescript.iml
+!/releases/idea-run-typescript.jar
+!/.idea/runConfigurations/jar.xml
+!/.idea/runConfigurations/Plugin.xml
