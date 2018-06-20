@@ -11,7 +11,6 @@ import com.intellij.psi.search.FileTypeIndex
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.ProjectScope
 import com.intellij.ui.RawCommandLineEditor
-import com.intellij.ui.TextFieldWithHistoryWithBrowseButton
 import com.intellij.ui.components.fields.ExpandableTextField
 import com.intellij.util.ui.ComponentWithEmptyText
 import com.intellij.util.ui.SwingHelper
@@ -28,13 +27,20 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 	val nodeJsInterpreterField = TsForm.LazyNodeJsInterpreterField("Node &interpreter:", project)
 
 	var interpreterRef
-	get() = nodeJsInterpreterField.interpreterRef
-	set(value)
-	{
-		nodeJsInterpreterField.interpreterRef = value
-	}
+		get() = nodeJsInterpreterField.interpreterRef
+		set(value)
+		{
+			nodeJsInterpreterField.interpreterRef = value
+		}
 
 	val nodeOptionsField = TsForm.LazyRawCommandLineEditor("Node &options:")
+
+	override var interpreterOptions
+		get() = nodeOptionsField.text
+		set(value)
+		{
+			nodeOptionsField.text = value
+		}
 
 	val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", nodeJsInterpreterField, "ts-node")
 
@@ -42,10 +48,29 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	//private var typescriptOptionsField = createTypeScriptOptionsField()
 
-	private var typescriptConfigFileField = createTypeScriptConfigFileField()
+	val typescriptConfigFileField = TsForm.LazyTextFieldWithBrowseSingleFileButton("ts&config file:", project)
 
-	private var typescriptFileField = createTypeScriptFileField()
-	private var typescriptFileOptionsField = createTypeScriptFileOptionsField()
+	//private var typescriptConfigFileField = createTypeScriptConfigFileField()
+
+	val typescriptFileField = TsForm.LazyTextFieldWithBrowseSingleFileButton("TypeScript &file:", project)
+	val typescriptFileOptionsField = TsForm.LazyRawCommandLineEditor("&Application parameters:")
+
+	override var scriptName
+		get() = typescriptFileField.text
+		set(value)
+		{
+			typescriptFileField.text = value
+		}
+
+	override var scriptParameters
+		get() = typescriptFileOptionsField.text
+		set(value)
+		{
+			typescriptFileOptionsField.text = value
+		}
+
+	//private var typescriptFileField = createTypeScriptFileField()
+	//private var typescriptFileOptionsField = createTypeScriptFileOptionsField()
 
 	override val form: JPanel
 
@@ -65,13 +90,13 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 			.addLabeledComponent(tsnodePackageField)
 
-			.addLabeledComponent("ts&config file:", typescriptConfigFileField)
+			.addLabeledComponent(typescriptConfigFileField)
 			.addLabeledComponent(typescriptOptionsField)
 
-			.addLabeledComponent("TypeScript &file:", typescriptFileField)
-			.addLabeledComponent("&Application parameters:", typescriptFileOptionsField)
+			.addLabeledComponent(typescriptFileField)
+			.addLabeledComponent(typescriptFileOptionsField)
 
-			.addLabeledComponent("&Environment variables:", envVars)
+			.addLabeledComponent(envVars)
 
 			.panel
 	}
@@ -120,19 +145,21 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		return editor
 	}
 
-	private fun createTypeScriptConfigFileField(): TextFieldWithHistoryWithBrowseButton
+	private fun createTypeScriptConfigFileField(): com.intellij.openapi.ui.TextFieldWithBrowseButton
 	{
-		val fullField = TextFieldWithHistoryWithBrowseButton()
-		val innerField = fullField.childComponent
-		innerField.setHistorySize(-1)
-		innerField.setMinimumAndPreferredWidth(0)
+		//val fullField = TextFieldWithHistoryWithBrowseButton()
+		val fullField = com.intellij.openapi.ui.TextFieldWithBrowseButton()
 
-		SwingHelper.addHistoryOnExpansion(innerField) {
-			innerField.history = emptyList<String>()
-			listPossibleConfigFilesInProject().map { file ->
-				FileUtil.toSystemDependentName(file.path)
-			}.sorted()
-		}
+//		val innerField = fullField.childComponent
+//		innerField.setHistorySize(-1)
+//		innerField.setMinimumAndPreferredWidth(0)
+//
+//		SwingHelper.addHistoryOnExpansion(innerField) {
+//			innerField.history = emptyList<String>()
+//			listPossibleConfigFilesInProject().map { file ->
+//				FileUtil.toSystemDependentName(file.path)
+//			}.sorted()
+//		}
 
 		SwingHelper.installFileCompletionAndBrowseDialog(
 			project,

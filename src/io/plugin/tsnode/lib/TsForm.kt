@@ -8,7 +8,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.ui.RawCommandLineEditor
-import com.intellij.ui.TextAccessor
 import com.intellij.util.ui.ComponentWithEmptyText
 import com.intellij.util.ui.FormBuilder
 import com.intellij.util.ui.StatusText
@@ -48,7 +47,7 @@ class TsForm
 		override abstract fun toString(): String
 	}
 
-	open class TextField<Comp : TextAccessor>(override val field: Comp, override val label: String, options: Options? = null) : Field<Comp>
+	open class TextField<Comp: com.intellij.ui.TextAccessor>(override val field: Comp, override val label: String, options: Options? = null) : Field<Comp>
 	{
 		companion object Options
 		{
@@ -66,12 +65,106 @@ class TsForm
 		override fun toString() = field.toString()
 	}
 
+	open class TextFieldWithBrowseSingleFileButton<Comp : com.intellij.openapi.ui.TextFieldWithBrowseButton>(
+		override val field: Comp
+		, override val label: String, protected var options: Options? = null
+	) : TextField<Comp>(field, label)
+	{
+		fun createFileChooserDescriptor(fn: FileChooserDescriptor?): FileChooserDescriptor
+		{
+			return fn
+				?: options?.defaultFileChooserDescriptor
+				?: FileChooserDescriptorFactory.createSingleFileDescriptor()
+		}
+
+		data class Options(
+			var defaultProject: Project? = null,
+
+			var emptyText: String? = null,
+			var dialogCaption: String? = null,
+
+			var defaultFileChooserDescriptor: FileChooserDescriptor? = null,
+
+			var defaultBrowseDialogTitle: String? = null
+		)
+
+		init
+		{
+			if (options?.defaultProject != null && options?.defaultProject is Project)
+			{
+				installFileCompletionAndBrowseDialog(options?.defaultProject, options?.defaultBrowseDialogTitle, options?.defaultFileChooserDescriptor)
+			}
+
+			if (
+				(field is com.intellij.openapi.ui.TextFieldWithBrowseButton)
+				|| (field is com.intellij.ui.RawCommandLineEditor)
+			)
+			{
+				val textField: JTextField? = field.textField
+
+				if (textField != null && textField is ComponentWithEmptyText)
+				{
+					val emptyText = textField.emptyText
+
+					/**
+					 * @FIXME 不知道為什麼要寫成這樣才能成功更新文字
+					 */
+					if (StringUtil.isEmptyOrSpaces(emptyText?.text))
+					{
+						if (!StringUtil.isEmptyOrSpaces(options?.emptyText))
+						{
+							emptyText?.text = options?.emptyText as String
+						}
+						else if (!StringUtil.isEmptyOrSpaces(label))
+						{
+							emptyText?.text = Util.stripTitle(label)
+						}
+					}
+				}
+			}
+		}
+
+		fun installFileCompletionAndBrowseDialog(project: Project? = null, browseDialogTitle: String? = null, fn: com.intellij.openapi.fileChooser.FileChooserDescriptor? = null): TextFieldWithBrowseSingleFileButton<Comp>
+		{
+			val project = project
+				?: options?.defaultProject
+
+			val browseDialogTitle = browseDialogTitle
+				?: options?.defaultBrowseDialogTitle
+				?: Util.stripTitle(this.label)
+
+			SwingHelper
+				.installFileCompletionAndBrowseDialog(project, this.field, browseDialogTitle,
+					createFileChooserDescriptor(fn))
+
+			return this
+		}
+
+		val textField
+			get() = field.textField
+
+		val emptyText: StatusText?
+			get()
+			{
+				val field = this.field
+
+				if (field.textField != null && field.textField is ComponentWithEmptyText)
+				{
+					val emptyText = field.textField as ComponentWithEmptyText
+
+					return emptyText?.emptyText
+				}
+
+				return null
+			}
+	}
+
 	open class TextFieldWithBrowseSingleFolderButton<Comp : com.intellij.openapi.ui.TextFieldWithBrowseButton>(
 		override val field: Comp
 		, override val label: String, options: Options? = null
 	) : TextField<Comp>(field, label)
 	{
-		var defaultFileChooserDescriptor: FileChooserDescriptor? = null
+		open var defaultFileChooserDescriptor: FileChooserDescriptor? = null
 		var defaultProject: Project? = null
 		var defaultBrowseDialogTitle: String? = null
 
@@ -111,7 +204,7 @@ class TsForm
 			}
 		}
 
-		fun createFileChooserDescriptor(fn: FileChooserDescriptor?): FileChooserDescriptor
+		open fun createFileChooserDescriptor(fn: FileChooserDescriptor?): FileChooserDescriptor
 		{
 			return fn
 				?: defaultFileChooserDescriptor
@@ -268,9 +361,46 @@ class TsForm
 		override fun toString() = field.toString()
 	}
 
-	open class EnvironmentVariablesTextFieldWithBrowseButtonField<Comp : com.intellij.execution.configuration.EnvironmentVariablesTextFieldWithBrowseButton>(override val field: Comp, override val label: String) : Field<Comp>
+	open class EnvironmentVariablesTextFieldWithBrowseButtonField<Comp : com.intellij.execution.configuration.EnvironmentVariablesTextFieldWithBrowseButton>(override val field: Comp, override val label: String, options: Options? = null) : Field<Comp>
 	{
 		//fun isPassParentEnvs() = field.isPassParentEnvs
+
+		companion object Options
+		{
+			var emptyText: String? = null
+			var dialogCaption: String? = null
+		}
+
+		init
+		{
+			if (
+				(field is com.intellij.openapi.ui.TextFieldWithBrowseButton)
+				|| (field is com.intellij.ui.RawCommandLineEditor)
+			)
+			{
+				val textField: JTextField? = field.textField
+
+				if (textField != null && textField is ComponentWithEmptyText)
+				{
+					val emptyText = textField.emptyText
+
+					/**
+					 * @FIXME 不知道為什麼要寫成這樣才能成功更新文字
+					 */
+					if (StringUtil.isEmptyOrSpaces(emptyText?.text))
+					{
+						if (!StringUtil.isEmptyOrSpaces(options?.emptyText))
+						{
+							emptyText?.text = options?.emptyText as String
+						}
+						else if (!StringUtil.isEmptyOrSpaces(label))
+						{
+							emptyText?.text = Util.stripTitle(label)
+						}
+					}
+				}
+			}
+		}
 
 		val isPassParentEnvs
 			get() = field.isPassParentEnvs
@@ -289,6 +419,24 @@ class TsForm
 				this.field.envs = value
 			}
 
+		val textField
+			get() = field.textField
+
+		val emptyText: StatusText?
+			get()
+			{
+				val field = this.field
+
+				if (field.textField != null && field.textField is ComponentWithEmptyText)
+				{
+					val emptyText = field.textField as ComponentWithEmptyText
+
+					return emptyText?.emptyText
+				}
+
+				return null
+			}
+
 		override fun toString() = field.toString()
 	}
 
@@ -298,6 +446,10 @@ class TsForm
 		fun LazyNodeJsInterpreterField(label: String, project: Project, withRemote: Boolean = false, fieldFactory: com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField = com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField(project, withRemote)) = NodeJsInterpreterField(fieldFactory, label)
 
 		fun LazyTextFieldWithBrowseButton(label: String, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton = TextFieldWithBrowseButton()) = TextField(fieldFactory, label)
+
+		fun LazyTextFieldWithBrowseSingleFileButton(label: String, project: Project, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton = com.intellij.openapi.ui.TextFieldWithBrowseButton()) = TextFieldWithBrowseSingleFileButton(fieldFactory, label, TextFieldWithBrowseSingleFileButton.Options(
+			project
+		))
 
 		fun LazyTextFieldWithBrowseSingleFolderButton(label: String, fieldFactory: com.intellij.openapi.ui.TextFieldWithBrowseButton) = TextField(fieldFactory, label)
 
