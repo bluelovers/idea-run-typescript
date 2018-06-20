@@ -1,7 +1,7 @@
 <idea-plugin url="www.jetbrains.com">
   <id>io.plugin.tsnode</id>
   <name>Run Configuration for TypeScript</name>
-  <version>1.0</version>
+  <version>2018.6.20.0</version>
   <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">bluelovers</vendor>
 
   <description><![CDATA[
