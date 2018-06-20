@@ -6,6 +6,34 @@
 
   <description><![CDATA[
     IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
+
+<h1 style="margin:1.3em 0 1em;padding:0;font-weight:bold;font-size:1.6em;border-bottom:1pt solid #ddd;">Run Configuration for TypeScript</h1>
+<pre style="font-family:Consolas,Inconsolata,Courier,monospace;font-size:1em;line-height:1.3em;margin:1.2em 0;"><code style="background-color:#f8f8f8;border-radius:3px;border:1px solid #ccc;display:block;font-family:Consolas,Inconsolata,Courier,monospace;font-size:0.9em;margin:0 0.15em;overflow:auto;padding:0.5em 0.7em;white-space:pre;color:#444;">IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
+</code></pre>
+<p style="margin:1.2em 0;"><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run001.jpg" alt="run001.jpg" class="absent" style="max-width:100%;" />
+<img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run002.jpg" alt="run002.jpg" class="absent" style="max-width:100%;" />
+<img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run003.jpg" alt="run003.jpg" class="absent" style="max-width:100%;" /></p>
+<p style="margin:1.2em 0;">this is my first time touch kotlin/java</p>
+<p style="margin:1.2em 0;">this plugin made by</p>
+<ol style="margin-left:1em;padding-left:0.5em;text-indent:0;">
+  <li>copy / paste form many plugin</li>
+  <li>idea auto complete api</li>
+  <li>google lol</li>
+  <li>fuck u, noob official plugin dev doc/demo</li>
+</ol>
+<h2 style="margin:1.3em 0 1em;padding:0;font-weight:bold;font-size:1.5em;border-bottom:1px solid #eee;">link</h2>
+<ul style="list-style-type:disc;margin-left:1em;padding-left:0.5em;text-indent:0;">
+  <li><a href="https://github.com/JetBrains/intellij-community">https://github.com/JetBrains/intellij-community</a></li>
+  <li><a href="https://zh.wikipedia.org/wiki/Kotlin">https://zh.wikipedia.org/wiki/Kotlin</a></li>
+  <li><a href="https://www.kotlincn.net/">https://www.kotlincn.net/</a></li>
+  <li><a href="https://github.com/t3hnar/CmdSupport">https://github.com/t3hnar/CmdSupport</a></li>
+  <li><a href="https://github.com/jasmine/IdeaJasmine">https://github.com/jasmine/IdeaJasmine</a></li>
+  <li><a href="https://github.com/jansorg/BashSupport">https://github.com/jansorg/BashSupport</a></li>
+  <li><a href="https://github.com/TypeStrong/ts-node">https://github.com/TypeStrong/ts-node</a></li>
+  <li><a href="https://github.com/xiyuan-fengyu/IdeaPluginTypeScriptExecutor">https://github.com/xiyuan-fengyu/IdeaPluginTypeScriptExecutor</a></li>
+  <li></li>
+</ul>
+
     ]]></description>
 
   <change-notes>Initial commit</change-notes>
