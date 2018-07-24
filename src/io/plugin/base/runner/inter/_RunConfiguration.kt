@@ -182,6 +182,14 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		configurationModule.readExternal(element)
 
+		val interpreterRef_referenceName = JDOMExternalizerUtil.readField(element, "interpreterRef") ?: "";
+
+		if (interpreterRef_referenceName != "")
+		{
+			// 讀取 node js bin
+			runSettings.interpreterRef = NodeJsInterpreterRef.create(interpreterRef_referenceName);
+		}
+
 		setScriptName(JDOMExternalizerUtil.readField(element, "scriptName"))
 		setWorkingDirectory(JDOMExternalizerUtil.readField(element, "workingDirectory"))
 
@@ -212,7 +220,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		//runSettings.envData.writeExternal(element)
 
-		JDOMExternalizerUtil.writeField(element, "interpreterRef", getInterpreterRef().toString())
+		JDOMExternalizerUtil.writeField(element, "interpreterRef", getInterpreterRef().referenceName)
 
 		JDOMExternalizerUtil.writeField(element, "interpreterOptions", getInterpreterOptions())
 
