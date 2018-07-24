@@ -24,6 +24,8 @@ object TsUtil
 {
 	public val TypeScriptFileType = TsData.FileTypeClassName
 
+	val LOG = TsLog(javaClass)
+
 	val logger2 = Logger.getInstance(javaClass)
 
 	private val configurations = HashMap<String, RunnerAndConfigurationSettingsImpl>()
@@ -133,8 +135,16 @@ object TsUtil
 
 	fun tsnodePath(runConfig: TsRunConfiguration): String
 	{
-		return TsUtil.NodePackagePathResolve(runConfig.selectedTsNodePackage(), """dist${File.separatorChar}bin.js""")
-			.toAbsolutePath()
-			.toString()
+		// 改進 搜尋 ts-node bin 的方法
+		var file = runConfig.selectedTsNodePackage().findBinFile()!!.absoluteFile.toPath().toAbsolutePath();
+
+		if (file == null)
+		{
+			file = TsUtil.NodePackagePathResolve(runConfig.selectedTsNodePackage(), """dist${File.separatorChar}bin.js""").toAbsolutePath();
+		}
+
+		LOG.info("""[tsnodePath] ${file}""");
+
+		return file.toString()
 	}
 }
