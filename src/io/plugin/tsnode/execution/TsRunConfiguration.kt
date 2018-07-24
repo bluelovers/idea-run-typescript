@@ -6,8 +6,10 @@ import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 import com.intellij.javascript.nodejs.util.NodePackage
+import com.intellij.openapi.util.JDOMExternalizerUtil
 import com.intellij.openapi.util.text.StringUtil
 import io.plugin.base.runner.inter._RunConfiguration
+import org.jdom.Element
 import java.io.File
 
 class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory: TsConfigurationFactory, name: String) :
@@ -33,11 +35,11 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 		}
 	}
 
-	fun selectedTsNodePackage(): NodePackage
+	fun selectedTsNodePackage(name: String = "ts-node"): NodePackage
 	{
 		if (_tsPackage == null)
 		{
-			val pkg = findPreferredPackage("ts-node")
+			val pkg = findPreferredPackage(name)
 			_tsPackage = pkg
 			return pkg
 		}
@@ -74,5 +76,27 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 	override fun setProgramParameters(value: String?)
 	{
 		runSettings.programParameters = value!!
+	}
+
+	override fun readExternal(element: Element)
+	{
+		super.readExternal(element)
+
+		val tsnodePackage_referenceName = JDOMExternalizerUtil.readField(element, "tsnodePackage") ?: "";
+
+		if (tsnodePackage_referenceName != "")
+		{
+			// @todo 讀取 ts-node
+			//selectedTsNodePackage(tsnodePackage_referenceName)
+		}
+	}
+
+	override fun writeExternal(element: Element)
+	{
+		super.writeExternal(element)
+
+		JDOMExternalizerUtil.writeField(element, "tsnodePackage", selectedTsNodePackage()!!.presentablePath ?: "")
+
+		//LOG.info("[findBinFile] ${selectedTsNodePackage().findBinFile()}")
 	}
 }
