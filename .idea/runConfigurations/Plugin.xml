@@ -3,8 +3,10 @@
     <module name="idea-run-typescript" />
     <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
     <option name="PROGRAM_PARAMETERS" value="" />
-    <alternative-path path="IntelliJ IDEA IU-181.5540.7" alternative-path-enabled="$NODE_DEBUG$" />
+    <alternative-path path="IntelliJ IDEA IU-181.5540.7" alternative-path-enabled="false" />
     <predefined_log_file id="idea.log" enabled="$NODE_DEBUG$" />
-    <method />
+    <method v="2">
+      <option name="Make" enabled="$NODE_DEBUG$" />
+    </method>
   </configuration>
 </component>

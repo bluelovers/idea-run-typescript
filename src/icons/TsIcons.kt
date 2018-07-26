@@ -18,7 +18,7 @@ object TsIcons
 	val TypeScriptDebug = load("/io/plugin/tsnode/icons/typescript-debug@16.png")
 
 	val Npm = JavaScriptLanguageIcons.BuildTools.Npm.Npm_16
-	val Nodejs = NodeJSIcons.Nodejs_16
+	val Nodejs = JavaScriptLanguageIcons.Nodejs.Nodejs
 	val Mocha = NodeJSIcons.Mocha
 
 	private fun load(path: String): Icon
