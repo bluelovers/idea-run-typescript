@@ -42,9 +42,9 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
 
     ]]></description>
 
-  <change-notes><![CDATA[
+  <!--change-notes><![CDATA[
   Initial commit
-  ]]></change-notes>
+  ]]></change-notes-->
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->

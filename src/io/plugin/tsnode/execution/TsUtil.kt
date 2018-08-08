@@ -143,7 +143,7 @@ object TsUtil
 			file = TsUtil.NodePackagePathResolve(runConfig.selectedTsNodePackage(), """dist${File.separatorChar}bin.js""").toAbsolutePath();
 		}
 
-		LOG.info("""[tsnodePath] ${file}""");
+		//LOG.info("""[tsnodePath] ${file}""");
 
 		return file.toString()
 	}

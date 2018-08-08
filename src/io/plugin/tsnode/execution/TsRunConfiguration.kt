@@ -99,4 +99,11 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 
 		//LOG.info("[findBinFile] ${selectedTsNodePackage().findBinFile()}")
 	}
+
+	/*
+	override fun createDebugProcess(p0: InetSocketAddress, p1: XDebugSession, p2: ExecutionResult?, p3: ExecutionEnvironment): XDebugProcess
+	{
+		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+	}
+	*/
 }
