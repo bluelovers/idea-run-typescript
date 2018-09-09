@@ -39,7 +39,7 @@ class TsRunProfileState(protected var project: Project,
 		/**
 		 * same as node.js run add FORCE_COLOR=true
 		 */
-		commandLine.environment.putIfAbsent("FORCE_COLOR", "true")
+		commandLine.environment.putIfAbsent("FORCE_COLOR", "1")
 
 		commandLine.exePath = runConfig.getInterpreterSystemDependentPath()
 
@@ -68,7 +68,9 @@ class TsRunProfileState(protected var project: Project,
 
 				if (!StringUtil.isEmptyOrSpaces(runSettings.programParameters))
 				{
-					commandLine.addParameter(runSettings.programParameters)
+					val programParametersList = ParametersListUtil.parse(runSettings.programParameters.trim())
+
+					commandLine.addParameters(programParametersList)
 				}
 			}
 		}

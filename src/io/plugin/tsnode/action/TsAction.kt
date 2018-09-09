@@ -11,7 +11,7 @@ import io.plugin.tsnode.execution.TsExecutor
 import io.plugin.tsnode.execution.TsUtil
 import javax.swing.Icon
 
-public abstract class TsAction(icon: Icon = TsIcons.TypeScript): AnAction(icon)
+abstract class TsAction(icon: Icon = TsIcons.TypeScript): AnAction(icon)
 {
 	public val LOG = Logger.getInstance(javaClass)
 
