@@ -20,7 +20,6 @@ this plugin made by
 1. copy / paste form many plugin
 2. idea auto complete api
 3. google lol
-4. fuck u, noob official plugin dev doc/demo
 
 ## link
 
