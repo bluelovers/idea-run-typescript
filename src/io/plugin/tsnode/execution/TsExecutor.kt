@@ -8,7 +8,7 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.jetbrains.nodejs.run.NodeJsRunConfiguration
-import com.jetbrains.nodejs.run.NodeJsRunConfigurationState
+//import com.jetbrains.nodejs.run.NodeJsRunConfigurationState
 import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
 import io.plugin.tsnode.lib.TsLog
 
@@ -60,7 +60,7 @@ object TsExecutor
 			val runManager = RunManager.getInstance(project)
 
 			val settings = runManager.createConfiguration(virtualFile.name,
-				NodeJsRunConfigurationType.getInstance().factory)
+				NodeJsRunConfigurationType.getInstance().javaClass)
 
 			val configuration = settings.configuration
 
@@ -68,11 +68,11 @@ object TsExecutor
 				.getDeclaredMethod("getOptions")
 			getOptions!!.isAccessible = true
 
-			val state = getOptions
-				.invoke(configuration) as NodeJsRunConfigurationState
-
-			state.workingDir = virtualFile.parent.path
-			state.pathToJsFile = virtualFile.path
+//			val state = getOptions
+//				.invoke(configuration) as NodeJsRunConfigurationState
+//
+//			state.workingDir = virtualFile.parent.path
+//			state.pathToJsFile = virtualFile.path
 
 			runManager.addConfiguration(settings)
 
