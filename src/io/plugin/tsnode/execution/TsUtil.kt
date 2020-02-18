@@ -23,6 +23,7 @@ import java.util.*
 object TsUtil
 {
 	public val TypeScriptFileType = TsData.FileTypeClassName
+	public val FileTypeJSXClassName = TsData.FileTypeJSXClassName
 
 	val LOG = TsLog(javaClass)
 
@@ -32,14 +33,15 @@ object TsUtil
 
 	fun isTypeScript(virtualFile: VirtualFile): Boolean
 	{
-		return TypeScriptFileType == virtualFile.fileType.javaClass.name
+		val fileType = virtualFile.fileType.javaClass.name
+		return TypeScriptFileType == fileType || FileTypeJSXClassName == fileType
 	}
 
 	fun compatibleFiles(event: AnActionEvent): List<VirtualFile>
 	{
 		val files = event.getData(DataKeys.VIRTUAL_FILE_ARRAY).orEmpty()
 
-		logger2.debug("[tsnode][compatibleFiles]" + files.size)
+		//logger2.debug("[tsnode][compatibleFiles]" + files.size)
 
 		return files
 			.filter { it -> TsUtil.isTypeScript(it) }
@@ -47,11 +49,13 @@ object TsUtil
 
 	fun executable(project: Project, virtualFile: VirtualFile): Boolean
 	{
-		TsLog.debug("virtualFile.fileType.name=" + virtualFile.fileType.name)
-		TsLog.debug(virtualFile.fileType.defaultExtension)
-		TsLog.debug(virtualFile.fileType.javaClass.name)
+		//TsLog.debug("virtualFile.fileType.name=" + virtualFile.fileType.name)
+		//TsLog.debug(virtualFile.fileType.defaultExtension)
+		//TsLog.debug(virtualFile.fileType.javaClass.name)
 
-		return TypeScriptFileType == virtualFile.fileType.name
+		val fileType = virtualFile.fileType.name
+
+		return TypeScriptFileType == fileType || FileTypeJSXClassName == fileType
 			//&& getConfiguration(project, virtualFile) != null
 	}
 
@@ -81,7 +85,7 @@ object TsUtil
 		val runManager = RunManager.getInstance(project)
 		val configuration = getConfiguration(project, virtualFile)
 
-		logger2.debug("[tsnode][execute]" + configuration)
+		//logger2.debug("[tsnode][execute]" + configuration)
 
 		if (configuration != null)
 		{

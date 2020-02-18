@@ -92,7 +92,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 	@Throws(RuntimeConfigurationException::class)
 	override fun checkConfiguration()
 	{
-		TsLog(javaClass).info("[checkConfiguration] $this")
+		//TsLog(javaClass).info("[checkConfiguration] $this")
 
 		super<AbstractRunConfiguration>.checkConfiguration()
 

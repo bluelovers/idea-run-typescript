@@ -3,6 +3,7 @@ package io.plugin.tsnode.execution
 import com.intellij.execution.actions.ConfigurationContext
 import com.intellij.execution.actions.RunConfigurationProducer
 import com.intellij.lang.javascript.TypeScriptFileType
+import com.intellij.lang.javascript.TypeScriptJSXFileType
 import com.intellij.openapi.util.Ref
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.psi.PsiElement
@@ -30,7 +31,18 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 			}
 
 			val psiFile = psiElement.containingFile
-			if (psiFile == null || psiFile.fileType !is TypeScriptFileType)
+
+			LOG.info("${psiFile.fileType}")
+
+			if (psiFile == null)
+			{
+				return false
+			}
+			else if (psiFile.fileType is TypeScriptFileType || psiFile.fileType is TypeScriptJSXFileType)
+			{
+				// support .ts and .tsx
+			}
+			else
 			{
 				return false
 			}

@@ -23,7 +23,7 @@ class TsConfigurationType : ConfigurationTypeBase(TsData.RunnerId, TsData.name, 
 
 		fun getInstance(): TsConfigurationType
 		{
-			TsLog(javaClass).info("[getInstance]")
+			//TsLog(javaClass).info("[getInstance]")
 
 			return ConfigurationTypeUtil.findConfigurationType(TsConfigurationType::class.java)
 			//return Holder.INSTANCE
