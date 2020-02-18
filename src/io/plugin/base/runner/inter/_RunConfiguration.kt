@@ -41,7 +41,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 		return allModules
 	}
 
-	override fun isCompileBeforeLaunchAddedByDefault(): Boolean
+	fun isCompileBeforeLaunchAddedByDefault(): Boolean
 	{
 		TsLog(javaClass).info("[isCompileBeforeLaunchAddedByDefault]")
 
