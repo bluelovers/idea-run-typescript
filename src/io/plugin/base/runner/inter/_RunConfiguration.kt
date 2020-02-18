@@ -58,7 +58,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 	override fun suggestedName(): String?
 	{
 		val name = File(getScriptName()).name
-		LOG.info("[suggestedName] $name")
+		//LOG.info("[suggestedName] $name")
 
 		return name
 	}
@@ -138,7 +138,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 	{
 		//runSettings.envData.envs?.clear()
 
-		LOG.info("[setEnvs] $value ")
+		//LOG.info("[setEnvs] $value ")
 
 		//envs2 = value
 
@@ -170,7 +170,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 	@Throws(InvalidDataException::class)
 	override fun readExternal(element: Element)
 	{
-		LOG.info("[readExternal:1] $element ${element.name} ${element.attributes}")
+		//LOG.info("[readExternal:1] $element ${element.name} ${element.attributes}")
 
 		super<AbstractRunConfiguration>.readExternal(element)
 
@@ -201,9 +201,9 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		runSettings.programParameters = JDOMExternalizerUtil.readField(element, "programParameters") ?: ""
 
-		LOG.info("[readExternal:2] $element ${element.name} ${element.attributes}")
+		//LOG.info("[readExternal:2] $element ${element.name} ${element.attributes}")
 
-		LOG.info(envs.toString())
+		//LOG.info(envs.toString())
 	}
 
 	/**
@@ -212,7 +212,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 	@Throws(WriteExternalException::class)
 	override fun writeExternal(element: Element)
 	{
-		LOG.info("[writeExternal:1] $element ${element.name} ${element.attributes}")
+		//LOG.info("[writeExternal:1] $element ${element.name} ${element.attributes}")
 
 		super<AbstractRunConfiguration>.writeExternal(element)
 
@@ -236,10 +236,10 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		configurationModule.writeExternal(element)
 
-		LOG.info("""[writeExternal:2] $element ${element.name}
-${element.attributes}
-${element.children}
-""".trimMargin())
+//		LOG.info("""[writeExternal:2] $element ${element.name}
+//${element.attributes}
+//${element.children}
+//""".trimMargin())
 
 		LOG.info(envs.toString())
 	}

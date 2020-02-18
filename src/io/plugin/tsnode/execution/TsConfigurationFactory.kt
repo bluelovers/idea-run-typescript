@@ -14,7 +14,7 @@ class TsConfigurationFactory(configurationType: TsConfigurationType) : Configura
 
 	override fun onNewConfigurationCreated(configuration: TsRunConfiguration)
 	{
-		LOG.info("[onNewConfigurationCreated] $configuration")
+		//LOG.info("[onNewConfigurationCreated] $configuration")
 
 		//the last param has to be false because we do not want a fallback to the template (we're creating it right now) (avoiding a SOE)
 		RunManagerEx.getInstanceEx(configuration.project)
@@ -25,7 +25,7 @@ class TsConfigurationFactory(configurationType: TsConfigurationType) : Configura
 	{
 		val configuration = TsRunConfiguration(getModule(project), this, "")
 
-		LOG.info("[onNewConfigurationCreated] $configuration")
+		//LOG.info("[onNewConfigurationCreated] $configuration")
 
 		return configuration
 	}

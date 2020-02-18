@@ -28,7 +28,7 @@ abstract class TsAction(icon: Icon = TsIcons.TypeScript): AnAction(icon)
 
 	override fun actionPerformed(event: AnActionEvent)
 	{
-		LOG.info("""[actionPerformed]""")
+		//LOG.info("""[actionPerformed]""")
 		/*
 		LOG.info("""[actionPerformed]
 event.inputEvent.isAltDown: ${event.inputEvent.isAltDown.toString()}
@@ -43,7 +43,7 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 
 	override fun update(event: AnActionEvent)
 	{
-		LOG.info("""[update]""")
+		//LOG.info("""[update]""")
 
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE) as VirtualFile
 

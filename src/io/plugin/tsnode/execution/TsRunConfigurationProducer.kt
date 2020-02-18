@@ -24,7 +24,7 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 			val psiElement = location.psiElement
 			if (!psiElement.isValid)
 			{
-				LOG.info("$psiElement ${psiElement.isValid}")
+				//LOG.info("$psiElement ${psiElement.isValid}")
 
 				return false
 			}
@@ -56,7 +56,7 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 			return true
 		}.invoke()
 
-		LOG.info("[setupConfigurationFromContext] $bool")
+		//LOG.info("[setupConfigurationFromContext] $bool")
 
 		return bool
 	}
@@ -69,7 +69,7 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 
 		val bool = virtualFile != null && FileUtil.pathsEqual(virtualFile.path, runConfig.getScriptName())
 
-		LOG.info("[isConfigurationFromContext] ${runConfig.name} $bool")
+		//LOG.info("[isConfigurationFromContext] ${runConfig.name} $bool")
 
 		return bool
 	}

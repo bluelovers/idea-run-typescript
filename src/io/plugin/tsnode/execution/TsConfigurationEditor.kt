@@ -93,7 +93,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	init
 	{
-		LOG.info("[init] $this")
+		//LOG.info("[init] $this")
 
 		//interpreterOptionsField.dialogCaption = "Node Options"
 
@@ -206,14 +206,14 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	override fun createEditor(): JComponent
 	{
-		LOG.info("[createEditor] $form")
+		//LOG.info("[createEditor] $form")
 
 		return form
 	}
 
 	override fun applyEditorTo(config: TsRunConfiguration)
 	{
-		LOG.info("[applyEditorTo] $this $config")
+		//LOG.info("[applyEditorTo] $this $config")
 
 		val runSettings = config.runSettings
 
@@ -237,12 +237,12 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 		config.setTypeScriptPackage(tsnodePackageField.selected)
 
-		LOG.info("config.runSettings=${config.runSettings}")
+		//LOG.info("config.runSettings=${config.runSettings}")
 	}
 
 	override fun resetEditorFrom(config: TsRunConfiguration)
 	{
-		LOG.info("[resetEditorFrom] $this $config")
+		//LOG.info("[resetEditorFrom] $this $config")
 
 		val runSettings = config.runSettings
 		interpreterField.interpreterRef = runSettings.interpreterRef

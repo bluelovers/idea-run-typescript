@@ -20,7 +20,7 @@ object TsExecutor
 	{
 		val bool = executable(event, debug)
 
-		LOG.info("[execute] $bool, debug=$debug")
+		//LOG.info("[execute] $bool, debug=$debug")
 
 		if (bool)
 		{
@@ -34,10 +34,10 @@ object TsExecutor
 		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
 		val module = event.getData(DataKeys.MODULE) as Module?
 
-		LOG.info("[execute:executable] debug=$debug")
-		LOG.info("project=$project")
-		LOG.info("virtualFile=$virtualFile")
-		LOG.info("module=$module")
+		//LOG.info("[execute:executable] debug=$debug")
+		//LOG.info("project=$project")
+		//LOG.info("virtualFile=$virtualFile")
+		//LOG.info("module=$module")
 
 		if (project == null || virtualFile == null || module == null) return false
 
@@ -50,7 +50,7 @@ object TsExecutor
 
 		init
 		{
-			LOG.info("[execute:run] debug=$debug")
+			//LOG.info("[execute:run] debug=$debug")
 
 			val project = event.project as Project
 			val virtualFile = event.getData(DataKeys.VIRTUAL_FILE) as VirtualFile

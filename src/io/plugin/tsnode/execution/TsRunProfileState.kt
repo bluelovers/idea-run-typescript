@@ -75,7 +75,7 @@ class TsRunProfileState(protected var project: Project,
 			}
 		}
 
-		LOG.info("[createCommandLine] $commandLine")
+		//LOG.info("[createCommandLine] $commandLine")
 
 		return commandLine
 	}
@@ -85,9 +85,10 @@ class TsRunProfileState(protected var project: Project,
 		val commandLine = createCommandLine()
 
 		val processHandler = KillableColoredProcessHandler(commandLine)
+		processHandler.setShouldKillProcessSoftlyWithWinP(true)
 		ProcessTerminatedListener.attach(processHandler)
 
-		LOG.info("[startProcess] $processHandler")
+		//LOG.info("[startProcess] $processHandler")
 
 		return processHandler
 	}
