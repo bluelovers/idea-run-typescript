@@ -85,6 +85,11 @@ class TsRunProfileState(protected var project: Project,
 		val commandLine = createCommandLine()
 
 		val processHandler = KillableColoredProcessHandler(commandLine)
+		/**
+		 * Sergey Simonchik
+		 * https://youtrack.jetbrains.com/issue/WEB-43796#focus=streamItem-27-3945268.0-0
+		 */
+		processHandler.setShouldKillProcessSoftlyWithWinP(true)
 		ProcessTerminatedListener.attach(processHandler)
 
 		//LOG.info("[startProcess] $processHandler")
