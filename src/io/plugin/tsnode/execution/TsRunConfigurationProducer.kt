@@ -32,7 +32,7 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 
 			val psiFile = psiElement.containingFile
 
-			LOG.info("${psiFile.fileType}")
+			//LOG.info("${psiFile.fileType}")
 
 			if (psiFile == null)
 			{
