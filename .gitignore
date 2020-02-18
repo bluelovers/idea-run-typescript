@@ -3,7 +3,7 @@
 ### Example user template
 
 # IntelliJ project files
-.idea
+.idea/*/
 *.iml
 out
 gen### git2 template
@@ -127,3 +127,5 @@ fabric.properties
 !/releases/idea-run-typescript.jar
 !/.idea/runConfigurations/jar.xml
 !/.idea/runConfigurations/Plugin.xml
+.idea/vcs.xml
+.idea/workspace.xml

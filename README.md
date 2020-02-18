@@ -21,6 +21,20 @@ this plugin made by
 2. idea auto complete api
 3. google lol
 
+# dev
+
+## IDEA 2019.1.4
+
+```
+IntelliJ IDEA 2019.1.4 (Ultimate Edition)
+Build #IU-191.8026.42, built on July 30, 2019
+JRE: 1.8.0_212-release-1586-b4 amd64
+JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o
+Windows 10 10.0
+```
+
+![](readme/ShareX_2020-02-18-21-02-20-415.png)
+
 ## link
 
 - https://github.com/JetBrains/intellij-community
@@ -31,4 +45,4 @@ this plugin made by
 - https://github.com/jansorg/BashSupport
 - https://github.com/TypeStrong/ts-node
 - https://github.com/xiyuan-fengyu/IdeaPluginTypeScriptExecutor
-- 
+-
