@@ -39,7 +39,7 @@ class TsRunProfileState(protected var project: Project,
 		/**
 		 * same as node.js run add FORCE_COLOR=true
 		 */
-		commandLine.environment.putIfAbsent("FORCE_COLOR", "1")
+		commandLine.environment.putIfAbsent("FORCE_COLOR", "3")
 
 		commandLine.exePath = runConfig.getInterpreterSystemDependentPath()
 
