@@ -7,7 +7,7 @@ private val DEFAULT_NAME = "#io.plugin.tsnode"
 
 fun TsLog() = Logger.getInstance(DEFAULT_NAME)
 
-fun TsLog(name: Any?): Logger
+private fun TsLogCore(name: Any?): Logger
 {
 	if (name is Class<*>)
 	{
@@ -19,6 +19,15 @@ fun TsLog(name: Any?): Logger
 	}
 
 	return Logger.getInstance(DEFAULT_NAME)
+}
+
+fun TsLog(name: Any?): Logger
+{
+	val LOG = TsLogCore(name)
+
+	LOG.debug("${name} init logger")
+
+	return LOG
 }
 
 val TsLog = TsLog()
