@@ -51,6 +51,9 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 			{
 				val ext = PathUtil.getFileExtension(psiFile.originalFile.toString())
 
+				//LOG.info("${location.virtualFile!!.canonicalPath}")
+				//LOG.info("${location.virtualFile!!.path}")
+
 				if ("ts" == ext || "tsx" == ext)
 				{
 
@@ -81,7 +84,11 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 			runConfig.setName(virtualFile.presentableName)
 			runConfig.setScriptName(virtualFile.path)
 
-			if (virtualFile.parent != null)
+			if (psiFile.fileType is ScratchFileType)
+			{
+				// make ScratchFile run in project path
+			}
+			else if (virtualFile.parent != null)
 			{
 				runConfig.setWorkingDirectory(virtualFile.parent.path)
 			}
