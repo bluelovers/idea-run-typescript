@@ -5,7 +5,7 @@
   <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">bluelovers</vendor>
 
   <category>JavaScript</category>
-  <idea-version since-build="173.0"/>
+  <idea-version since-build="183.0"/>
 
   <description><![CDATA[
     IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
