@@ -6,6 +6,9 @@
     <predefined_log_file enabled="true" id="idea.log" />
     <method v="2">
       <option name="Make" enabled="true" />
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="idea-run-typescript:jar" />
+      </option>
     </method>
   </configuration>
 </component>

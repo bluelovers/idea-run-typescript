@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="idea-run-typescript:jar">
+    <output-path>$PROJECT_DIR$/releases</output-path>
+    <root id="root">
+      <element id="archive" name="idea-run-typescript.jar">
+        <element id="module-output" name="idea-run-typescript" />
+      </element>
+    </root>
+  </artifact>
+</component>

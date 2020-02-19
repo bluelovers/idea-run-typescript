@@ -1,7 +1,7 @@
 <idea-plugin url="https://github.com/bluelovers/idea-run-typescript">
   <id>io.plugin.tsnode</id>
   <name>Run Configuration for TypeScript</name>
-  <version>2020.2.18.0</version>
+  <version>2020.2.19.0</version>
   <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">bluelovers</vendor>
 
   <category>JavaScript</category>
@@ -43,9 +43,12 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
 
     ]]></description>
 
-  <!--change-notes><![CDATA[
-  Initial commit
-  ]]></change-notes-->
+  <change-notes><![CDATA[
+  <ul>
+  <li>Add ability to run TSX files</li>
+  <li>Add ability to run TS scratch files</li>
+  </ul>
+  ]]></change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->

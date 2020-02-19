@@ -2,6 +2,10 @@
 
     IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
 
+# requirements
+
+- plugin: [NodeJS](https://plugins.jetbrains.com/plugin/6098-nodejs)
+
 # install
 
 1. via jetbrains https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript
@@ -12,6 +16,7 @@
 ![run001.jpg](readme/run001.jpg)
 ![run002.jpg](readme/run002.jpg)
 ![run003.jpg](readme/run003.jpg)
+![ShareX_2020-02-19-13-20-08-028.png](readme/ShareX_2020-02-19-13-20-08-028.png)
 
 this is my first time touch kotlin/java
 
