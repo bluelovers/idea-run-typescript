@@ -27,7 +27,7 @@ class TsRunProfileState(protected var project: Project,
 
 		if (StringUtil.isEmptyOrSpaces(runSettings.workingDirectory))
 		{
-			commandLine.withWorkDirectory(project.baseDir.path)
+			commandLine.withWorkDirectory(project.basePath)
 		}
 		else
 		{
