@@ -8,6 +8,11 @@ import com.intellij.openapi.util.Ref
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.psi.PsiElement
 import io.plugin.tsnode.lib.TsLog
+import com.intellij.ide.scratch.ScratchFileType;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.PathUtil;
 
 /**
  * @todo 不知道如何支援 Debug 模式
@@ -42,8 +47,30 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 			{
 				// support .ts and .tsx
 			}
+			else if (psiFile.fileType is ScratchFileType)
+			{
+				val ext = PathUtil.getFileExtension(psiFile.originalFile.toString())
+
+				if ("ts" == ext || "tsx" == ext)
+				{
+
+				}
+				else
+				{
+					//LOG.info("${psiFile.fileType}")
+					//LOG.info("${psiFile.originalFile}")
+					//LOG.info("${psiFile.originalFile.fileType}")
+					//LOG.info("${psiFile.fileElementType}")
+					//LOG.info("${psiFile.originalFile.toString()}")
+					//LOG.info("${PathUtil.getFileExtension(psiFile.originalFile.toString())}")
+
+					return false
+				}
+			}
 			else
 			{
+				//LOG.warn("${psiFile.fileType}")
+
 				return false
 			}
 
