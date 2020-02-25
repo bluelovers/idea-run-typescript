@@ -40,41 +40,8 @@ class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(
 
 			//LOG.info("${psiFile.fileType}")
 
-			if (psiFile == null)
+			if (!TsUtil.isTypeScript(psiFile))
 			{
-				return false
-			}
-			else if (psiFile.fileType is TypeScriptFileType || psiFile.fileType is TypeScriptJSXFileType)
-			{
-				// support .ts and .tsx
-			}
-			else if (psiFile.fileType is ScratchFileType)
-			{
-				val ext = PathUtil.getFileExtension(psiFile.originalFile.toString())
-
-				//LOG.info("${location.virtualFile!!.canonicalPath}")
-				//LOG.info("${location.virtualFile!!.path}")
-
-				if ("ts" == ext || "tsx" == ext)
-				{
-
-				}
-				else
-				{
-					//LOG.info("${psiFile.fileType}")
-					//LOG.info("${psiFile.originalFile}")
-					//LOG.info("${psiFile.originalFile.fileType}")
-					//LOG.info("${psiFile.fileElementType}")
-					//LOG.info("${psiFile.originalFile.toString()}")
-					//LOG.info("${PathUtil.getFileExtension(psiFile.originalFile.toString())}")
-
-					return false
-				}
-			}
-			else
-			{
-				//LOG.warn("${psiFile.fileType}")
-
 				return false
 			}
 

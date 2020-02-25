@@ -1,8 +1,10 @@
 <idea-plugin url="https://github.com/bluelovers/idea-run-typescript">
   <id>io.plugin.tsnode</id>
   <name>Run Configuration for TypeScript</name>
-  <version>2020.2.19.0</version>
-  <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">bluelovers</vendor>
+  <version>2020.2.25.0</version>
+  <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">
+    bluelovers
+  </vendor>
 
   <category>JavaScript</category>
   <idea-version since-build="183.0"/>
@@ -45,8 +47,9 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
 
   <change-notes><![CDATA[
   <ul>
-  <li>Add ability to run TSX files</li>
-  <li>Add ability to run TS scratch files</li>
+  <li>Build Plugin in IntelliJ IDEA 2019.2.4#IU-192.7142.36</li>
+  <li>Set Console output UTF-8 for avoid output as BIG5 and GBK</li>
+  <li>Support Debug from NodeJS Run Conf by https://github.com/nguyennk92/run-typescript-plugin</li>
   </ul>
   ]]></change-notes>
 
@@ -81,17 +84,28 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
             description="Run TypeScript">
             <add-to-group group-id="ProjectViewPopupMenuRunGroup" anchor="first"/>
             <add-to-group group-id="EditorPopupMenu.Run" anchor="first"/>
-        </action>
+        </action-->
 
     <action id="io.plugin.tsnode.action.DebugTsAction"
             class="io.plugin.tsnode.action.DebugTsAction"
             text="Debug TypeScript"
             description="Debug TypeScript">
-            <add-to-group group-id="ProjectViewPopupMenuRunGroup" anchor="after" relative-to-action="io.plugin.tsnode.action.RunTsAction"/>
-            <add-to-group group-id="EditorPopupMenu.Run" anchor="after" relative-to-action="io.plugin.tsnode.action.RunTsAction"/>
-        </action>
+      <add-to-group
+        group-id="ProjectViewPopupMenuRunGroup"
+        anchor="first"
+      />
+      <add-to-group
+        group-id="EditorPopupMenuDebug"
+        anchor="first"
+      />
+      <add-to-group
+        group-id="EditorTabPopupMenuEx"
+        relative-to-action="RunContextPopupGroup"
+        anchor="before"
+      />
+    </action>
 
-    <group id="MyPlugin.TestMeu"
+    <!--group id="MyPlugin.TestMeu"
            text="Greeting"
            description="Greeting menu">
       <add-to-group group-id="MainMenu" anchor="last"/>

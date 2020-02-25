@@ -11,6 +11,8 @@ import com.jetbrains.nodejs.run.NodeJsRunConfiguration
 //import com.jetbrains.nodejs.run.NodeJsRunConfigurationState
 import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
 import io.plugin.tsnode.lib.TsLog
+import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE
 
 object TsExecutor
 {
@@ -31,7 +33,7 @@ object TsExecutor
 	fun executable(event: AnActionEvent, debug: Boolean): Boolean
 	{
 		val project = event.project
-		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE)
+		val virtualFile = event.getData(CommonDataKeys.VIRTUAL_FILE)
 		val module = event.getData(DataKeys.MODULE) as Module?
 
 		//LOG.info("[execute:executable] debug=$debug")

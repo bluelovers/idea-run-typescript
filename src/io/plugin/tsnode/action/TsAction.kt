@@ -1,8 +1,14 @@
 package io.plugin.tsnode.action
 
+import com.intellij.execution.RunnerAndConfigurationSettings
+import com.intellij.execution.ProgramRunnerUtil
+import com.intellij.execution.RunManager
+import com.intellij.execution.executors.DefaultDebugExecutor
+import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
+import com.intellij.openapi.actionSystem.DataKeys.*
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
@@ -11,21 +17,17 @@ import io.plugin.tsnode.execution.TsExecutor
 import io.plugin.tsnode.execution.TsUtil
 import javax.swing.Icon
 import com.intellij.openapi.project.DumbAware
+import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE
+import com.intellij.openapi.project.Project
+import com.jetbrains.nodejs.run.NodeJsRunConfiguration
+import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
 
-abstract class TsAction(icon: Icon = TsIcons.TypeScript): AnAction(icon), DumbAware
+abstract class TsAction(icon: Icon = TsIcons.TypeScript) : AnAction(icon), DumbAware
 {
 	public val LOG = Logger.getInstance(javaClass)
 
 	protected open val _debug: Boolean = false
-	protected open var _prefix: String = ""
-
-	init
-	{
-		if (StringUtil.isEmpty(_prefix))
-		{
-			_prefix = if (_debug) "Debug" else "Run"
-		}
-	}
 
 	override fun actionPerformed(event: AnActionEvent)
 	{
@@ -39,14 +41,42 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 """)
 		*/
 
-		TsExecutor.execute(event, isDebugAction())
+		//TsExecutor.execute(event, isDebugAction())
+
+		val project = event.getData(CommonDataKeys.PROJECT) as Project
+		val virtualFile = event.getData(CommonDataKeys.VIRTUAL_FILE) as VirtualFile
+
+		val runManager = RunManager.getInstance(event.project!!)
+		val type = NodeJsRunConfigurationType.getInstance()
+		val settings = runManager.createConfiguration(virtualFile.name, type)
+
+		val nodeJsRunConf = settings.configuration as NodeJsRunConfiguration
+
+		//LOG.info("working directory: ${nodeJsRunConf.workingDirectory}")
+
+		if (nodeJsRunConf.workingDirectory.isNullOrEmpty())
+			nodeJsRunConf.workingDirectory = project.basePath
+
+		nodeJsRunConf.inputPath = virtualFile.path
+
+		if (nodeJsRunConf.programParameters?.contains("--require ts-node/register") != true)
+		{
+			nodeJsRunConf.programParameters = "--require ts-node/register " + nodeJsRunConf.programParameters.orEmpty()
+		}
+
+		runManager.setTemporaryConfiguration(settings)
+
+		val executor =
+			if (isDebugAction()) DefaultDebugExecutor.getDebugExecutorInstance() else DefaultRunExecutor.getRunExecutorInstance()
+
+		ProgramRunnerUtil.executeConfiguration(settings, executor)
 	}
 
 	override fun update(event: AnActionEvent)
 	{
 		//LOG.info("""[update]""")
 
-		val virtualFile = event.getData(DataKeys.VIRTUAL_FILE) as VirtualFile
+		val virtualFile = event.getData(VIRTUAL_FILE) as VirtualFile
 
 		if (TsUtil.isTypeScript(virtualFile))
 		{
@@ -67,6 +97,7 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 
 	protected fun _getText(virtualFile: VirtualFile): String
 	{
+		val _prefix = if (_debug) "Debug" else "Run"
 		return "${_prefix} '${virtualFile.name}'"
 	}
 }

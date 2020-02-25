@@ -6,13 +6,18 @@ import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.executors.DefaultDebugExecutor
 import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl
+import com.intellij.ide.scratch.ScratchFileType
 import com.intellij.javascript.nodejs.util.NodePackage
+import com.intellij.lang.javascript.TypeScriptFileType
+import com.intellij.lang.javascript.TypeScriptJSXFileType
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
-import com.intellij.openapi.diagnostic.Logger
+import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.psi.PsiFile
+import com.intellij.util.PathUtil
 import io.plugin.tsnode.lib.TsData
 import io.plugin.tsnode.lib.TsLog
 import java.io.File
@@ -27,14 +32,66 @@ object TsUtil
 
 	val LOG = TsLog(javaClass)
 
-	val logger2 = Logger.getInstance(javaClass)
+	//val logger2 = Logger.getInstance(javaClass)
 
 	private val configurations = HashMap<String, RunnerAndConfigurationSettingsImpl>()
 
+	fun isTypeScript(psiFile: PsiFile): Boolean
+	{
+		if (psiFile !== null)
+		{
+			if (psiFile.fileType is TypeScriptFileType || psiFile.fileType is TypeScriptJSXFileType)
+			{
+				return true
+			}
+			else if (psiFile.fileType is ScratchFileType)
+			{
+				val ext = PathUtil.getFileExtension(psiFile.originalFile.toString())
+
+				if ("ts" == ext || "tsx" == ext)
+				{
+					return true
+				}
+
+				//LOG.info("${psiFile.fileType}")
+				//LOG.info("${psiFile.originalFile}")
+				//LOG.info("${psiFile.originalFile.fileType}")
+				//LOG.info("${psiFile.fileElementType}")
+				//LOG.info("${psiFile.originalFile.toString()}")
+				//LOG.info("${PathUtil.getFileExtension(psiFile.originalFile.toString())}")
+
+				LOG.info("[isTypeScript] ${ext}")
+			}
+
+			LOG.info("[isTypeScript] ${psiFile.fileType}")
+		}
+		return false
+	}
+
 	fun isTypeScript(virtualFile: VirtualFile): Boolean
 	{
-		val fileType = virtualFile.fileType.javaClass.name
-		return TypeScriptFileType == fileType || FileTypeJSXClassName == fileType
+		if (virtualFile !== null)
+		{
+			if (virtualFile.fileType is TypeScriptFileType || virtualFile.fileType is TypeScriptJSXFileType)
+			{
+				return true
+			}
+			else if (virtualFile.fileType is ScratchFileType)
+			{
+				//val ext = PathUtil.getFileExtension(virtualFile.extension.toString())
+				val ext = virtualFile.extension.toString()
+
+				if ("ts" == ext || "tsx" == ext)
+				{
+					return true
+				}
+
+				LOG.info("[isTypeScript] ${ext}")
+			}
+
+			LOG.info("[isTypeScript] ${virtualFile.fileType}")
+		}
+		return false
 	}
 
 	fun compatibleFiles(event: AnActionEvent): List<VirtualFile>
