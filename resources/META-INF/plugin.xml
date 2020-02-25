@@ -50,6 +50,7 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
   <li>Build Plugin in IntelliJ IDEA 2019.2.4#IU-192.7142.36</li>
   <li>Set Console output UTF-8 for avoid output as BIG5 and GBK</li>
   <li>Support Debug from NodeJS Run Conf by https://github.com/nguyennk92/run-typescript-plugin</li>
+   <li>fix: psiFile must not null</li>
   </ul>
   ]]></change-notes>
 
