@@ -130,3 +130,7 @@ fabric.properties
 .idea/vcs.xml
 .idea/workspace.xml
 !.idea/artifacts
+/.idea/kotlinc.xml
+/.idea/markdown-navigator.xml
+/.idea/markdown-navigator-enh.xml
+/src/META-INF/MANIFEST.MF
