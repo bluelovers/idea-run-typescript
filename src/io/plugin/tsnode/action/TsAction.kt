@@ -10,8 +10,9 @@ import icons.TsIcons
 import io.plugin.tsnode.execution.TsExecutor
 import io.plugin.tsnode.execution.TsUtil
 import javax.swing.Icon
+import com.intellij.openapi.project.DumbAware
 
-abstract class TsAction(icon: Icon = TsIcons.TypeScript): AnAction(icon)
+abstract class TsAction(icon: Icon = TsIcons.TypeScript): AnAction(icon), DumbAware
 {
 	public val LOG = Logger.getInstance(javaClass)
 

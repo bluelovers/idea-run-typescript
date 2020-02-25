@@ -13,11 +13,12 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PathUtil;
+import com.intellij.openapi.project.DumbAware
 
 /**
  * @todo 不知道如何支援 Debug 模式
  */
-class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(TsConfigurationType.getInstance())
+class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(TsConfigurationType.getInstance()), DumbAware
 {
 	protected val LOG = TsLog(javaClass)
 
