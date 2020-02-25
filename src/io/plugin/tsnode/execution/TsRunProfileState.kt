@@ -1,22 +1,42 @@
 package io.plugin.tsnode.execution
 
+import com.intellij.execution.DefaultExecutionResult
+import com.intellij.execution.ExecutionResult
 import com.intellij.execution.Executor
 import com.intellij.execution.configurations.CommandLineState
 import com.intellij.execution.configurations.GeneralCommandLine
+import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.process.KillableColoredProcessHandler
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessTerminatedListener
 import com.intellij.execution.runners.ExecutionEnvironment
+import com.intellij.execution.testframework.TestConsoleProperties
+import com.intellij.execution.testframework.autotest.ToggleAutoTestAction
+import com.intellij.execution.testframework.sm.SMTestRunnerConnectionUtil
+import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView
+import com.intellij.execution.ui.ConsoleView
+import com.intellij.javascript.nodejs.NodeCommandLineUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.util.execution.ParametersListUtil
 import io.plugin.tsnode.execution.TsUtil.tsnodePath
 import io.plugin.tsnode.lib.TsLog
+import com.intellij.javascript.nodejs.debug.createDebugPortString
+import com.intellij.javascript.nodejs.debug.NodeLocalDebugRunProfileState
+import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
+import com.intellij.javascript.protractor.ProtractorConsoleFilter
+import com.intellij.javascript.protractor.ProtractorConsoleProperties
+import com.intellij.javascript.protractor.ProtractorRunState.FRAMEWORK_NAME
+import java.nio.charset.Charset
+import java.io.File
+import com.intellij.javascript.testFramework.navigation.JSTestLocationProvider
+import com.intellij.lang.javascript.buildTools.base.JsbtUtil.foldCommandLine
+import com.intellij.openapi.util.Disposer
 
 class TsRunProfileState(protected var project: Project,
 	protected var runConfig: TsRunConfiguration,
 	protected var executor: Executor,
-	environment: ExecutionEnvironment) : CommandLineState(environment)
+	environment: ExecutionEnvironment) : CommandLineState(environment), RunProfileState
 {
 	val LOG = TsLog(javaClass)
 
@@ -83,6 +103,13 @@ class TsRunProfileState(protected var project: Project,
 	override fun startProcess(): ProcessHandler
 	{
 		val commandLine = createCommandLine()
+
+		if (commandLine.charset.toString() == "x-windows-950" || commandLine.charset.toString() == "x-windows-936")
+		{
+			commandLine.charset = Charset.forName("UTF-8")
+		}
+
+		//LOG.info("[processHandler.charset] ${commandLine.charset}")
 
 		val processHandler = KillableColoredProcessHandler(commandLine)
 		/**
