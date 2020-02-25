@@ -36,9 +36,9 @@ object TsUtil
 
 	private val configurations = HashMap<String, RunnerAndConfigurationSettingsImpl>()
 
-	fun isTypeScript(psiFile: PsiFile): Boolean
+	fun isTypeScript(psiFile: PsiFile?): Boolean
 	{
-		if (psiFile !== null)
+		if (psiFile !== null && !psiFile.isDirectory)
 		{
 			if (psiFile.fileType is TypeScriptFileType || psiFile.fileType is TypeScriptJSXFileType)
 			{
@@ -68,9 +68,9 @@ object TsUtil
 		return false
 	}
 
-	fun isTypeScript(virtualFile: VirtualFile): Boolean
+	fun isTypeScript(virtualFile: VirtualFile?): Boolean
 	{
-		if (virtualFile !== null)
+		if (virtualFile !== null && !virtualFile.isDirectory)
 		{
 			if (virtualFile.fileType is TypeScriptFileType || virtualFile.fileType is TypeScriptJSXFileType)
 			{
@@ -86,10 +86,11 @@ object TsUtil
 					return true
 				}
 
-				LOG.info("[isTypeScript] ${ext}")
+				LOG.info("[isTypeScript] ${ext} ${virtualFile.name}")
+				LOG.info("[isTypeScript:ext] ${ext} ${virtualFile.extension}")
 			}
 
-			LOG.info("[isTypeScript] ${virtualFile.fileType}")
+			LOG.info("[isTypeScript:fileType] ${virtualFile.fileType}")
 		}
 		return false
 	}
