@@ -36,21 +36,21 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 	override fun getValidModules(): Collection<Module>
 	{
-		TsLog(javaClass).info("[getValidModules] $allModules")
+		//TsLog(javaClass).info("[getValidModules] $allModules")
 
 		return allModules
 	}
 
 	fun isCompileBeforeLaunchAddedByDefault(): Boolean
 	{
-		TsLog(javaClass).info("[isCompileBeforeLaunchAddedByDefault]")
+		//TsLog(javaClass).info("[isCompileBeforeLaunchAddedByDefault]")
 
 		return false
 	}
 
 	override fun excludeCompileBeforeLaunchOption(): Boolean
 	{
-		TsLog(javaClass).info("[excludeCompileBeforeLaunchOption]")
+		//TsLog(javaClass).info("[excludeCompileBeforeLaunchOption]")
 
 		return false
 	}
@@ -68,6 +68,15 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 	abstract fun getScriptName(): String
 	abstract fun setScriptName(value: String?)
+
+	fun getInputPath(): String
+	{
+		return getScriptName()
+	}
+	fun setInputPath(value: String?)
+	{
+		return setScriptName(value)
+	}
 
 	fun getInterpreter(): NodeJsLocalInterpreter?
 	{
@@ -212,7 +221,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 	@Throws(WriteExternalException::class)
 	override fun writeExternal(element: Element)
 	{
-		//LOG.info("[writeExternal:1] $element ${element.name} ${element.attributes}")
+		LOG.info("[writeExternal:1] $element ${element.name} ${element.attributes}")
 
 		super<AbstractRunConfiguration>.writeExternal(element)
 
@@ -241,7 +250,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 //${element.children}
 //""".trimMargin())
 
-		LOG.info(envs.toString())
+		//LOG.info(envs.toString())
 	}
 
 }

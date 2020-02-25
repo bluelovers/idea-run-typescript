@@ -2,6 +2,7 @@ package io.plugin.tsnode.execution
 
 import com.intellij.execution.actions.ConfigurationContext
 import com.intellij.execution.actions.RunConfigurationProducer
+import com.intellij.execution.actions.LazyRunConfigurationProducer
 import com.intellij.lang.javascript.TypeScriptFileType
 import com.intellij.lang.javascript.TypeScriptJSXFileType
 import com.intellij.openapi.util.Ref
@@ -18,7 +19,7 @@ import com.intellij.openapi.project.DumbAware
 /**
  * @todo 不知道如何支援 Debug 模式
  */
-class TsRunConfigurationProducer : RunConfigurationProducer<TsRunConfiguration>(TsConfigurationType.getInstance()), DumbAware
+class TsRunConfigurationProducer: RunConfigurationProducer<TsRunConfiguration>(TsConfigurationType.getInstance()), DumbAware
 {
 	protected val LOG = TsLog(javaClass)
 

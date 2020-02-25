@@ -2,6 +2,8 @@ package io.plugin.tsnode.execution
 
 import com.intellij.execution.ProgramRunnerUtil
 import com.intellij.execution.RunManager
+import com.intellij.execution.RunnerAndConfigurationSettings
+import com.intellij.execution.configurations.ConfigurationFactory
 import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.executors.DefaultDebugExecutor
 import com.intellij.execution.executors.DefaultRunExecutor
@@ -18,6 +20,8 @@ import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiFile
 import com.intellij.util.PathUtil
+import com.jetbrains.nodejs.run.NodeJsRunConfiguration
+import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
 import io.plugin.tsnode.lib.TsData
 import io.plugin.tsnode.lib.TsLog
 import java.io.File
@@ -210,4 +214,37 @@ object TsUtil
 
 		return file.toString()
 	}
+
+	fun allNodeJsConfiguration(project: Project): List<RunnerAndConfigurationSettings>
+	{
+		val runManager = RunManager.getInstance(project)
+
+		return runManager.getConfigurationSettingsList(NodeJsRunConfigurationType.getInstance())
+	}
+
+	fun allTsConfiguration(project: Project): List<RunnerAndConfigurationSettings>
+	{
+		val runManager = RunManager.getInstance(project)
+
+		return runManager.getConfigurationSettingsList(TsConfigurationType.getInstance())
+	}
+
+	fun getExistedNodeJsConfiguration(virtualFile: VirtualFile, allSettings: List<RunnerAndConfigurationSettings>): RunnerAndConfigurationSettings?
+	{
+		return allSettings.find { x ->
+			val config = x.configuration as NodeJsRunConfiguration
+
+			virtualFile.canonicalPath.equals(config.inputPath)
+		}
+	}
+
+	fun getExistedTsConfiguration(virtualFile: VirtualFile, allSettings: List<RunnerAndConfigurationSettings>): RunnerAndConfigurationSettings?
+	{
+		return allSettings.find { x ->
+			val config = x.configuration as TsRunConfiguration
+
+			virtualFile.canonicalPath.equals(config.getScriptName())
+		}
+	}
+
 }

@@ -20,8 +20,17 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.roots.ui.configuration.PathUIUtils
+import com.intellij.util.PathUtil
+import com.intellij.util.io.directoryContent
 import com.jetbrains.nodejs.run.NodeJsRunConfiguration
 import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
+import io.plugin.tsnode.execution.TsUtil.allNodeJsConfiguration
+import io.plugin.tsnode.execution.TsUtil.allTsConfiguration
+import io.plugin.tsnode.execution.TsUtil.getExistedNodeJsConfiguration
+import java.nio.file.Path
+import java.nio.file.PathMatcher
+import java.nio.file.Paths
 
 abstract class TsAction(icon: Icon = TsIcons.TypeScript) : AnAction(icon), DumbAware
 {
@@ -78,12 +87,18 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 
 		val virtualFile = event.getData(VIRTUAL_FILE) as VirtualFile
 
+		//val conf = getExistedConfiguration(event)
+		//LOG.info("[update] ${conf}")
+
 		if (TsUtil.isTypeScript(virtualFile))
 		{
-			event.presentation.isEnabledAndVisible = true
-			event.presentation.text = _getText(virtualFile)
+			if (!event.presentation.isEnabledAndVisible)
+			{
+				event.presentation.isEnabledAndVisible = true
+				event.presentation.text = _getText(virtualFile)
+			}
 		}
-		else
+		else if (event.presentation.isEnabledAndVisible)
 		{
 			event.presentation.isEnabledAndVisible = false
 			//event.presentation.isVisible = false
@@ -99,5 +114,15 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 	{
 		val _prefix = if (_debug) "Debug" else "Run"
 		return "${_prefix} '${virtualFile.name}'"
+	}
+
+	private fun getExistedConfiguration(event: AnActionEvent): RunnerAndConfigurationSettings?
+	{
+		val project = event.getData(CommonDataKeys.PROJECT) as Project
+		val virtualFile = event.getData(VIRTUAL_FILE) as VirtualFile
+
+		val allSettings = allNodeJsConfiguration(project)
+
+		return getExistedNodeJsConfiguration(virtualFile, allSettings)
 	}
 }
