@@ -60,10 +60,11 @@ object TsUtil
 				//LOG.info("${psiFile.originalFile.toString()}")
 				//LOG.info("${PathUtil.getFileExtension(psiFile.originalFile.toString())}")
 
-				LOG.info("[isTypeScript] ${ext}")
+				//LOG.info("[isTypeScript] ${psiFile.name}")
+				//LOG.info("[isTypeScript:ext] ${ext}")
 			}
 
-			LOG.info("[isTypeScript] ${psiFile.fileType}")
+			//LOG.info("[isTypeScript:fileType] ${psiFile.fileType}")
 		}
 		return false
 	}
@@ -86,11 +87,11 @@ object TsUtil
 					return true
 				}
 
-				LOG.info("[isTypeScript] ${ext} ${virtualFile.name}")
-				LOG.info("[isTypeScript:ext] ${ext} ${virtualFile.extension}")
+				//LOG.info("[isTypeScript] ${ext} ${virtualFile.name}")
+				//LOG.info("[isTypeScript:ext] ${ext} ${virtualFile.extension}")
 			}
 
-			LOG.info("[isTypeScript:fileType] ${virtualFile.fileType}")
+			//LOG.info("[isTypeScript:fileType] ${virtualFile.fileType}")
 		}
 		return false
 	}
