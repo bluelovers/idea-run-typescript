@@ -11,6 +11,7 @@ import com.jetbrains.nodejs.run.NodeJsRunConfiguration
 //import com.jetbrains.nodejs.run.NodeJsRunConfigurationState
 import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
 import io.plugin.tsnode.lib.TsLog
+import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE
 
@@ -34,7 +35,7 @@ object TsExecutor
 	{
 		val project = event.project
 		val virtualFile = event.getData(CommonDataKeys.VIRTUAL_FILE)
-		val module = event.getData(DataKeys.MODULE) as Module?
+		val module = event.getData(LangDataKeys.MODULE) as Module?
 
 		//LOG.info("[execute:executable] debug=$debug")
 		//LOG.info("project=$project")
@@ -55,8 +56,8 @@ object TsExecutor
 			//LOG.info("[execute:run] debug=$debug")
 
 			val project = event.project as Project
-			val virtualFile = event.getData(DataKeys.VIRTUAL_FILE) as VirtualFile
-			val module = event.getData(DataKeys.MODULE) as Module
+			val virtualFile = event.getData(CommonDataKeys.VIRTUAL_FILE) as VirtualFile
+			val module = event.getData(LangDataKeys.MODULE) as Module
 
 			//val runManager = RunManagerEx.getInstanceEx(project)
 			val runManager = RunManager.getInstance(project)
