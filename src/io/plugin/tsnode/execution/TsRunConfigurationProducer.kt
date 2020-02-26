@@ -53,7 +53,7 @@ class TsRunConfigurationProducer: RunConfigurationProducer<TsRunConfiguration>(T
 			runConfig.setName(virtualFile.presentableName)
 			runConfig.setScriptName(virtualFile.path)
 
-			if (psiFile.fileType is ScratchFileType)
+			if (TsUtil.isScratchFileType(psiFile))
 			{
 				// make ScratchFile run in project path
 			}

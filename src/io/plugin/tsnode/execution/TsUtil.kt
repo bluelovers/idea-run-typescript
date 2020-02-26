@@ -41,6 +41,16 @@ object TsUtil
 
 	private val configurations = HashMap<String, RunnerAndConfigurationSettingsImpl>()
 
+	fun isScratchFileType(psiFile: PsiFile): Boolean
+	{
+		return ScratchUtil.isScratch(psiFile.virtualFile)
+	}
+
+	fun isScratchFileType(virtualFile: VirtualFile): Boolean
+	{
+		return ScratchUtil.isScratch(virtualFile)
+	}
+
 	fun isTypeScript(psiFile: PsiFile?): Boolean
 	{
 		if (psiFile !== null && !psiFile.isDirectory)
@@ -49,7 +59,7 @@ object TsUtil
 			{
 				return true
 			}
-			else if (ScratchUtil.isScratch(psiFile.virtualFile))
+			else if (isScratchFileType(psiFile))
 			{
 				val ext = PathUtil.getFileExtension(psiFile.originalFile.toString())
 
@@ -82,7 +92,7 @@ object TsUtil
 			{
 				return true
 			}
-			else if (ScratchUtil.isScratch(virtualFile))
+			else if (isScratchFileType(virtualFile))
 			{
 				//val ext = PathUtil.getFileExtension(virtualFile.extension.toString())
 				val ext = virtualFile.extension.toString()
