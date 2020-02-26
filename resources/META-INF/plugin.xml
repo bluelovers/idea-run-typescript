@@ -1,7 +1,7 @@
 <idea-plugin url="https://github.com/bluelovers/idea-run-typescript">
   <id>io.plugin.tsnode</id>
   <name>Run Configuration for TypeScript</name>
-  <version>2020.2.25.1</version>
+  <version>2020.2.26.0</version>
   <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">
     bluelovers
   </vendor>
@@ -47,10 +47,8 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
 
   <change-notes><![CDATA[
   <ul>
-  <li>Build Plugin in IntelliJ IDEA 2019.2.4#IU-192.7142.36</li>
-  <li>Set Console output UTF-8 for avoid output as BIG5 and GBK</li>
-  <li>Support Debug from NodeJS Run Conf by https://github.com/nguyennk92/run-typescript-plugin</li>
-   <li>fix: psiFile must not null</li>
+  <li>Build Plugin in IntelliJ IDEA 2019.3.3#IU-193.6494.35</li>
+  <li>deprecated `ScratchFileType` => ScratchUtil.isScratch(virtualFile)</li>
   </ul>
   ]]></change-notes>
 
