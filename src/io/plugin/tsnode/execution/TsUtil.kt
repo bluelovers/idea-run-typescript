@@ -9,6 +9,7 @@ import com.intellij.execution.executors.DefaultDebugExecutor
 import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl
 import com.intellij.ide.scratch.ScratchFileType
+import com.intellij.ide.scratch.ScratchUtil
 import com.intellij.javascript.nodejs.util.NodePackage
 import com.intellij.lang.javascript.TypeScriptFileType
 import com.intellij.lang.javascript.TypeScriptJSXFileType
@@ -48,7 +49,7 @@ object TsUtil
 			{
 				return true
 			}
-			else if (psiFile.fileType is ScratchFileType)
+			else if (ScratchUtil.isScratch(psiFile.virtualFile))
 			{
 				val ext = PathUtil.getFileExtension(psiFile.originalFile.toString())
 
@@ -81,7 +82,7 @@ object TsUtil
 			{
 				return true
 			}
-			else if (virtualFile.fileType is ScratchFileType)
+			else if (ScratchUtil.isScratch(virtualFile))
 			{
 				//val ext = PathUtil.getFileExtension(virtualFile.extension.toString())
 				val ext = virtualFile.extension.toString()
