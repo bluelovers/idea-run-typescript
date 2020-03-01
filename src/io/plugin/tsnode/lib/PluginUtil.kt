@@ -18,6 +18,11 @@ object PluginUtil
 		return getPlugin(PluginId.getId(PLUGIN_ID))!!
 	}
 
+	/**
+	 * make sure support 183 , 193
+	 *
+	 * https://github.com/JetBrains/intellij-community/blob/30edfba7a578f9856180a13a3ee3bd695f5b5e0b/platform/core-impl/src/com/intellij/ide/plugins/PluginManagerCore.java#L1901
+	 */
 	fun getPlugin(id: PluginId): IdeaPluginDescriptor?
 	{
 		if (id != null)
