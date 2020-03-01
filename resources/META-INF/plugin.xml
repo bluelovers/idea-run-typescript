@@ -65,6 +65,8 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
     <configurationType implementation="io.plugin.tsnode.execution.TsConfigurationType"/>
     <programRunner implementation="io.plugin.tsnode.execution.TsProgramRunner"/>
     <runConfigurationProducer implementation="io.plugin.tsnode.execution.TsRunConfigurationProducer"/>
+
+    <postStartupActivity implementation="io.plugin.tsnode.activity.PluginStartupActivity"/>
   </extensions>
 
   <application-components>
