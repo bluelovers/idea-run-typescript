@@ -147,7 +147,10 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 	private fun createTypeScriptOptionsField(): RawCommandLineEditor
 	{
 		val editor = RawCommandLineEditor()
-		editor.dialogCaption = "Extra ts-node Options"
+		//editor.dialogCaption = "Extra ts-node Options"
+
+		editor.toolTipText = "Extra ts-node Options"
+
 		val field = editor.textField
 		if (field is ExpandableTextField)
 		{

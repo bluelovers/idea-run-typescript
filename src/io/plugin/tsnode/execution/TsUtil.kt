@@ -15,6 +15,9 @@ import com.intellij.lang.javascript.TypeScriptFileType
 import com.intellij.lang.javascript.TypeScriptJSXFileType
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DataKeys
+import com.intellij.openapi.actionSystem.LangDataKeys
+import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.actionSystem.PlatformDataKeys
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.text.StringUtil
@@ -113,7 +116,7 @@ object TsUtil
 
 	fun compatibleFiles(event: AnActionEvent): List<VirtualFile>
 	{
-		val files = event.getData(DataKeys.VIRTUAL_FILE_ARRAY).orEmpty()
+		val files = event.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY).orEmpty()
 
 		//logger2.debug("[tsnode][compatibleFiles]" + files.size)
 
