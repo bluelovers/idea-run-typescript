@@ -230,7 +230,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			scriptName = scriptNameField.text,
 			programParameters = this.programParameters,
 
-			tsnodePackage = tsnodePackageField.selectedRef,
+			tsnodePackage = tsnodePackageField.selected,
 
 			tsconfigFile = tsconfigFileField.text,
 			extraTypeScriptOptions = extraTypeScriptOptionsField.text)

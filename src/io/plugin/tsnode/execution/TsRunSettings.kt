@@ -2,6 +2,8 @@ package io.plugin.tsnode.execution
 
 import com.intellij.execution.configuration.EnvironmentVariablesData
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
+import com.intellij.javascript.nodejs.util.NodePackage
+import com.intellij.javascript.nodejs.util.NodePackageRef
 
 data class TsRunSettings(
 	var interpreterRef: NodeJsInterpreterRef = NodeJsInterpreterRef.createProjectRef(),
@@ -13,6 +15,8 @@ data class TsRunSettings(
 
 	var scriptName: String = "",
 	var programParameters: String = "",
+
+	var tsnodePackage: NodePackage? = null,
 
 	var extraTypeScriptOptions: String = "",
 	var tsconfigFile: String = ""

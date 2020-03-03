@@ -6,8 +6,12 @@ import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 import com.intellij.javascript.nodejs.util.NodePackage
+import com.intellij.javascript.nodejs.util.NodePackageField
+import com.intellij.javascript.nodejs.util.NodePackageRef
+import com.intellij.javascript.nodejs.util.NodePackageRefResolver
 import com.intellij.openapi.util.JDOMExternalizerUtil
 import com.intellij.openapi.util.text.StringUtil
+import com.intellij.profiler.model.Transformation
 import io.plugin.base.runner.inter._RunConfiguration
 import org.jdom.Element
 import java.io.File
@@ -35,21 +39,23 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 		}
 	}
 
-	fun selectedTsNodePackage(name: String = "ts-node"): NodePackage
+	fun selectedTsNodePackage(name: String = "ts-node"): NodePackage?
 	{
 		if (_tsPackage == null)
 		{
 			val pkg = findPreferredPackage(listOf(name, "ts-node", "esm-ts-node"))
 
 			_tsPackage = pkg
+
 			return pkg
 		}
-		return _tsPackage!!
+		return _tsPackage
 	}
 
 	fun setTypeScriptPackage(nodePackage: NodePackage)
 	{
 		_tsPackage = nodePackage
+		runSettings.tsnodePackage = nodePackage
 	}
 
 	override fun getWorkingDirectory() = runSettings.workingDirectory
@@ -85,10 +91,19 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 
 		val tsnodePackage_referenceName = JDOMExternalizerUtil.readField(element, "tsnodePackage") ?: "";
 
+		//LOG.info("[readExternal] ${tsnodePackage_referenceName}")
+
 		if (tsnodePackage_referenceName != "")
 		{
-			// @todo 讀取 ts-node
-			//selectedTsNodePackage(tsnodePackage_referenceName)
+			val pkgRef = NodePackageRef.create(tsnodePackage_referenceName);
+
+			//LOG.info("[readExternal:3] ${pkgRef}")
+			//LOG.info("[readExternal:4] ${pkgRef.constantPackage}")
+
+			if (pkgRef?.constantPackage?.isValid == true)
+			{
+				setTypeScriptPackage(pkgRef.constantPackage!!)
+			}
 		}
 	}
 
@@ -96,7 +111,12 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 	{
 		super.writeExternal(element)
 
-		JDOMExternalizerUtil.writeField(element, "tsnodePackage", selectedTsNodePackage()!!.presentablePath ?: "")
+		if (_tsPackage != null && _tsPackage?.isValid() == true)
+		{
+			JDOMExternalizerUtil.writeField(element, "tsnodePackage", _tsPackage!!.presentablePath ?: "")
+
+			//configurationModule.writeExternal(element)
+		}
 
 		//LOG.info("[findBinFile] ${selectedTsNodePackage().findBinFile()}")
 	}
