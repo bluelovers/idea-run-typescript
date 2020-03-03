@@ -84,6 +84,13 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 			.tryCast(getInterpreterRef().resolve(project))
 	}
 
+	fun findPreferredPackage(name: List<String>): NodePackage
+	{
+		val interpreter = getInterpreter()
+		val pkg = NodePackage.findPreferredPackage(project, name, interpreter)
+		return pkg
+	}
+
 	fun findPreferredPackage(name: String): NodePackage
 	{
 		val interpreter = getInterpreter()
@@ -221,7 +228,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 	@Throws(WriteExternalException::class)
 	override fun writeExternal(element: Element)
 	{
-		LOG.info("[writeExternal:1] $element ${element.name} ${element.attributes}")
+		//LOG.info("[writeExternal:1] $element ${element.name} ${element.attributes}")
 
 		super<AbstractRunConfiguration>.writeExternal(element)
 

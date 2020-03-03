@@ -39,7 +39,8 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 	{
 		if (_tsPackage == null)
 		{
-			val pkg = findPreferredPackage(name)
+			val pkg = findPreferredPackage(listOf(name, "ts-node", "esm-ts-node"))
+
 			_tsPackage = pkg
 			return pkg
 		}
