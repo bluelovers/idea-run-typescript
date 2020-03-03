@@ -58,6 +58,8 @@ class PluginStartupActivity : StartupActivity, DumbAware
 
 		val content = """
 			The Project url click <a href="${MILESTONE_URL.format(version)}">here</a>.
+			See <a href="https://github.com/bluelovers/idea-run-typescript/commits/master">Whats New</a>
+			Welcome post issue/request, or help this plugin dev <a href="https://github.com/bluelovers/idea-run-typescript/issues">here</a>
 			""".trimIndent();
 
 		NotificationGroup(displayId, NotificationDisplayType.BALLOON, true)

@@ -1,3 +1,5 @@
+[![jetbrains.svg](jetbrains.svg)](https://www.jetbrains.com/?from=novel-segment)
+
 # Run Configuration for TypeScript
 
     IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
@@ -68,3 +70,5 @@ Windows 10 10.0
 - https://github.com/nguyennk92/run-typescript-plugin
 - https://plugins.jetbrains.com/docs/marketplace/intellij-plugin-recommendations.html
 - 
+
+Icons made by [Freepik](https://www.freepik.com/) from [www.flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)

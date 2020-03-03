@@ -1,7 +1,7 @@
 <idea-plugin url="https://github.com/bluelovers/idea-run-typescript">
   <id>io.plugin.tsnode</id>
   <name>Run Configuration for TypeScript</name>
-  <version>2020.03.01.0</version>
+  <version>2020.03.04.0</version>
   <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">
     bluelovers
   </vendor>
@@ -12,14 +12,38 @@
   <description><![CDATA[
     IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
 
-<h1>Run Configuration for TypeScript</h1>
-
-IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
-
-<p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run001.jpg" alt="run001.jpg" class="absent" style="max-width:100%;" />
-<p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run002.jpg" alt="run002.jpg" class="absent" style="max-width:100%;" />
-<p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run003.jpg" alt="run003.jpg" class="absent" style="max-width:100%;" />
-
+<h1><a  id="run-configuration-for-typescript">Run Configuration for TypeScript</a></h1>
+<pre><code>IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
+</code></pre>
+<h1><a  id="requirements">requirements</a></h1>
+<ul>
+  <li>plugin: <a href="https://plugins.jetbrains.com/plugin/6098-nodejs">NodeJS</a></li>
+</ul>
+<h1><a  id="install">install</a></h1>
+<ol>
+  <li>via jetbrains <a href="https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript">https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript</a></li>
+  <li>github <a href="https://github.com/bluelovers/idea-run-typescript/blob/master/releases/idea-run-typescript.jar">idea-run-typescript.jar</a></li>
+</ol>
+<h1><a  id="screenshot">screenshot</a></h1>
+<blockquote>
+  <p>support run/debug <code>.ts</code> , <code>.tsx</code></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/ShareX_2020-03-04-00-11-01-496.png" alt="ShareX_2020-03-04-00-11-01-496.png" /></p>
+<blockquote>
+  <p>support scratch file</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/ShareX_2020-02-19-13-20-08-028.png" alt="ShareX_2020-02-19-13-20-08-028.png" /></p>
+<blockquote>
+  <p>support select <code>esm-ts-node</code>, <code>ts-node</code></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/ShareX_2020-03-04-00-06-57-786.png" alt="ShareX_2020-03-04-00-06-57-786.png" /></p>
+<blockquote>
+  <p>other</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run001.jpg" alt="run001.jpg" /><br/>
+<img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run002.jpg" alt="run002.jpg" /><br/>
+<img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/run003.jpg" alt="run003.jpg" /></p>
+<h1><a  id="about-this-plugin">about this plugin</a></h1>
 <p>this is my first time touch kotlin/java</p>
 <p>this plugin made by</p>
 <ol>
@@ -27,17 +51,27 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
   <li>idea auto complete api</li>
   <li>google lol</li>
 </ol>
-
-<h2>link</h2>
+<h1><a  id="dev">dev</a></h1>
+<h2><a  id="idea-201914">IDEA 2019.1.4</a></h2>
+<pre><code>IntelliJ IDEA 2019.1.4 (Ultimate Edition)
+Build #IU-191.8026.42, built on July 30, 2019
+JRE: 1.8.0_212-release-1586-b4 amd64
+JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o
+Windows 10 10.0
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/bluelovers/idea-run-typescript/master/readme/ShareX_2020-02-18-21-02-20-415.png" alt="" /></p>
+<h2><a id="link">link</a></h2>
 <ul>
-  <li><a href="https://github.com/JetBrains/intellij-community">https://github.com/JetBrains/intellij-community</a></li>
-  <li><a href="https://zh.wikipedia.org/wiki/Kotlin">https://zh.wikipedia.org/wiki/Kotlin</a></li>
-  <li><a href="https://www.kotlincn.net/">https://www.kotlincn.net/</a></li>
-  <li><a href="https://github.com/t3hnar/CmdSupport">https://github.com/t3hnar/CmdSupport</a></li>
-  <li><a href="https://github.com/jasmine/IdeaJasmine">https://github.com/jasmine/IdeaJasmine</a></li>
-  <li><a href="https://github.com/jansorg/BashSupport">https://github.com/jansorg/BashSupport</a></li>
-  <li><a href="https://github.com/TypeStrong/ts-node">https://github.com/TypeStrong/ts-node</a></li>
-  <li><a href="https://github.com/xiyuan-fengyu/IdeaPluginTypeScriptExecutor">https://github.com/xiyuan-fengyu/IdeaPluginTypeScriptExecutor</a></li>
+  <li>https://github.com/JetBrains/intellij-community</li>
+  <li>https://zh.wikipedia.org/wiki/Kotlin</li>
+  <li>https://www.kotlincn.net/</li>
+  <li>https://github.com/t3hnar/CmdSupport</li>
+  <li>https://github.com/jasmine/IdeaJasmine</li>
+  <li>https://github.com/jansorg/BashSupport</li>
+  <li>https://github.com/TypeStrong/ts-node</li>
+  <li>https://github.com/xiyuan-fengyu/IdeaPluginTypeScriptExecutor</li>
+  <li>https://github.com/nguyennk92/run-typescript-plugin</li>
+  <li>https://plugins.jetbrains.com/docs/marketplace/intellij-plugin-recommendations.html</li>
   <li></li>
 </ul>
 
@@ -48,7 +82,8 @@ IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configur
   <change-notes><![CDATA[
   <ul>
   <li>Build Plugin in IntelliJ IDEA 2019.3.3#IU-193.6494.35</li>
-  <li>deprecated `ScratchFileType` => ScratchUtil.isScratch(virtualFile)</li>
+  <li>support select `esm-ts-node`, `ts-node`</li>
+  <li>better check ts-node</li>
   </ul>
   ]]></change-notes>
 
