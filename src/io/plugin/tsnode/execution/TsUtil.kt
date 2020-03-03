@@ -217,7 +217,7 @@ object TsUtil
 	fun tsnodePath(runConfig: TsRunConfiguration): String
 	{
 		// 改進 搜尋 ts-node bin 的方法
-		var file = runConfig.selectedTsNodePackage().findBinFile()!!.absoluteFile.toPath().toAbsolutePath();
+		var file = runConfig.selectedTsNodePackage()?.findBinFile()?.absoluteFile?.toPath()?.toAbsolutePath()
 
 		if (file == null)
 		{
