@@ -14,6 +14,7 @@ import com.intellij.util.ui.StatusText
 import com.intellij.util.ui.SwingHelper
 import javax.swing.JComponent
 import javax.swing.JTextField
+import java.util.function.Supplier
 
 class TsForm
 {
@@ -462,6 +463,27 @@ class TsForm
 		fun LazyRawCommandLineEditor(label: String, fieldFactory: RawCommandLineEditor = com.intellij.ui.RawCommandLineEditor(), options: TextField.Options? = null) = RawCommandLineEditorField(fieldFactory, label, options)
 
 		fun LazyNodePackageField(label: String, interpreterField: com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField, packageName: String, fieldFactory: com.intellij.javascript.nodejs.util.NodePackageField = com.intellij.javascript.nodejs.util.NodePackageField(interpreterField, packageName)) = NodePackageField(fieldFactory, label)
+
+		/*
+		fun LazyNodePackageField(label: String, project: com.intellij.openapi.project.Project, packageNames: List<String>): NodePackageField<com.intellij.javascript.nodejs.util.NodePackageField>
+		{
+			val fieldFactory = com.intellij.javascript.nodejs.util.NodePackageField(project, packageNames, null)
+
+			return NodePackageField(fieldFactory, label)
+		}
+		 */
+
+		/**
+		 * 允許選擇多個不同 package
+		 */
+		fun LazyNodePackageField(label: String, interpreterField: NodeJsInterpreterField<com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterField>, packageNames: List<String>): NodePackageField<com.intellij.javascript.nodejs.util.NodePackageField>
+		{
+			val fieldFactory = com.intellij.javascript.nodejs.util.NodePackageField(interpreterField.field.project, packageNames, Supplier{ ->
+				interpreterField.field.interpreter
+			})
+
+			return NodePackageField(fieldFactory, label)
+		}
 
 		fun LazyNodePackageField(
 			label: String

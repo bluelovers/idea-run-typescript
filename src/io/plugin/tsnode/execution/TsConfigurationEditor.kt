@@ -42,8 +42,9 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			interpreterOptionsField.text = value
 		}
 
-	val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", interpreterField, "ts-node")
+	//val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", interpreterField, "ts-node")
 
+	val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", interpreterField, listOf("ts-node", "esm-ts-node"))
 
 
 	val extraTypeScriptOptionsField = TsForm.LazyRawCommandLineEditor("E&xtra ts-node options:")
@@ -229,6 +230,8 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			scriptName = scriptNameField.text,
 			programParameters = this.programParameters,
 
+			tsnodePackage = tsnodePackageField.selectedRef,
+
 			tsconfigFile = tsconfigFileField.text,
 			extraTypeScriptOptions = extraTypeScriptOptionsField.text)
 
@@ -256,7 +259,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		//envVars.data = runSettings.envData
 		envVars.envs = config.envs2
 
-		tsnodePackageField.selected = config.selectedTsNodePackage()
+		tsnodePackageField.selected = config.selectedTsNodePackage()!!
 		tsconfigFileField.text = runSettings.tsconfigFile
 		extraTypeScriptOptionsField.text = runSettings.extraTypeScriptOptions
 

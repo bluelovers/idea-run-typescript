@@ -8,15 +8,30 @@
 
 # install
 
-1. via jetbrains https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript
+1. via jetbrains [https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript](https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript)
 2. github [idea-run-typescript.jar](releases/idea-run-typescript.jar)
 
 # screenshot
 
+> support run/debug `.ts` , `.tsx`
+
+![ShareX_2020-03-04-00-11-01-496.png](readme/ShareX_2020-03-04-00-11-01-496.png)
+
+> support scratch file
+
+![ShareX_2020-02-19-13-20-08-028.png](readme/ShareX_2020-02-19-13-20-08-028.png)
+
+> support select `esm-ts-node`, `ts-node`
+
+![ShareX_2020-03-04-00-06-57-786.png](readme/ShareX_2020-03-04-00-06-57-786.png)
+
+> other
+
 ![run001.jpg](readme/run001.jpg)
 ![run002.jpg](readme/run002.jpg)
 ![run003.jpg](readme/run003.jpg)
-![ShareX_2020-02-19-13-20-08-028.png](readme/ShareX_2020-02-19-13-20-08-028.png)
+
+# about this plugin
 
 this is my first time touch kotlin/java
 
@@ -50,4 +65,6 @@ Windows 10 10.0
 - https://github.com/jansorg/BashSupport
 - https://github.com/TypeStrong/ts-node
 - https://github.com/xiyuan-fengyu/IdeaPluginTypeScriptExecutor
--
+- https://github.com/nguyennk92/run-typescript-plugin
+- https://plugins.jetbrains.com/docs/marketplace/intellij-plugin-recommendations.html
+- 
