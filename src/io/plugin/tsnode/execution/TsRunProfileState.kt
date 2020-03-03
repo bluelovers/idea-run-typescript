@@ -32,6 +32,7 @@ import java.io.File
 import com.intellij.javascript.testFramework.navigation.JSTestLocationProvider
 import com.intellij.lang.javascript.buildTools.base.JsbtUtil.foldCommandLine
 import com.intellij.openapi.util.Disposer
+import io.plugin.tsnode.execution.TsUtil.isEmptyOrSpacesOrNull
 
 class TsRunProfileState(protected var project: Project,
 	protected var runConfig: TsRunConfiguration,
@@ -68,7 +69,17 @@ class TsRunProfileState(protected var project: Project,
 
 		val tsnode = tsnodePath(runConfig)
 
-		if (!StringUtil.isEmptyOrSpaces(tsnode))
+		if (isEmptyOrSpacesOrNull(tsnode))
+		{
+			commandLine.addParameter("--require")
+			commandLine.addParameter("ts-node/register")
+
+			if (!StringUtil.isEmptyOrSpaces(runSettings.tsconfigFile))
+			{
+				commandLine.environment.putIfAbsent("TS_NODE_PROJECT", runSettings.tsconfigFile)
+			}
+		}
+		else
 		{
 			commandLine.addParameter(tsnode)
 
@@ -81,17 +92,17 @@ class TsRunProfileState(protected var project: Project,
 				commandLine.addParameter("--project")
 				commandLine.addParameter(runSettings.tsconfigFile)
 			}
+		}
 
-			if (!StringUtil.isEmptyOrSpaces(runSettings.scriptName))
+		if (!StringUtil.isEmptyOrSpaces(runSettings.scriptName))
+		{
+			commandLine.addParameter(runSettings.scriptName)
+
+			if (!StringUtil.isEmptyOrSpaces(runSettings.programParameters))
 			{
-				commandLine.addParameter(runSettings.scriptName)
+				val programParametersList = ParametersListUtil.parse(runSettings.programParameters.trim())
 
-				if (!StringUtil.isEmptyOrSpaces(runSettings.programParameters))
-				{
-					val programParametersList = ParametersListUtil.parse(runSettings.programParameters.trim())
-
-					commandLine.addParameters(programParametersList)
-				}
+				commandLine.addParameters(programParametersList)
 			}
 		}
 

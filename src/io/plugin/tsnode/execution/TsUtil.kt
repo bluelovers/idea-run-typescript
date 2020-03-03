@@ -214,19 +214,42 @@ object TsUtil
 			.resolve(path)
 	}
 
+	fun isEmptyOrSpacesOrNull(target: Any?): Boolean
+	{
+		if (target != null)
+		{
+			if (target is String)
+			{
+				return StringUtil.isEmptyOrSpaces(target)
+			}
+
+			return false
+		}
+
+		return true
+	}
+
 	fun tsnodePath(runConfig: TsRunConfiguration): String
 	{
-		// 改進 搜尋 ts-node bin 的方法
-		var file = runConfig.selectedTsNodePackage()?.findBinFile()?.absoluteFile?.toPath()?.toAbsolutePath()
+		val pkg = runConfig.selectedTsNodePackage()
+		var file: Path? = null
 
-		if (file == null)
+		if (!isEmptyOrSpacesOrNull(pkg))
 		{
-			file = TsUtil.NodePackagePathResolve(runConfig.selectedTsNodePackage(), """dist${File.separatorChar}bin.js""").toAbsolutePath();
+			// 改進 搜尋 ts-node bin 的方法
+			file = pkg?.findBinFile()?.absoluteFile?.toPath()?.toAbsolutePath()
+
+			//LOG.info("""[tsnodePath] ${file} ${pkg}""");
+
+			if (file == null && pkg?.isValid == true)
+			{
+				file = TsUtil.NodePackagePathResolve(pkg!!, """dist${File.separatorChar}bin.js""").toAbsolutePath();
+			}
 		}
 
 		//LOG.info("""[tsnodePath] ${file}""");
 
-		return file.toString()
+		return file?.toString() ?: ""
 	}
 
 	fun allNodeJsConfiguration(project: Project): List<RunnerAndConfigurationSettings>
