@@ -6,13 +6,10 @@ import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 import com.intellij.javascript.nodejs.util.NodePackage
-import com.intellij.javascript.nodejs.util.NodePackageField
 import com.intellij.javascript.nodejs.util.NodePackageRef
-import com.intellij.javascript.nodejs.util.NodePackageRefResolver
 import com.intellij.openapi.util.JDOMExternalizerUtil
 import com.intellij.openapi.util.text.StringUtil
-import com.intellij.profiler.model.Transformation
-import io.plugin.base.runner.inter._RunConfiguration
+import io.plugin.tsnode.runner.inter._RunConfiguration
 import org.jdom.Element
 import java.io.File
 

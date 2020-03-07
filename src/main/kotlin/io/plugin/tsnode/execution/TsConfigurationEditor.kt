@@ -14,7 +14,7 @@ import com.intellij.ui.RawCommandLineEditor
 import com.intellij.ui.components.fields.ExpandableTextField
 import com.intellij.util.ui.ComponentWithEmptyText
 import com.intellij.util.ui.SwingHelper
-import io.plugin.base.runner._ConfigurationEditor
+import io.plugin.tsnode.runner._ConfigurationEditor
 import io.plugin.tsnode.lib.TsForm
 import io.plugin.tsnode.lib.TsLog
 import javax.swing.JComponent

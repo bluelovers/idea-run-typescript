@@ -1,6 +1,6 @@
 package io.plugin.tsnode.lib
 
-import icons.TsIcons
+import io.plugin.tsnode.icons.TsIcons
 
 object TsData
 {

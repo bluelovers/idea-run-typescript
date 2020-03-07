@@ -1,4 +1,4 @@
-package io.plugin.base.runner.inter
+package io.plugin.tsnode.runner.inter
 
 import com.intellij.execution.CommonProgramRunConfigurationParameters
 import com.intellij.execution.configuration.AbstractRunConfiguration

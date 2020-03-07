@@ -1,4 +1,4 @@
-package icons
+package io.plugin.tsnode.icons
 
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.util.IconLoader
@@ -14,8 +14,8 @@ object TsIcons
 	//val Debug = IconLoader.getIcon("/actions/startDebugger.png")
 	//val Json = IconLoader.getIcon("/fileTypes/json.png")
 
-	val TypeScript = load("/io/plugin/tsnode/icons/typescript@16.png")
-	val TypeScriptDebug = load("/io/plugin/tsnode/icons/typescript-debug@16.png")
+	val TypeScript = load("/icons/typescript@16.png")
+	val TypeScriptDebug = load("/icons/typescript-debug@16.png")
 
 	//val Npm = JavaScriptLanguageIcons.BuildTools.Npm.Npm_16
 	//val Nodejs = JavaScriptLanguageIcons.Nodejs.Nodejs

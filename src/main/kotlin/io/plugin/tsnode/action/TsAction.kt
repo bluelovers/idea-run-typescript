@@ -1,36 +1,25 @@
 package io.plugin.tsnode.action
 
-import com.intellij.execution.RunnerAndConfigurationSettings
 import com.intellij.execution.ProgramRunnerUtil
 import com.intellij.execution.RunManager
+import com.intellij.execution.RunnerAndConfigurationSettings
 import com.intellij.execution.executors.DefaultDebugExecutor
 import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.DataKeys
-import com.intellij.openapi.actionSystem.DataKeys.*
-import com.intellij.openapi.diagnostic.Logger
-import com.intellij.openapi.util.text.StringUtil
-import com.intellij.openapi.vfs.VirtualFile
-import icons.TsIcons
-import io.plugin.tsnode.execution.TsExecutor
-import io.plugin.tsnode.execution.TsUtil
-import javax.swing.Icon
-import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE
+import com.intellij.openapi.diagnostic.Logger
+import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.roots.ui.configuration.PathUIUtils
-import com.intellij.util.PathUtil
-import com.intellij.util.io.directoryContent
+import com.intellij.openapi.vfs.VirtualFile
 import com.jetbrains.nodejs.run.NodeJsRunConfiguration
 import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
+import io.plugin.tsnode.execution.TsUtil
 import io.plugin.tsnode.execution.TsUtil.allNodeJsConfiguration
-import io.plugin.tsnode.execution.TsUtil.allTsConfiguration
 import io.plugin.tsnode.execution.TsUtil.getExistedNodeJsConfiguration
-import java.nio.file.Path
-import java.nio.file.PathMatcher
-import java.nio.file.Paths
+import io.plugin.tsnode.icons.TsIcons
+import javax.swing.Icon
 
 abstract class TsAction(icon: Icon = TsIcons.TypeScript) : AnAction(icon), DumbAware
 {

@@ -1,15 +1,15 @@
 <idea-plugin url="https://github.com/bluelovers/idea-run-typescript">
-  <id>io.plugin.tsnode</id>
-  <name>Run Configuration for TypeScript</name>
-  <version>2020.03.04.0</version>
-  <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">
-    bluelovers
-  </vendor>
+    <id>io.plugin.tsnode</id>
+    <name>Run Configuration for TypeScript</name>
+    <version>2020.03.04.0</version>
+    <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">
+        bluelovers
+    </vendor>
 
-  <category>JavaScript</category>
-  <idea-version since-build="183.0"/>
+    <category>JavaScript</category>
+    <idea-version since-build="183.0"/>
 
-  <description><![CDATA[
+    <description><![CDATA[
     IntelliJ IDEA (and WebStorm...) plugin to support 'TypeScript' as a run configuration
 
 <h1><a  id="run-configuration-for-typescript">Run Configuration for TypeScript</a></h1>
@@ -79,7 +79,7 @@ Windows 10 10.0
 
     ]]></description>
 
-  <change-notes><![CDATA[
+    <change-notes><![CDATA[
   <ul>
   <li>Build Plugin in IntelliJ IDEA 2019.3.3#IU-193.6494.35</li>
   <li>support select `esm-ts-node`, `ts-node`</li>
@@ -87,59 +87,31 @@ Windows 10 10.0
   </ul>
   ]]></change-notes>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
-  <depends>com.intellij.modules.lang</depends>
-  <depends optional="true">NodeJS</depends>
-  <depends optional="true">JavaScript</depends>
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+           on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+    <depends>com.intellij.modules.lang</depends>
+    <depends>NodeJS</depends>
+    <depends>JavaScript</depends>
+    <depends>JavaScriptDebugger</depends>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <configurationType implementation="io.plugin.tsnode.execution.TsConfigurationType"/>
-    <programRunner implementation="io.plugin.tsnode.execution.TsProgramRunner"/>
-    <runConfigurationProducer implementation="io.plugin.tsnode.execution.TsRunConfigurationProducer"/>
+    <extensions defaultExtensionNs="com.intellij">
+        <configurationType implementation="io.plugin.tsnode.execution.TsConfigurationType"/>
+        <programRunner implementation="io.plugin.tsnode.execution.TsProgramRunner"/>
+        <runConfigurationProducer implementation="io.plugin.tsnode.execution.TsRunConfigurationProducer"/>
 
-    <postStartupActivity implementation="io.plugin.tsnode.activity.PluginStartupActivity"/>
-  </extensions>
+        <postStartupActivity implementation="io.plugin.tsnode.activity.PluginStartupActivity"/>
+    </extensions>
 
-  <application-components>
-    <!-- Add your application components here -->
-  </application-components>
+    <application-components>
+        <!-- Add your application components here -->
+    </application-components>
 
-  <project-components>
-    <!-- Add your project components here -->
-  </project-components>
-
-  <actions>
-    <!-- Add your actions here -->
-    <!--action id="io.plugin.tsnode.action.RunTsAction"
-            class="io.plugin.tsnode.action.RunTsAction"
-            text="Run TypeScript"
-            description="Run TypeScript">
-            <add-to-group group-id="ProjectViewPopupMenuRunGroup" anchor="first"/>
-            <add-to-group group-id="EditorPopupMenu.Run" anchor="first"/>
-        </action-->
-
-    <action id="io.plugin.tsnode.action.DebugTsAction"
-            class="io.plugin.tsnode.action.DebugTsAction"
-            text="Debug TypeScript"
-            description="Debug TypeScript">
-      <add-to-group
-        group-id="ProjectViewPopupMenuRunGroup"
-        anchor="first"
-      />
-      <add-to-group
-        group-id="EditorPopupMenuDebug"
-        anchor="first"
-      />
-      <add-to-group
-        group-id="EditorTabPopupMenuEx"
-        relative-to-action="RunContextPopupGroup"
-        anchor="before"
-      />
-    </action>
+    <project-components>
+        <!-- Add your project components here -->
+    </project-components>
 
     <!--group id="MyPlugin.TestMeu"
            text="Greeting"
@@ -147,6 +119,34 @@ Windows 10 10.0
       <add-to-group group-id="MainMenu" anchor="last"/>
       <action id="io.plugin.tsnode.action.HelloAction" class="io.plugin.tsnode.action.HelloAction" text="Hello" description="Says hello"/>
     </group-->
-  </actions>
 
+    <actions>
+        <!-- Add your actions here -->
+        <!--action id="io.plugin.tsnode.action.RunTsAction"
+                class="io.plugin.tsnode.action.RunTsAction"
+                text="Run TypeScript"
+                description="Run TypeScript">
+                <add-to-group group-id="ProjectViewPopupMenuRunGroup" anchor="first"/>
+                <add-to-group group-id="EditorPopupMenu.Run" anchor="first"/>
+            </action-->
+
+        <action id="io.plugin.tsnode.action.DebugTsAction"
+                class="io.plugin.tsnode.action.DebugTsAction"
+                text="Debug TypeScript"
+                description="Debug TypeScript">
+            <add-to-group
+                    group-id="ProjectViewPopupMenuRunGroup"
+                    anchor="first"
+            />
+            <add-to-group
+                    group-id="EditorPopupMenuDebug"
+                    anchor="first"
+            />
+            <add-to-group
+                    group-id="EditorTabPopupMenuEx"
+                    relative-to-action="RunContextPopupGroup"
+                    anchor="before"
+            />
+        </action>
+    </actions>
 </idea-plugin>
