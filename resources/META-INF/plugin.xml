@@ -112,41 +112,4 @@ Windows 10 10.0
     <!-- Add your project components here -->
   </project-components>
 
-  <actions>
-    <!-- Add your actions here -->
-    <!--action id="io.plugin.tsnode.action.RunTsAction"
-            class="io.plugin.tsnode.action.RunTsAction"
-            text="Run TypeScript"
-            description="Run TypeScript">
-            <add-to-group group-id="ProjectViewPopupMenuRunGroup" anchor="first"/>
-            <add-to-group group-id="EditorPopupMenu.Run" anchor="first"/>
-        </action-->
-
-    <action id="io.plugin.tsnode.action.DebugTsAction"
-            class="io.plugin.tsnode.action.DebugTsAction"
-            text="Debug TypeScript"
-            description="Debug TypeScript">
-      <add-to-group
-        group-id="ProjectViewPopupMenuRunGroup"
-        anchor="first"
-      />
-      <add-to-group
-        group-id="EditorPopupMenuDebug"
-        anchor="first"
-      />
-      <add-to-group
-        group-id="EditorTabPopupMenuEx"
-        relative-to-action="RunContextPopupGroup"
-        anchor="before"
-      />
-    </action>
-
-    <!--group id="MyPlugin.TestMeu"
-           text="Greeting"
-           description="Greeting menu">
-      <add-to-group group-id="MainMenu" anchor="last"/>
-      <action id="io.plugin.tsnode.action.HelloAction" class="io.plugin.tsnode.action.HelloAction" text="Hello" description="Says hello"/>
-    </group-->
-  </actions>
-
 </idea-plugin>

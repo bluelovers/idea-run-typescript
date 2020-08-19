@@ -13,7 +13,7 @@ import java.util.*
 /**
  * @todo ConfigurationFactoryEx is deprecated in java
  */
-class TsConfigurationFactory(configurationType: TsConfigurationType) : ConfigurationFactoryEx< TsRunConfiguration>(configurationType)
+class TsConfigurationFactory(configurationType: TsConfigurationType) : ConfigurationFactoryEx<TsRunConfiguration>(configurationType)
 {
 	val LOG = TsLog(javaClass)
 

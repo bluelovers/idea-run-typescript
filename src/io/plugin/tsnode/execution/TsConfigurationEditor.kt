@@ -233,13 +233,13 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			tsnodePackage = tsnodePackageField.selected,
 
 			tsconfigFile = tsconfigFileField.text,
-			extraTypeScriptOptions = extraTypeScriptOptionsField.text)
+			extraTypeScriptOptions = extraTypeScriptOptionsField.text
+		)
 
+		config.envs.clear()
+		config.envs.putAll(envVars.envs)
 
-		//config.envs2.clear()
-		//config.envs2.putAll(envVars.envs)
-
-		config.envs2 = envVars.envs.toMutableMap()
+//		config.envs2 = envVars.envs.toMutableMap()
 
 		config.setTypeScriptPackage(tsnodePackageField.selected)
 
@@ -257,8 +257,9 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 
 		//envVars.data = runSettings.envData
-		envVars.envs = config.envs2
+//		envVars.envs = config.envs2
 
+		envVars.envs = config.envs;
 		tsnodePackageField.selected = config.selectedTsNodePackage()!!
 		tsconfigFileField.text = runSettings.tsconfigFile
 		extraTypeScriptOptionsField.text = runSettings.extraTypeScriptOptions

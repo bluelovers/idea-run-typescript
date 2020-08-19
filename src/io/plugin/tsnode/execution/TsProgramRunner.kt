@@ -17,17 +17,6 @@ class TsProgramRunner : DefaultProgramRunner()
 	{
 		val bool = DefaultRunExecutor.EXECUTOR_ID == executorId && profile is TsRunConfiguration
 
-		//LOG.info("[canRun] $bool $executorId $profile")
-
 		return bool
 	}
-
-	/*
-	override fun execute(environment: ExecutionEnvironment, state: RunProfileState): Promise<RunContentDescriptor?>
-	{
-		LOG.info("[execute] $environment $state")
-
-		return super.execute(environment, state)
-	}
-	*/
 }

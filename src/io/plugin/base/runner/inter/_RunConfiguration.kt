@@ -6,6 +6,7 @@ import com.intellij.execution.configuration.EnvironmentVariablesComponent
 import com.intellij.execution.configuration.EnvironmentVariablesData
 import com.intellij.execution.configurations.*
 import com.intellij.execution.util.ProgramParametersUtil
+import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreter
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
 import com.intellij.javascript.nodejs.util.NodePackage
@@ -31,8 +32,6 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 {
 
 	val LOG = TsLog(javaClass)
-
-	var envs2: MutableMap<String, String> = mutableMapOf()
 
 	override fun getValidModules(): Collection<Module>
 	{
@@ -78,7 +77,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 		return setScriptName(value)
 	}
 
-	fun getInterpreter(): NodeJsLocalInterpreter?
+	open fun getInterpreter(): NodeJsInterpreter?
 	{
 		return NodeJsLocalInterpreter
 			.tryCast(getInterpreterRef().resolve(project))
@@ -133,26 +132,9 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 	{
 		runSettings.interpreterOptions = value
 	}
-
-	fun getEnvData(): EnvironmentVariablesData
-	{
-		return runSettings.envData
-	}
-
-	fun setEnvData(value: EnvironmentVariablesData)
-	{
-		runSettings.envData = value
-	}
-
-	override fun getEnvs(): Map<String, String>
-	{
-		return envs2
-		//return runSettings.envData.envs
-	}
-
 	override fun setEnvs(value: Map<String, String>)
 	{
-		//runSettings.envData.envs?.clear()
+		runSettings.envData.envs.clear()
 
 		//LOG.info("[setEnvs] $value ")
 
@@ -161,11 +143,10 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 		//envs2.clear()
 		//envs2.putAll(value)
 
-		envs2 = value.toMutableMap()
+		envs = value
 
-		//runSettings.envData.envs.putAll(value)
+		runSettings.envData.envs.putAll(value)
 	}
-
 	override fun isPassParentEnvs(): Boolean
 	{
 		return runSettings.envData.isPassParentEnvs
@@ -192,7 +173,7 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		//var mapenv: MutableMap<String, String> = mutableMapOf()
 
-		EnvironmentVariablesComponent.readExternal(element, envs2)
+		EnvironmentVariablesComponent.readExternal(element, envs)
 
 		//setEnvs(mapenv)
 
@@ -232,32 +213,17 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 
 		super<AbstractRunConfiguration>.writeExternal(element)
 
-		EnvironmentVariablesComponent.writeExternal(element, envs2)
-
-		//runSettings.envData.writeExternal(element)
+		EnvironmentVariablesComponent.writeExternal(element, envs)
 
 		JDOMExternalizerUtil.writeField(element, "interpreterRef", getInterpreterRef().referenceName)
-
 		JDOMExternalizerUtil.writeField(element, "interpreterOptions", getInterpreterOptions())
-
 		JDOMExternalizerUtil.writeField(element, "workingDirectory", getWorkingDirectory())
-
 		JDOMExternalizerUtil.writeField(element, "tsconfigFile", runSettings.tsconfigFile)
-
 		JDOMExternalizerUtil.writeField(element, "extraTypeScriptOptions", runSettings.extraTypeScriptOptions)
-
 		JDOMExternalizerUtil.writeField(element, "scriptName", getScriptName())
-
 		JDOMExternalizerUtil.writeField(element, "programParameters", runSettings.programParameters)
 
 		configurationModule.writeExternal(element)
-
-//		LOG.info("""[writeExternal:2] $element ${element.name}
-//${element.attributes}
-//${element.children}
-//""".trimMargin())
-
-		//LOG.info(envs.toString())
 	}
 
 }
