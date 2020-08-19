@@ -1,7 +1,7 @@
 <idea-plugin url="https://github.com/bluelovers/idea-run-typescript">
   <id>io.plugin.tsnode</id>
   <name>Run Configuration for TypeScript</name>
-  <version>2020.03.04.0</version>
+  <version>2020.08.20.0</version>
   <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">
     bluelovers
   </vendor>
@@ -81,7 +81,7 @@ Windows 10 10.0
 
   <change-notes><![CDATA[
   <ul>
-  <li>Build Plugin in IntelliJ IDEA 2019.3.3#IU-193.6494.35</li>
+  <li>Build Plugin in IntelliJ IDEA 2019.3.5#IU-193.7288.26</li>
   <li>support select `esm-ts-node`, `ts-node`</li>
   <li>better check ts-node</li>
   </ul>
