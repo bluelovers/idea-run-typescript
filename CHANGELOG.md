@@ -42,6 +42,134 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### ♻️　Chores
 
+* **release:** publish ([7af8528](https://github.com/bluelovers/idea-run-typescript/commit/7af85287b442b571b5592f7da240ebd58b6cf930))
+* v2020.03.04.0 ([ec0c31d](https://github.com/bluelovers/idea-run-typescript/commit/ec0c31d6db6069fe1109381400d0a9ed1892b26f))
+* Build Plugin in IntelliJ IDEA 2019.2.4#IU-192.7142.36 ([8e81b89](https://github.com/bluelovers/idea-run-typescript/commit/8e81b89f988f923b15487e030c214e2092e41b6f)), closes [2019.2.4#IU-192](https://github.com/2019.2.4/issues/IU-192)
+* <idea-version since-build="183.0"/> ([c134fd9](https://github.com/bluelovers/idea-run-typescript/commit/c134fd983b35ae77e0b6cd5b11cf9b787a98a7d9))
+* .idea/artifacts/idea_run_typescript_jar.xml ([a845439](https://github.com/bluelovers/idea-run-typescript/commit/a84543975332f6a0b962ccf50f07cb35e8e7cc77))
+* build plugin/jar at IDEA 2019.1.4#IU-191.8026.42 ([1acf695](https://github.com/bluelovers/idea-run-typescript/commit/1acf695d8d2e0da16f8071c5a982c3318bacf54f)), closes [2019.1.4#IU-191](https://github.com/2019.1.4/issues/IU-191)
+* svg by Freepik/Flaticon ([20849c0](https://github.com/bluelovers/idea-run-typescript/commit/20849c04259f174c51aec3d6258971479900305b))
+* remove all log print ([99621cb](https://github.com/bluelovers/idea-run-typescript/commit/99621cbb5d3fee820e2af39452acfba1889b249a))
+* remove all log print ([306ecb0](https://github.com/bluelovers/idea-run-typescript/commit/306ecb0899ad0f3205a49448fb6d52182eb2f62b))
+
+
+### 🔖　Miscellaneous
+
+* Fetching environment variables from typescript config and setting working directory ([9b935ec](https://github.com/bluelovers/idea-run-typescript/commit/9b935ec6914f3cf669d1e5d300ced4520fb37d8b))
+* Update intellij-plugin-verifier.yml ([5b74f79](https://github.com/bluelovers/idea-run-typescript/commit/5b74f796f54b0e6a42e49e9791dc2065d11e6b1c))
+* [FIX] TsUtil.kt: Fix a NPE ([adab34a](https://github.com/bluelovers/idea-run-typescript/commit/adab34a3f54a19ac2e945a21c9402a289eb907c7))
+* . ([b1accc7](https://github.com/bluelovers/idea-run-typescript/commit/b1accc7f2248316a992867c70c7ec6fd69fc0ccd))
+* Build Plugin in IntelliJ IDEA 2019.3.3#IU-193.6494.35 ([fb8fb46](https://github.com/bluelovers/idea-run-typescript/commit/fb8fb462c77be1bb110bcdc9fe96eedf9c5d53fc)), closes [2019.3.3#IU-193](https://github.com/2019.3.3/issues/IU-193)
+* LangDataKeys.MODULE ([95a7936](https://github.com/bluelovers/idea-run-typescript/commit/95a7936ae63c8b854f4a27a39523e41cbc09e70f))
+* TsUtil.isScratchFileType ([8875a67](https://github.com/bluelovers/idea-run-typescript/commit/8875a67484a0d69174da6e9040ad755393afbe26))
+* update deprecated `ScratchFileType` => ScratchUtil.isScratch(virtualFile) ([028a353](https://github.com/bluelovers/idea-run-typescript/commit/028a353a6b76098548add588df020c8d33b07b38))
+* 2020.2.25.1 ([5de41b4](https://github.com/bluelovers/idea-run-typescript/commit/5de41b485210b050dd33d69b0745c844e9e35bf4))
+* update code ([7385b0f](https://github.com/bluelovers/idea-run-typescript/commit/7385b0f4accc2f17fbeab6feef4b0a370287c055))
+* . ([cdf16d1](https://github.com/bluelovers/idea-run-typescript/commit/cdf16d1cf8b2e9ec466d9868bbb84b9d3e1d92ae))
+* . ([b9c49fc](https://github.com/bluelovers/idea-run-typescript/commit/b9c49fc18e11e415082e799ec970b857f8db0cca))
+* . ([6014950](https://github.com/bluelovers/idea-run-typescript/commit/6014950f6dda2ad34ec38ba44b4ae175fa4815ae))
+* IntelliJ IDEA IU-192.5587.17 ([3d7318f](https://github.com/bluelovers/idea-run-typescript/commit/3d7318f3503a1d600c839f4585f944ad17e7cc3e))
+* commandLine.charset = Charset.forName("UTF-8") ([5a5d67d](https://github.com/bluelovers/idea-run-typescript/commit/5a5d67dfed64cbb086aea1085f68f1c5090b570d))
+* DumbAware ([50be282](https://github.com/bluelovers/idea-run-typescript/commit/50be28219cda91891d6d8bf4bf3cab6970928935))
+* small debug ([97ff321](https://github.com/bluelovers/idea-run-typescript/commit/97ff3214b0a05ecb4c84f19eaaac1063b35bdd92))
+* Merge remote-tracking branch 'origin/master' ([7fffe29](https://github.com/bluelovers/idea-run-typescript/commit/7fffe291c497741a77b8cb073920058f12c2385c))
+* . ([e74fa2a](https://github.com/bluelovers/idea-run-typescript/commit/e74fa2a52bc5541030391991266b6650358004bd))
+* Update plugin.xml ([8e6a818](https://github.com/bluelovers/idea-run-typescript/commit/8e6a81863ba1fe35587192d9ffea3a5dcffc0b02))
+* pluginIcon.svg ([9c65e20](https://github.com/bluelovers/idea-run-typescript/commit/9c65e20506d1e4facf0186adcb03dcf44b838b22))
+* :bug: Fixing a bug. ([23add22](https://github.com/bluelovers/idea-run-typescript/commit/23add223ce2b00d7d7bfef47ccd3bea8a8a0bcd2))
+* 2018.8.8.0 ([5fcb4e0](https://github.com/bluelovers/idea-run-typescript/commit/5fcb4e02c779f0d89bd20469ec822c46d1a6e62e))
+* :bug: fix cannot be cast to org.jetbrains.debugger.DebuggableRunConfiguration ([d714f76](https://github.com/bluelovers/idea-run-typescript/commit/d714f765d3f78da1f59781264a88c573f71f8865))
+* . ([7463ea3](https://github.com/bluelovers/idea-run-typescript/commit/7463ea3860c6c8f2721fe80c74df39f5439bb70f))
+* remove useless icon ([f2ee05c](https://github.com/bluelovers/idea-run-typescript/commit/f2ee05c4ea8b15ab546e5606ec6820d27b7cf477))
+* fix for 2018.2 ([7c1d744](https://github.com/bluelovers/idea-run-typescript/commit/7c1d7442bd8bff27c60ab3f02fa373db995cfe52))
+* 2018.7.25.0 ([ced7c88](https://github.com/bluelovers/idea-run-typescript/commit/ced7c88dd8a5ae64b11ef134e0cb924475ba5bc5))
+* 改進 搜尋 ts-node bin 的方法 ([f314487](https://github.com/bluelovers/idea-run-typescript/commit/f3144879672c0fa3f4cad6c53778aaa6bed30e5c))
+* 讀取 ts-node ([55f7d63](https://github.com/bluelovers/idea-run-typescript/commit/55f7d6392f464e3b8a08d233abab2227e96af3ba))
+* 讀取 node js bin ([86171cd](https://github.com/bluelovers/idea-run-typescript/commit/86171cda13409eb448eebe196d19f1c392fb5507))
+* same as node.js run add FORCE_COLOR=true ([7c0cc9c](https://github.com/bluelovers/idea-run-typescript/commit/7c0cc9c7b4c78ad931fd2969cd8005fc766a4fe9))
+* update readme ([6f9ecfd](https://github.com/bluelovers/idea-run-typescript/commit/6f9ecfdd000422d7de54258cddb66797d2ef4ff7))
+* update readme ([430f657](https://github.com/bluelovers/idea-run-typescript/commit/430f65717f1d8d4a54526e42e22742f810f7bd93))
+* update readme ([3a31247](https://github.com/bluelovers/idea-run-typescript/commit/3a31247fa149210d42b5083ceb61142ea98d576c))
+* update readme ([69c4233](https://github.com/bluelovers/idea-run-typescript/commit/69c4233a495c940ce15d62045ff40bfc9cc67e2a))
+* update readme ([4941711](https://github.com/bluelovers/idea-run-typescript/commit/49417114f821c5dee553e3a4704d2372f3665999))
+* update readme ([56c3cab](https://github.com/bluelovers/idea-run-typescript/commit/56c3cab84f3b563fb4e6703762cce1d9dfc1e190))
+* update readme ([6a01568](https://github.com/bluelovers/idea-run-typescript/commit/6a01568493e92018eaf91ec9ebfa7ef3ddcba825))
+* . ([dd23fe3](https://github.com/bluelovers/idea-run-typescript/commit/dd23fe30d78bf5208ce02be74ac3d117c27838aa))
+* . ([7bb0767](https://github.com/bluelovers/idea-run-typescript/commit/7bb0767dbafab7a64892071cbdb329ed3d0ec68a))
+* . ([2626fac](https://github.com/bluelovers/idea-run-typescript/commit/2626fac9a0f7a3015df2fba8244a98b3f25c14ce))
+* . ([1cf997f](https://github.com/bluelovers/idea-run-typescript/commit/1cf997f9babacb3ef9772962fa40df42348d8315))
+* . ([238aca7](https://github.com/bluelovers/idea-run-typescript/commit/238aca789695b393aa438971a5a6ee01716da0db))
+* . ([24ee43c](https://github.com/bluelovers/idea-run-typescript/commit/24ee43c17b2053ba1b096449bcc6f2ce99352e41))
+* TsForm ([40a1118](https://github.com/bluelovers/idea-run-typescript/commit/40a11189bbc4d44ee2ebfc3c66ccf7583039d234))
+* TsForm ([7a77ee0](https://github.com/bluelovers/idea-run-typescript/commit/7a77ee0356760bea69186664269f05912702484e))
+* . ([f24a968](https://github.com/bluelovers/idea-run-typescript/commit/f24a968254aee61d9103f6ef1ce3995af749d960))
+* . ([050eebe](https://github.com/bluelovers/idea-run-typescript/commit/050eebe8b55ff43ee10415bb8e4b435f0915f385))
+* . ([022ce1c](https://github.com/bluelovers/idea-run-typescript/commit/022ce1ce1697ccf30f62e8eaeb56ddee5c6131bd))
+* . ([0b28d32](https://github.com/bluelovers/idea-run-typescript/commit/0b28d32a00ad02cb12e354dd4d1a64a0970e8dd4))
+* . ([c0fb391](https://github.com/bluelovers/idea-run-typescript/commit/c0fb39183dff532ec87d9916492a62a82b8c610e))
+* . ([042cc2b](https://github.com/bluelovers/idea-run-typescript/commit/042cc2bb807cc319f028a421394f0ea6d98c3dfb))
+* [done] TsRunConfigurationProducer ([fbe4938](https://github.com/bluelovers/idea-run-typescript/commit/fbe493877e5309a9247b4c6b81fe4d7c4ed2fd7d))
+* AllIcons.Actions ([2c0cd3d](https://github.com/bluelovers/idea-run-typescript/commit/2c0cd3da52ab783f45f98f5e2c6c818415ec1830))
+* . ([3af1098](https://github.com/bluelovers/idea-run-typescript/commit/3af1098717dc98221bdd6bfb90a18675ea607a5a))
+* . ([6d0d6f3](https://github.com/bluelovers/idea-run-typescript/commit/6d0d6f32054a80d76ba86bc2c6cbd50645192239))
+* . ([18bc2ef](https://github.com/bluelovers/idea-run-typescript/commit/18bc2efbbc687beb6c53e38708eea31060a82f8e))
+* fun expectFile(file: String, throwError: Boolean = false, name: String = "path"): Boolean ([11ac5e9](https://github.com/bluelovers/idea-run-typescript/commit/11ac5e96a7e0ea46f8fe5fe96a96272fd5a4eff1))
+* . ([5f64c55](https://github.com/bluelovers/idea-run-typescript/commit/5f64c55e2facdf8d311ad3e3b00219895a5bd0c6))
+* . ([21b3f9b](https://github.com/bluelovers/idea-run-typescript/commit/21b3f9b05768b5f3ca85d5a6d499339b841a5434))
+* . ([c03e127](https://github.com/bluelovers/idea-run-typescript/commit/c03e12722b57862e7ecba34191b4c0a032209886))
+* 方便識別是不是內建的 TypeScript API ([2fa5ad6](https://github.com/bluelovers/idea-run-typescript/commit/2fa5ad6c477a878dfe54a7b52c76fe644a661cd6))
+* . ([66de3e2](https://github.com/bluelovers/idea-run-typescript/commit/66de3e20683113f4a42d4a52ece4c3363dd39aff))
+* . ([f27e842](https://github.com/bluelovers/idea-run-typescript/commit/f27e842cd1c0cf5024dcb2afb775ccdced603dfc))
+* . ([ed84a33](https://github.com/bluelovers/idea-run-typescript/commit/ed84a33d71eae54ac76a830550212563c5ddae80))
+* . ([84b0f08](https://github.com/bluelovers/idea-run-typescript/commit/84b0f087c2b311edbf34e5a05b3e235ee7635c84))
+* . ([7219b94](https://github.com/bluelovers/idea-run-typescript/commit/7219b944b58fea5587467ae9247f78d365fa0b7e))
+* 累了 光靠複製貼上 猜不出來 如何解決問題 ([da2c9ee](https://github.com/bluelovers/idea-run-typescript/commit/da2c9eeb622d182fe895812ae564bb856258e413))
+* . ([0adb089](https://github.com/bluelovers/idea-run-typescript/commit/0adb089dbb0f8236cb9bb62ec51459983ac8b051))
+* :tada: Initial commit. ([0954c56](https://github.com/bluelovers/idea-run-typescript/commit/0954c56f3962c66cbb69eeda41c3d7e8cafe49c8))
+
+
+
+
+
+## 2020.8.2-0.0 (2020-08-19)
+
+
+### 🐛　Bug Fixes
+
+* psiFile null ([d9a6aaa](https://github.com/bluelovers/idea-run-typescript/commit/d9a6aaade051468cba8b8b722dd1b9900d28f23d))
+* project.baseDir.path => project.basePath ([49aabfb](https://github.com/bluelovers/idea-run-typescript/commit/49aabfba216cc6533b333893a24f25a5a6f78280))
+* null ([afc0c88](https://github.com/bluelovers/idea-run-typescript/commit/afc0c887628901b745077332d877aa12ae0cc8c4))
+* make build plugin work at IDEA 2019.1.4#IU-191.8026.42 ([fb3e11c](https://github.com/bluelovers/idea-run-typescript/commit/fb3e11c374964a84ed6332496c14b13c79014f0b)), closes [2019.1.4#IU-191](https://github.com/2019.1.4/issues/IU-191)
+* **action:** 按鈕只會出現在 ts 上 ([cadb742](https://github.com/bluelovers/idea-run-typescript/commit/cadb742979f6b2caa7d74ce4db37e4e79df70e58))
+* **conf:** 修正為檔案選擇器 ([d3aec6d](https://github.com/bluelovers/idea-run-typescript/commit/d3aec6de78bfb4b06a546d1b7eaa57ef3e93fc24))
+* **console:** 修正為普通 Run 輸出 ([70ea2d1](https://github.com/bluelovers/idea-run-typescript/commit/70ea2d1aef301f705b130cf064e63692b99b83f9))
+
+
+### ✨　Features
+
+* try remember ts-node package choose https://github.com/bluelovers/idea-run-typescript/issues/9 ([7d2097f](https://github.com/bluelovers/idea-run-typescript/commit/7d2097ff58f29e458779fce467af22edae32b16e))
+* better check `ts-node` ([d5da387](https://github.com/bluelovers/idea-run-typescript/commit/d5da3878e0371449ccb831cc1197563f0a144de5))
+* findPreferredPackage(name: List<String>) ([bf59600](https://github.com/bluelovers/idea-run-typescript/commit/bf5960052a40bd3d3ef1acac0dce4850a2f5b4b9))
+* support select `esm-ts-node`, `ts-node` ([178fc00](https://github.com/bluelovers/idea-run-typescript/commit/178fc0012f03efe724cb8fed970ac91c9842dfeb))
+* showUpdateNotification ([dbda60d](https://github.com/bluelovers/idea-run-typescript/commit/dbda60d29ea8ad6486cd314aded3b7bb150052f4))
+* showUpdateNotification ([83a46a0](https://github.com/bluelovers/idea-run-typescript/commit/83a46a09954f350fcedd9aa6c23e6eeba8bcbbd5))
+* Give up try using Plugin way for Run Debug ([c75599c](https://github.com/bluelovers/idea-run-typescript/commit/c75599c022ec2c531bd504ab014433c31f8a68d0))
+* make ScratchFile run in project path ([387510e](https://github.com/bluelovers/idea-run-typescript/commit/387510e68bd0cd4ce4af92cd8dec6ab50e47e7a2))
+* support Scratch File https://github.com/bluelovers/idea-run-typescript/issues/5 ([d9059c2](https://github.com/bluelovers/idea-run-typescript/commit/d9059c211d158c5cfca9c167ef5d4c67de5f6ae0))
+* FORCE_COLOR=3 ([2360e42](https://github.com/bluelovers/idea-run-typescript/commit/2360e42afc0d401429b22cd54bffd21b0eb87646))
+* support .tsx ([79df6ef](https://github.com/bluelovers/idea-run-typescript/commit/79df6ef6844658b5abab7c328fdae3d9ecde954a))
+* emit ctrl+c with `setShouldKillProcessSoftlyWithWinP` by Sergey Simonchik ([c2960f0](https://github.com/bluelovers/idea-run-typescript/commit/c2960f0aca951eaa85dc885ed7ebb91767caf3c6))
+* **action:** 支援顯示額外的 Before launch action (例如 build) ([5467250](https://github.com/bluelovers/idea-run-typescript/commit/54672501bcc9eedc5aad21a882b3599a36b0bdc8))
+* **action:** 支援顯示額外的 Before launch action (例如 build) ([51fb083](https://github.com/bluelovers/idea-run-typescript/commit/51fb083965021def30428e9bba424e64581daa00))
+
+
+### ⚙️　Continuous Integration
+
+* add Plugin compatibility check ([3a14b32](https://github.com/bluelovers/idea-run-typescript/commit/3a14b32e277393998749eb0c841e9ee723e95eb6))
+
+
+### ♻️　Chores
+
 * v2020.03.04.0 ([ec0c31d](https://github.com/bluelovers/idea-run-typescript/commit/ec0c31d6db6069fe1109381400d0a9ed1892b26f))
 * Build Plugin in IntelliJ IDEA 2019.2.4#IU-192.7142.36 ([8e81b89](https://github.com/bluelovers/idea-run-typescript/commit/8e81b89f988f923b15487e030c214e2092e41b6f)), closes [2019.2.4#IU-192](https://github.com/2019.2.4/issues/IU-192)
 * <idea-version since-build="183.0"/> ([c134fd9](https://github.com/bluelovers/idea-run-typescript/commit/c134fd983b35ae77e0b6cd5b11cf9b787a98a7d9))
