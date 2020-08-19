@@ -7,24 +7,20 @@ import com.intellij.execution.executors.DefaultDebugExecutor
 import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.DataKeys
-import com.intellij.openapi.actionSystem.DataKeys.*
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
 import icons.TsIcons
-import io.plugin.tsnode.execution.TsExecutor
-import io.plugin.tsnode.execution.TsUtil
 import javax.swing.Icon
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.roots.ui.configuration.PathUIUtils
 import com.intellij.util.PathUtil
 import com.intellij.util.io.directoryContent
 import com.jetbrains.nodejs.run.NodeJsRunConfiguration
 import com.jetbrains.nodejs.run.NodeJsRunConfigurationType
+import io.plugin.tsnode.execution.*
 import io.plugin.tsnode.execution.TsUtil.allNodeJsConfiguration
 import io.plugin.tsnode.execution.TsUtil.allTsConfiguration
 import io.plugin.tsnode.execution.TsUtil.getExistedNodeJsConfiguration
@@ -61,10 +57,17 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 
 		val nodeJsRunConf = settings.configuration as NodeJsRunConfiguration
 
+		val existingConfig = runManager.getConfigurationsList(TsConfigurationType())
+				.find { it -> (it as TsRunConfiguration).runSettings.scriptName == virtualFile.path } as TsRunConfiguration?;
+
+		val typescriptConfig = existingConfig ?: (runManager.createConfiguration(virtualFile.name, TsConfigurationFactory(TsConfigurationType())).configuration as TsRunConfiguration)
+
 		//LOG.info("working directory: ${nodeJsRunConf.workingDirectory}")
 
+		nodeJsRunConf.envs = typescriptConfig.envs;
+
 		if (nodeJsRunConf.workingDirectory.isNullOrEmpty())
-			nodeJsRunConf.workingDirectory = project.basePath
+			nodeJsRunConf.workingDirectory = if (!virtualFile.parent.path.isEmpty()) virtualFile.parent.path else  project.basePath
 
 		nodeJsRunConf.inputPath = virtualFile.path
 
