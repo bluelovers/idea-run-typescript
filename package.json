@@ -1,6 +1,7 @@
 {
   "name": "idea-run-typescript",
   "version": "2020.08.20.0",
+  "private": true,
   "description": "[![jetbrains.svg](jetbrains.svg)](https://www.jetbrains.com/?from=novel-segment)",
   "keywords": [],
   "homepage": "https://github.com/bluelovers/idea-run-typescript#readme",
@@ -15,16 +16,7 @@
   "author": "bluelovers",
   "main": "index.js",
   "scripts": {
-    "coverage": "nyc npm run test",
-    "lint": "ynpx --quiet eslint -- **/*.ts",
-    "test": "echo \"Error: no test specified\"",
-    "test:jest": "ynpx --quiet jest -- --coverage",
-    "test:mocha": "ynpx --quiet -p ts-node -p mocha mocha -- --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\"",
-    "npm:publish": "npm publish",
-    "npm:publish:lerna": "lerna publish --yes --bump patch",
-    "preversion": "echo preversion",
-    "prepublishOnly": "yarn run prepublishOnly:check-bin && yarn run prepublishOnly:update && yarn run test",
-    "prepublishOnly:check-bin": "ynpx --quiet @yarn-tool/check-pkg-bin",
+    "version": "ts-node ./script/update-version.ts",
     "prepublishOnly:update": "yarn run ncu && yarn run sort-package-json",
     "postpublish": "yarn run postpublish:changelog && yarn run postpublish:git:commit && yarn run postpublish:git:tag && yarn run postpublish:git:push",
     "postpublish:changelog": "ynpx --quiet @yarn-tool/changelog && git add ./CHANGELOG.md",
@@ -32,14 +24,20 @@
     "postpublish:git:push": "git push --follow-tags",
     "postpublish:git:tag": "ynpx --quiet @yarn-tool/tag",
     "ncu": "yarn-tool ncu -u",
-    "sort-package-json": "yarn-tool sort",
-    "tsc:default": "tsc -p tsconfig.json",
-    "tsc:esm": "tsc -p tsconfig.esm.json"
+    "plugin:version": "yarn run version",
+    "plugin:publish": "yarn run plugin:version && yarn run plugin:postpublish",
+    "plugin:postpublish": "yarn run postpublish",
+    "sort-package-json": "yarn-tool sort"
   },
-  "dependencies": {},
+  "dependencies": {
+    "xmlbuilder2": "^2.3.1"
+  },
   "devDependencies": {
     "@bluelovers/tsconfig": "^1.0.20",
     "@types/node": "*"
   },
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "engines": {
+    "idea-version": "183.0"
+  }
 }
