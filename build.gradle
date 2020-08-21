@@ -8,11 +8,13 @@ buildscript {
     }
 }
 
-
 plugins {
     id 'org.jetbrains.intellij' version '0.4.21'
     id 'net.researchgate.release' version '2.6.0'
 }
+
+group pluginGroup
+version pluginVersion
 
 repositories {
     jcenter()
@@ -29,28 +31,34 @@ sourceSets {
 }
 
 sourceCompatibility = 1.8
+
 compileKotlin {
     kotlinOptions.jvmTarget = 1.8
 }
 
+compileTestKotlin {
+    kotlinOptions.jvmTarget = 1.8
+}
+
 intellij {
-    pluginName 'idea-run-typescript'
-    type = 'IU'
+    pluginName pluginName
 
-    version = 'LATEST-EAP-SNAPSHOT'
-    plugins = ['JavaScriptLanguage', 'NodeJS']
+    version = ideaVersion
+    type = ideaType
 
-    downloadSources true
+    plugins = ['JavaScriptLanguage', 'JavaScriptDebugger', 'NodeJS']
+
+    downloadSources Boolean.valueOf(sources)
     updateSinceUntilBuild = false
 }
 
 runIde {
     systemProperty("idea.auto.reload.plugins", true)
 
-    ideDirectory "../../.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/202.6397.88/"
+//    ideDirectory "C:\\Users\\User\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-2\\202.6948.46"
 //    ideDirectory "../../.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/201.8538.32/"
 
-    jvmArgs '-Xmx2G'
+    jvmArgs '-Xmx512m -Xms256m -ea'
 }
 
 buildPlugin {
@@ -66,4 +74,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+patchPluginXml {
+    version = project.version
 }
