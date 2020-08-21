@@ -1,0 +1,69 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+
+plugins {
+    id 'org.jetbrains.intellij' version '0.4.21'
+    id 'net.researchgate.release' version '2.6.0'
+}
+
+repositories {
+    jcenter()
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'idea'
+
+sourceSets {
+    main.java.srcDirs = ['src']
+    main.resources.srcDirs = ['resources']
+}
+
+sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions.jvmTarget = 1.8
+}
+
+intellij {
+    pluginName 'idea-run-typescript'
+    type = 'IU'
+
+    version = 'LATEST-EAP-SNAPSHOT'
+    plugins = ['JavaScriptLanguage', 'NodeJS']
+
+    downloadSources true
+    updateSinceUntilBuild = false
+}
+
+runIde {
+    systemProperty("idea.auto.reload.plugins", true)
+
+    ideDirectory "../../.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/202.6397.88/"
+//    ideDirectory "../../.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/201.8538.32/"
+
+    jvmArgs '-Xmx2G'
+}
+
+buildPlugin {
+
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
