@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/idea-run-typescript.iml" filepath="$PROJECT_DIR$/idea-run-typescript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/idea-run-typescript.main.iml" filepath="$PROJECT_DIR$/.idea/modules/idea-run-typescript.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/idea-run-typescript.test.iml" filepath="$PROJECT_DIR$/.idea/modules/idea-run-typescript.test.iml" />
     </modules>
   </component>
 </project>

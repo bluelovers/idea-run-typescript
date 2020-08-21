@@ -270,3 +270,5 @@ fabric.properties
 /.idea/markdown-navigator.xml
 /.idea/markdown-navigator-enh.xml
 
+!.idea/runConfigurations/
+!.idea/runConfigurations/*
