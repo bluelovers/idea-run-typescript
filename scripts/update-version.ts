@@ -1,8 +1,9 @@
 import pkg from '../package.json'
 import {readdirSync, readFile, readFileSync, writeFileSync} from "fs";
-import {join} from 'path';
+import {join,relative} from 'path';
 import {create,convert} from "xmlbuilder2";
 import {inspect} from "util";
+import DotProperties from 'dot-properties-loader';
 
 inspect.defaultOptions.colors = true;
 
@@ -29,6 +30,7 @@ console.log(pkg.version, `=>`, version);
 
 updatePackageJson();
 updatePluginXml();
+updateGradleProperties();
 
 function updatePackageJson() {
 	pkg.version = version;
@@ -60,4 +62,18 @@ function updatePluginXml() {
 
 	console.log(`update`, `resources/META-INF/plugin.xml`);
 	writeFileSync(file, xml);
+}
+
+function updateGradleProperties() {
+	let file = join(__root, 'gradle.properties');
+	let dp = new DotProperties({
+		file
+	});
+
+	dp.set('version', version);
+	dp.set('pluginVersion', version);
+
+	console.log(`update`, relative(__root, file));
+
+	dp.save();
 }
