@@ -18,7 +18,6 @@ jobs:
         with:
           plugin: '/releases/idea-run-typescript.jar'
           versions: |
-#            181.5684.4
             2019.3.3
             2020.2
             LATEST-EAP-SNAPSHOT
