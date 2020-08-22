@@ -1,0 +1,23 @@
+name: Build the plugin using Gradle
+on:
+  push:
+    branches:
+      - master
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11.x.x
+      - name: Build the plugin using Gradle
+        run: ./gradlew buildPlugin
+      - uses: thepieterdc/intellij-plugin-verifier-action@v1.1.2
+        with:
+          plugin: '/build/distributions/*.*'
+          versions: |
+            2019.3.3
+            2020.2
+            LATEST-EAP-SNAPSHOT
