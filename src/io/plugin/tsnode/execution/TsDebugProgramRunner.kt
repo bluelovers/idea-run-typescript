@@ -10,6 +10,9 @@ import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.javascript.debugger.execution.DebuggableProgramRunner
 import io.plugin.tsnode.lib.TsLog
 
+/**
+ * @fixme https://github.com/bluelovers/idea-run-typescript/pull/14#issuecomment-678684547
+ */
 class TsDebugProgramRunner : DebuggableProgramRunner()
 {
 	override fun getRunnerId() = javaClass.simpleName
