@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
 import com.intellij.openapi.ui.Messages
 
+@Deprecated("do not use this")
 //[Markdown reference](/tutorials/kotlin.md)
 class HelloAction : AnAction("Hello")
 {

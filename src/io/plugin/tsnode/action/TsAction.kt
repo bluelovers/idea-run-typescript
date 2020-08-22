@@ -28,6 +28,7 @@ import java.nio.file.Path
 import java.nio.file.PathMatcher
 import java.nio.file.Paths
 
+@Deprecated("do not use this")
 abstract class TsAction(icon: Icon = TsIcons.TypeScript) : AnAction(icon), DumbAware
 {
 	public val LOG = Logger.getInstance(javaClass)
