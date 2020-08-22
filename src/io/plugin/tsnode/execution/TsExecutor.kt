@@ -14,6 +14,7 @@ import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE
 
+@Deprecated("do not use this")
 object TsExecutor
 {
 	val LOG = TsLog(javaClass)
