@@ -9,12 +9,14 @@ import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.process.KillableColoredProcessHandler
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessTerminatedListener
+import com.intellij.execution.runners.DebuggableRunProfileState
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.execution.testframework.TestConsoleProperties
 import com.intellij.execution.testframework.autotest.ToggleAutoTestAction
 import com.intellij.execution.testframework.sm.SMTestRunnerConnectionUtil
 import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView
 import com.intellij.execution.ui.ConsoleView
+import com.intellij.javascript.debugger.CommandLineDebugConfigurator
 import com.intellij.javascript.nodejs.NodeCommandLineUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.text.StringUtil
@@ -23,6 +25,9 @@ import io.plugin.tsnode.execution.TsUtil.tsnodePath
 import io.plugin.tsnode.lib.TsLog
 import com.intellij.javascript.nodejs.debug.createDebugPortString
 import com.intellij.javascript.nodejs.debug.NodeLocalDebugRunProfileState
+import com.intellij.javascript.nodejs.debug.NodeLocalDebuggableRunProfileState
+import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreter
+import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
 import com.intellij.javascript.protractor.ProtractorConsoleFilter
 import com.intellij.javascript.protractor.ProtractorConsoleProperties
@@ -32,19 +37,27 @@ import java.io.File
 import com.intellij.javascript.testFramework.navigation.JSTestLocationProvider
 import com.intellij.lang.javascript.buildTools.base.JsbtUtil.foldCommandLine
 import com.intellij.openapi.util.Disposer
+import com.intellij.util.ThrowableConsumer
 import io.plugin.tsnode.execution.TsUtil.isEmptyOrSpacesOrNull
+import org.jetbrains.concurrency.Promise
+import org.jetbrains.concurrency.resolvedPromise
 
 class TsRunProfileState(protected var project: Project,
 	protected var runConfig: TsRunConfiguration,
 	protected var executor: Executor,
-	environment: ExecutionEnvironment) : CommandLineState(environment), RunProfileState
+	environment: ExecutionEnvironment) : CommandLineState(environment), RunProfileState, NodeLocalDebuggableRunProfileState
 {
+	private var debugConfigurator: CommandLineDebugConfigurator? = null
 	val LOG = TsLog(javaClass)
 
 	fun createCommandLine(): GeneralCommandLine
 	{
 		val runSettings = runConfig.runSettings
-		val commandLine = GeneralCommandLine()
+		val commandLine = NodeCommandLineUtil.createCommandLine()
+
+		if (this.debugConfigurator !== null) {
+			NodeCommandLineUtil.configureCommandLine(commandLine, debugConfigurator, ThrowableConsumer {  })
+		}
 
 		if (StringUtil.isEmptyOrSpaces(runSettings.workingDirectory))
 		{
@@ -55,7 +68,7 @@ class TsRunProfileState(protected var project: Project,
 			commandLine.withWorkDirectory(runSettings.workingDirectory)
 		}
 
-		runSettings.envData.configureCommandLine(commandLine, true)
+		commandLine.withEnvironment(this.runConfig.envs)
 
 		/**
 		 * same as node.js run add FORCE_COLOR=true
@@ -88,7 +101,6 @@ class TsRunProfileState(protected var project: Project,
 
 			if (!StringUtil.isEmptyOrSpaces(runSettings.tsconfigFile))
 			{
-				//commandLine.addParameter("--project ${runSettings.tsconfigFile}")
 				commandLine.addParameter("--project")
 				commandLine.addParameter(runSettings.tsconfigFile)
 			}
@@ -106,8 +118,6 @@ class TsRunProfileState(protected var project: Project,
 			}
 		}
 
-		//LOG.info("[createCommandLine] $commandLine")
-
 		return commandLine
 	}
 
@@ -120,27 +130,22 @@ class TsRunProfileState(protected var project: Project,
 			commandLine.charset = Charset.forName("UTF-8")
 		}
 
-		//LOG.info("[processHandler.charset] ${commandLine.charset}")
+//		val processHandler = KillableColoredProcessHandler(commandLine)
+//		/**
+//		 * Sergey Simonchik
+//		 * https://youtrack.jetbrains.com/issue/WEB-43796#focus=streamItem-27-3945268.0-0
+//		 */
+//		processHandler.setShouldKillProcessSoftlyWithWinP(true)
 
-		val processHandler = KillableColoredProcessHandler(commandLine)
-		/**
-		 * Sergey Simonchik
-		 * https://youtrack.jetbrains.com/issue/WEB-43796#focus=streamItem-27-3945268.0-0
-		 */
-		processHandler.setShouldKillProcessSoftlyWithWinP(true)
+		val processHandler = NodeCommandLineUtil.createProcessHandler(commandLine, true)
+
 		ProcessTerminatedListener.attach(processHandler)
-
-		//LOG.info("[startProcess] $processHandler")
 
 		return processHandler
 	}
 
-	/*
-	override fun createConsole(executor: Executor): ConsoleView?
-	{
-		val props = TypeScriptConsoleProperties(runConfig, this.executor)
-		return SMTestRunnerConnectionUtil.createConsole("TypeScript", props)
+	override fun execute(configurator: CommandLineDebugConfigurator?): Promise<ExecutionResult> {
+		this.debugConfigurator = configurator
+		return resolvedPromise(super.execute(executor, TsDebugProgramRunner()));
 	}
-	*/
-
 }

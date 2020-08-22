@@ -16,7 +16,7 @@
   "author": "bluelovers",
   "main": "index.js",
   "scripts": {
-    "version": "ts-node ./script/update-version.ts",
+    "version": "ts-node ./scripts/update-version.ts",
     "prepublishOnly:update": "yarn run ncu && yarn run sort-package-json",
     "postpublish": "yarn run postpublish:changelog && yarn run postpublish:git:commit && yarn run postpublish:git:tag && yarn run postpublish:git:push",
     "postpublish:changelog": "ynpx --quiet @yarn-tool/changelog && git add ./CHANGELOG.md",
@@ -24,6 +24,7 @@
     "postpublish:git:push": "git push --follow-tags",
     "postpublish:git:tag": "ynpx --quiet @yarn-tool/tag",
     "ncu": "yarn-tool ncu -u",
+    "plugin:sync:config": "ts-node ./scripts/sync-plugin-config.ts",
     "plugin:version": "yarn run version",
     "plugin:publish": "yarn run plugin:version && yarn run plugin:postpublish",
     "plugin:postpublish": "yarn run postpublish",
@@ -39,6 +40,6 @@
   },
   "peerDependencies": {},
   "engines": {
-    "idea-version": "183.0"
+    "idea-version": "193.4932.9"
   }
 }
