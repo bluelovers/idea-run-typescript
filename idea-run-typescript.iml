@@ -4,12 +4,13 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/scripts" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/readme" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/readme" />
       <excludeFolder url="file://$MODULE_DIR$/releases" />
+      <excludeFolder url="file://$MODULE_DIR$/scripts" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -16,6 +16,9 @@
   "author": "bluelovers",
   "main": "index.js",
   "scripts": {
+    "prebuild": "yarn run plugin:sync:config",
+    "build": "gradlew buildPlugin --warning-mode all",
+    "postbuild": "ts-node ./scripts/copy-build-plugin.ts",
     "version": "ts-node ./scripts/update-version.ts",
     "prepublishOnly:update": "yarn run ncu && yarn run sort-package-json",
     "postpublish": "yarn run postpublish:changelog && yarn run postpublish:git:commit && yarn run postpublish:git:tag && yarn run postpublish:git:push",
@@ -24,19 +27,21 @@
     "postpublish:git:push": "git push --follow-tags",
     "postpublish:git:tag": "ynpx --quiet @yarn-tool/tag",
     "ncu": "yarn-tool ncu -u",
-    "build": "gradlew buildPlugin --warning-mode all",
-    "plugin:sync:config": "ts-node ./scripts/sync-plugin-config.ts",
+    "plugin:build": "yarn run build",
     "plugin:version": "yarn run version",
-    "plugin:publish": "yarn run plugin:version && yarn run plugin:postpublish",
+    "plugin:publish": "yarn run plugin:version && yarn run plugin:build && yarn run plugin:postpublish",
     "plugin:postpublish": "yarn run postpublish",
+    "plugin:sync:config": "ts-node ./scripts/sync-plugin-config.ts",
     "sort-package-json": "yarn-tool sort"
   },
   "dependencies": {
     "dot-properties-loader": "^1.0.5",
+    "fs-extra": "^9.0.1",
     "xmlbuilder2": "^2.3.1"
   },
   "devDependencies": {
     "@bluelovers/tsconfig": "^1.0.20",
+    "@types/fs-extra": "^9.0.1",
     "@types/node": "*"
   },
   "peerDependencies": {},
