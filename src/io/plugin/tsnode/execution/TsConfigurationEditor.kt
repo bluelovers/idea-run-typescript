@@ -122,8 +122,10 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 	private fun createTypeScriptFileField(): TextFieldWithBrowseButton
 	{
 		val field = TextFieldWithBrowseButton()
-		SwingHelper.installFileCompletionAndBrowseDialog(project, field, "TypeScript file",
-			FileChooserDescriptorFactory.createSingleFileDescriptor())
+		SwingHelper.installFileCompletionAndBrowseDialog(
+			project, field, "TypeScript file",
+			FileChooserDescriptorFactory.createSingleFileDescriptor()
+		)
 		return field
 	}
 
@@ -171,16 +173,16 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		//val fullField = TextFieldWithHistoryWithBrowseButton()
 		val fullField = com.intellij.openapi.ui.TextFieldWithBrowseButton()
 
-//		val innerField = fullField.childComponent
-//		innerField.setHistorySize(-1)
-//		innerField.setMinimumAndPreferredWidth(0)
-//
-//		SwingHelper.addHistoryOnExpansion(innerField) {
-//			innerField.history = emptyList<String>()
-//			listPossibleConfigFilesInProject().map { file ->
-//				FileUtil.toSystemDependentName(file.path)
-//			}.sorted()
-//		}
+		//		val innerField = fullField.childComponent
+		//		innerField.setHistorySize(-1)
+		//		innerField.setMinimumAndPreferredWidth(0)
+		//
+		//		SwingHelper.addHistoryOnExpansion(innerField) {
+		//			innerField.history = emptyList<String>()
+		//			listPossibleConfigFilesInProject().map { file ->
+		//				FileUtil.toSystemDependentName(file.path)
+		//			}.sorted()
+		//		}
 
 		SwingHelper.installFileCompletionAndBrowseDialog(
 			project,
@@ -233,13 +235,13 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			tsnodePackage = tsnodePackageField.selected,
 
 			tsconfigFile = tsconfigFileField.text,
-			extraTypeScriptOptions = extraTypeScriptOptionsField.text)
+			extraTypeScriptOptions = extraTypeScriptOptionsField.text
+		)
 
+		config.envs.clear()
+		config.envs.putAll(envVars.envs)
 
-		//config.envs2.clear()
-		//config.envs2.putAll(envVars.envs)
-
-		config.envs2 = envVars.envs.toMutableMap()
+		//		config.envs2 = envVars.envs.toMutableMap()
 
 		config.setTypeScriptPackage(tsnodePackageField.selected)
 
@@ -257,8 +259,9 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 
 		//envVars.data = runSettings.envData
-		envVars.envs = config.envs2
+		//		envVars.envs = config.envs2
 
+		envVars.envs = config.envs;
 		tsnodePackageField.selected = config.selectedTsNodePackage()!!
 		tsconfigFileField.text = runSettings.tsconfigFile
 		extraTypeScriptOptionsField.text = runSettings.extraTypeScriptOptions
