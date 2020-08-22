@@ -11,7 +11,7 @@
 # install
 
 1. via jetbrains [https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript](https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript)
-2. github [idea-run-typescript.jar](releases/idea-run-typescript.jar)
+2. github [idea-run-typescript.jar](releases/idea-run-typescript.jar) /  [idea-run-typescript.jar](releases/idea-run-typescript.zip)
 
 # screenshot
 
@@ -69,6 +69,6 @@ Windows 10 10.0
 - https://github.com/xiyuan-fengyu/IdeaPluginTypeScriptExecutor
 - https://github.com/nguyennk92/run-typescript-plugin
 - https://plugins.jetbrains.com/docs/marketplace/intellij-plugin-recommendations.html
-- 
+-
 
 Icons made by [Freepik](https://www.freepik.com/) from [www.flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
