@@ -13,7 +13,9 @@ jobs:
         with:
           java-version: 11.x.x
       - name: Build the plugin using Gradle
-        run: ./gradlew buildPlugin
+        run: |
+          ./gradlew buildPlugin
+          ./gradlew verifyPlugin
       - uses: thepieterdc/intellij-plugin-verifier-action@v1.1.2
         with:
           plugin: '/build/distributions/*.*'
