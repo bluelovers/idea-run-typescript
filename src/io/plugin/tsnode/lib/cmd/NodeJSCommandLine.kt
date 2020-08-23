@@ -26,11 +26,11 @@ object MyNodeCommandLineUtil
 			/**
 			 * allow set env var nodejs.console.use.terminal=true/false for enable or disable
 			 */
-			val v = runConfig.runSettings.envData.envs.get("nodejs.console.use.terminal")
+			val v = runConfig.runSettings.envData.envs.get("NODEJS_CONSOLE_USE_TERMINAL")
 
 			if (!v.isNullOrEmpty() && !v.isBlank())
 			{
-				usePtyWithTerminalConsole = v.toBoolean()
+				usePtyWithTerminalConsole = v.toString().toBoolean()
 			}
 		}
 
