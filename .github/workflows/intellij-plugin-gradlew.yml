@@ -3,6 +3,12 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
+  release:
+    types:
+      - created
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -16,10 +22,10 @@ jobs:
         run: |
           ./gradlew buildPlugin
           ./gradlew verifyPlugin
-      - uses: thepieterdc/intellij-plugin-verifier-action@v1.1.2
-        with:
-          plugin: '/build/distributions/*.*'
-          versions: |
-            2019.3.3
-            2020.2
-            LATEST-EAP-SNAPSHOT
+#      - uses: thepieterdc/intellij-plugin-verifier-action@v1.1.2
+#        with:
+#          plugin: '/build/distributions/*.*'
+#          versions: |
+#            2019.3.3
+#            2020.2
+#            LATEST-EAP-SNAPSHOT

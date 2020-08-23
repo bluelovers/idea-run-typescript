@@ -15,6 +15,7 @@ jobs:
 #      - name: Build the plugin using Gradle
 #        run: ./gradlew buildPlugin
       - uses: thepieterdc/intellij-plugin-verifier-action@v1.1.2
+        if: false
         with:
           plugin: '/releases/idea-run-typescript.jar'
           versions: |
