@@ -18,7 +18,7 @@
 <h1><a  id="install">install</a></h1>
 <ol>
   <li>via jetbrains <a href="https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript">https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript</a></li>
-  <li>github <a href="https://github.com/bluelovers/idea-run-typescript/blob/master/releases/idea-run-typescript.jar">idea-run-typescript.jar</a></li>
+  <li>github <a href="https://github.com/bluelovers/idea-run-typescript/blob/master/releases/idea-run-typescript.jar">idea-run-typescript.jar</a> / <a href="https://github.com/bluelovers/idea-run-typescript/blob/master/releases/idea-run-typescript.zip">idea-run-typescript.zip</a></li>
 </ol>
 <h1><a  id="screenshot">screenshot</a></h1>
 <blockquote>
@@ -76,9 +76,10 @@ Windows 10 10.0
     ]]></description>
   <change-notes><![CDATA[
   <ul>
+  <li>via jetbrains <a href="https://github.com/bluelovers/idea-run-typescript/blob/master/CHANGELOG.md">CHANGELOG</a></li>
   <li>Build Plugin in IntelliJ IDEA 2019.3.5#IU-193.7288.26</li>
-  <li>support select `esm-ts-node`, `ts-node`</li>
-  <li>better check ts-node</li>
+  <li>support debug mode</li>
+  <li>allow use env var `NODEJS_CONSOLE_USE_TERMINAL` for control Registry `nodejs.console.use.terminal` in Run Configuration bu this plugin</li>
   </ul>
   ]]></change-notes>
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

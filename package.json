@@ -16,6 +16,9 @@
   "author": "bluelovers",
   "main": "index.js",
   "scripts": {
+    "pretest": "echo pretest",
+    "test": "echo test",
+    "posttest": "echo posttest",
     "prebuild": "yarn run plugin:sync:config",
     "build": "gradlew buildPlugin --warning-mode all",
     "postbuild": "ts-node ./scripts/copy-build-plugin.ts",

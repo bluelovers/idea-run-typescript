@@ -11,7 +11,18 @@
 # install
 
 1. via jetbrains [https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript](https://plugins.jetbrains.com/plugin/10841-run-configuration-for-typescript)
-2. github [idea-run-typescript.jar](releases/idea-run-typescript.jar) /  [idea-run-typescript.jar](releases/idea-run-typescript.zip)
+2. github [idea-run-typescript.jar](releases/idea-run-typescript.jar) /  [idea-run-typescript.zip](releases/idea-run-typescript.zip)
+
+# feature
+
+- run .tsx? by ts-node like bin tool (e.g. ts-node , [esm-ts-node](https://www.npmjs.com/package/esm-ts-node))
+- allow use env var `NODEJS_CONSOLE_USE_TERMINAL` for control Registry `nodejs.console.use.terminal` in Run Configuration bu this plugin
+- support debug mode
+- support set tsconfig
+- support set argv for node, ts-node, current file
+- support scratch file
+
+[CHANGELOG.md](./CHANGELOG.md)
 
 # screenshot
 
