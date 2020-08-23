@@ -10,14 +10,13 @@ const prefix = [
 	date.getFullYear(),
 	(date.getMonth() + 1).toString().padStart(2, '0'),
 	date.getDate().toString().padStart(2, '0'),
-	'',
-].join('.');
+].join('.') + '-';
 
 let idx = 0;
 
 if (pkg.version.startsWith(prefix))
 {
-	idx = +(pkg.version.match(/\.(\d+)$/)[1]) + 1
+	idx = +(pkg.version.match(/\-(\d+)$/)[1]) + 1
 }
 
 const version = prefix + idx;
