@@ -35,6 +35,7 @@
     "sort-package-json": "yarn-tool sort"
   },
   "dependencies": {
+    "debug-color2": "^1.2.3",
     "dot-properties-loader": "^1.0.5",
     "fs-extra": "^9.0.1",
     "xmlbuilder2": "^2.3.1"
@@ -46,6 +47,7 @@
   },
   "peerDependencies": {},
   "engines": {
-    "idea-version": "193.4932.9"
+    "idea-version": "193.4932.9",
+    "kotlin": "1.4.0"
   }
 }
