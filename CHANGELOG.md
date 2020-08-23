@@ -3,6 +3,100 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2020.8.24-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.08.20-0...idea-run-typescript@2020.8.24-0) (2020-08-23)
+
+
+### 🐛　Bug Fixes
+
+* invalid var name { nodejs.console.use.terminal => NODEJS_CONSOLE_USE_TERMINAL } ([be218a7](https://github.com/bluelovers/idea-run-typescript/commit/be218a7d492e685623a68ed8548264f5ee93ef32))
+* change version style for support changelog ([a4b8216](https://github.com/bluelovers/idea-run-typescript/commit/a4b8216a1cbb2ca864eca6539ac921dd960c9d21))
+* https://github.com/bluelovers/idea-run-typescript/issues/15 ([77db096](https://github.com/bluelovers/idea-run-typescript/commit/77db096f13c4b0b19fc5f2fbff1d8e929a8441f1))
+* error yaml syntax on line 21 ([9413aeb](https://github.com/bluelovers/idea-run-typescript/commit/9413aeb4fef8a10b6df8ddf5b2377ccd5c074a0f))
+
+
+### ✨　Features
+
+* remove deprecated message from TsAction ([d30031f](https://github.com/bluelovers/idea-run-typescript/commit/d30031f736195759f0ed2635d5f3caff03f3183e))
+* use NodeCommandLineUtil and supported ide => 193.4932.9 ([8e23aea](https://github.com/bluelovers/idea-run-typescript/commit/8e23aea28dbbc5fe1dd6b7eec7fbbd49c8532950))
+
+
+### 🗑　Reverts
+
+* jvmArgs ([732acd6](https://github.com/bluelovers/idea-run-typescript/commit/732acd6502ebbb4d6f023dd24f45cee230c20a22))
+
+
+### 📦　Code Refactoring
+
+* use `TsUtil.isEmptyOrSpacesOrNull` ([ab2f7d4](https://github.com/bluelovers/idea-run-typescript/commit/ab2f7d420b4f703424313738b47b503694632bda))
+* update envs code by https://github.com/bluelovers/idea-run-typescript/pull/14 ([ae15c6e](https://github.com/bluelovers/idea-run-typescript/commit/ae15c6e108f2be554bdecc9efe20b4ad5374ff75))
+* pick changes from https://github.com/bluelovers/idea-run-typescript/pull/14 ([93d5880](https://github.com/bluelovers/idea-run-typescript/commit/93d5880a1633d10427d9c36761824febc5ecad14))
+
+
+### 📚　Documentation
+
+* update README.md and plugin.xml ([62ae623](https://github.com/bluelovers/idea-run-typescript/commit/62ae623ce6fb963240763553c6fd82f97e70ddbd))
+* add install zip ([fac5c52](https://github.com/bluelovers/idea-run-typescript/commit/fac5c529e0ab1092def4163cd86f3b953f9b029d))
+
+
+### 💎　Styles
+
+* add code style config ([087aba8](https://github.com/bluelovers/idea-run-typescript/commit/087aba85b055ed9d289dbe1646686a112eb8e771))
+
+
+### 🛠　Build System
+
+* **deps:** update kotlin { 1.3.50 => 1.4.0 } ([f85252e](https://github.com/bluelovers/idea-run-typescript/commit/f85252ed3d0a7615faa718c15529f53d711a8746))
+* **deps:** use gradle-6.1.1 ([528409e](https://github.com/bluelovers/idea-run-typescript/commit/528409e703423aac427c93b80b58ab99171b74c8))
+* **gradle:** disable idea.auto.reload.plugins ([fb6272f](https://github.com/bluelovers/idea-run-typescript/commit/fb6272fcb120a922c6255407f517a4f994264c8e))
+* **gradle:** add verifyPlugin ([dd77d52](https://github.com/bluelovers/idea-run-typescript/commit/dd77d52b3e76e5f5a0e55f212f37afc9b796ac13))
+* add copy plugin.zip from build/distributions to releases ([52a0503](https://github.com/bluelovers/idea-run-typescript/commit/52a0503aa20250ed9e8d633f2094df3f7a18db1d))
+* add copy plugin.jar from build/libs to releases ([405348c](https://github.com/bluelovers/idea-run-typescript/commit/405348c0923816b6fc1748efb9e76db40366b95a))
+* update run config setting ([e6e3928](https://github.com/bluelovers/idea-run-typescript/commit/e6e392815f56f1fc6c2cb565cd4d4dc0f9effc27))
+* add run config ([372fc36](https://github.com/bluelovers/idea-run-typescript/commit/372fc3679638dc4ae9b4e8c407168ffe6a6488d8))
+* merge config from https://github.com/bluelovers/idea-run-typescript/pull/10 ([a2808ba](https://github.com/bluelovers/idea-run-typescript/commit/a2808bab5ce1c04846ecd59d93b739b8b1740743))
+* add updateGradleProperties ([ca53188](https://github.com/bluelovers/idea-run-typescript/commit/ca531883f6fb06946d3c4771ee3305ed6900bc46))
+* add Gradle from https://github.com/bluelovers/idea-run-typescript/pull/14 ([c1a0277](https://github.com/bluelovers/idea-run-typescript/commit/c1a0277c4e906a03e02f5c63ac7b1b7721eeb33b))
+* add script for update version ([822b5ba](https://github.com/bluelovers/idea-run-typescript/commit/822b5ba00a95f1fb6d4bec539db338f0ed254f49))
+
+
+### ⚙️　Continuous Integration
+
+* add gradlew verifyPlugin ([975b4b1](https://github.com/bluelovers/idea-run-typescript/commit/975b4b14c90539f63e9867e39d3e75d8c63779dd))
+* Build the plugin using Gradle ([dc9bea7](https://github.com/bluelovers/idea-run-typescript/commit/dc9bea7ab0be22ee5c8ca38f3fae0def746cfd2e))
+* skip check version 181 ([50cce1f](https://github.com/bluelovers/idea-run-typescript/commit/50cce1f316c440c23b46aeeb808153539f6e5fce))
+
+
+### ♻️　Chores
+
+* **release:** publish ([b173e4f](https://github.com/bluelovers/idea-run-typescript/commit/b173e4ff2276ef49f7fa3fec2d473fba89514142))
+* update script ([f18bf1c](https://github.com/bluelovers/idea-run-typescript/commit/f18bf1cdfcf5af8293f5e166834bee71ce3ec84d))
+* **release:** publish ([e36bc43](https://github.com/bluelovers/idea-run-typescript/commit/e36bc43a675510f1892c1ec8982c723859cac83a))
+* add miss file ([19676d0](https://github.com/bluelovers/idea-run-typescript/commit/19676d012dbe30d6a9d6ae49166ef45799bd5e9b))
+* update config ([9f78f45](https://github.com/bluelovers/idea-run-typescript/commit/9f78f45c391554bd784bba047684f03e1a0eedcd))
+* show as deprecated ([cd6211a](https://github.com/bluelovers/idea-run-typescript/commit/cd6211a788db687b221969926a5ff7ffce6fa3ba))
+* show as deprecated ([6093855](https://github.com/bluelovers/idea-run-typescript/commit/609385509c2620ba159c51e7d6f26a7c7231a441))
+* add .editorconfig ([d19b52f](https://github.com/bluelovers/idea-run-typescript/commit/d19b52ffd0a7dda35ba9a8fff726af135d90429c))
+
+
+### 🔖　Miscellaneous
+
+* https://github.com/bluelovers/idea-run-typescript/pull/14#issuecomment-678684547 ([4d9de1d](https://github.com/bluelovers/idea-run-typescript/commit/4d9de1d1ff7feae329028adcccea711d03aef26d)), closes [/github.com/bluelovers/idea-run-typescript/pull/14#issuecomment-678684547](https://github.com//github.com/bluelovers/idea-run-typescript/pull/14/issues/issuecomment-678684547)
+* make `TsDebugProgramRunner` can be fully replace `DebugTsAction` ([51cbdd1](https://github.com/bluelovers/idea-run-typescript/commit/51cbdd1dc7b2f66b929f61e458e04f24a35511fc))
+
+
+### BREAKING CHANGE
+
+* remove envs2
+* not support old ide version
+
+### TODO
+
+* support `ctrl+c`
+
+
+
+
+
 ## 2020.8.2-4.0 (2020-08-23)
 
 
