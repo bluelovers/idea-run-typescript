@@ -12,6 +12,7 @@ import com.intellij.openapi.util.text.StringUtil
 import com.intellij.util.ThrowableConsumer
 import io.plugin.tsnode.execution.TsRunConfiguration
 import io.plugin.tsnode.execution.TsRunSettings
+import io.plugin.tsnode.execution.TsUtil
 import java.nio.charset.Charset
 
 object MyNodeCommandLineUtil
@@ -28,7 +29,7 @@ object MyNodeCommandLineUtil
 			 */
 			val v = runConfig.runSettings.envData.envs.get("NODEJS_CONSOLE_USE_TERMINAL")
 
-			if (!v.isNullOrEmpty() && !v.isBlank())
+			if (!TsUtil.isEmptyOrSpacesOrNull(v))
 			{
 				usePtyWithTerminalConsole = v.toString().toBoolean()
 			}
