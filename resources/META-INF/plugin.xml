@@ -90,6 +90,7 @@ Windows 10 10.0
   <depends>com.intellij.modules.lang</depends>
   <depends optional="true">NodeJS</depends>
   <depends optional="true">JavaScript</depends>
+  <depends optional="true">JavaScriptDebugger</depends>
   <extensions defaultExtensionNs="com.intellij">
     <configurationType implementation="io.plugin.tsnode.execution.TsConfigurationType"/>
     <programRunner implementation="io.plugin.tsnode.execution.TsProgramRunner"/>
