@@ -65,6 +65,10 @@ buildPlugin {
 
 }
 
+verifyPlugin {
+
+}
+
 repositories {
     jcenter()
 }
