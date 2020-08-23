@@ -1,4 +1,4 @@
-import { __root } from "./lib/util";
+import { __root, console } from "./lib/util";
 import pkg from '../package.json'
 import { copyFileSync, copySync } from 'fs-extra';
 import { join, relative } from "path";
@@ -12,17 +12,13 @@ let target2 = join(__root, 'releases', 'idea-run-typescript.zip');
 let label = [`copy`, relative(__root, file), `=>`, relative(__root, target)].join(' ');
 let label2 = [`copy`, relative(__root, file2), `=>`, relative(__root, target2)].join(' ');
 
-console.time(label);
-
 copySync(file, target, {
 	preserveTimestamps: true,
 	overwrite: true,
 	dereference: true,
 });
 
-console.timeEnd(label);
-
-console.time(label2);
+console.success(label);
 
 copySync(file2, target2, {
 	preserveTimestamps: true,
@@ -30,4 +26,4 @@ copySync(file2, target2, {
 	dereference: true,
 });
 
-console.timeEnd(label2);
+console.success(label2);

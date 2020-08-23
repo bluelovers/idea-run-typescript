@@ -4,6 +4,9 @@ import { readFileSync, writeFileSync } from "fs";
 import { convert } from 'xmlbuilder2';
 import pluginPkg from '../../package.json'
 import { inspect } from "util";
+import { console } from "debug-color2";
+
+export { console }
 
 export const __root = join(__dirname, '../../');
 
@@ -43,6 +46,8 @@ export function updateGradleProperties(pkg: typeof pluginPkg)
 
 	dp.set('version', pkg.version);
 	dp.set('pluginVersion', pkg.version);
+
+	dp.set('kotlin_version', pkg.engines.kotlin);
 
 	console.log(`update`, relative(__root, file));
 
