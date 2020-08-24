@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2020.8.25-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.08.24-0...idea-run-typescript@2020.8.25-0) (2020-08-24)
+
+
+### ✨　Features
+
+* use withConsoleMode(true) ([1cd0c66](https://github.com/bluelovers/idea-run-typescript/commit/1cd0c668f736cd6bcc0779988809f85c9ee59c82))
+
+
+### 📚　Documentation
+
+* **plugin.xml:** add JavaScriptDebugger by https://github.com/bluelovers/idea-run-typescript/pull/10 ([3dc9a63](https://github.com/bluelovers/idea-run-typescript/commit/3dc9a63670fb238c7b92c5438e069015d0639825))
+
+
+### ⚙️　Continuous Integration
+
+* update check ([05c5c59](https://github.com/bluelovers/idea-run-typescript/commit/05c5c590ccbc0bf94922ecaa5c9572e47ab196f3))
+
+
+
+
+
 ## [2020.8.24-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.08.20-0...idea-run-typescript@2020.8.24-0) (2020-08-23)
 
 
