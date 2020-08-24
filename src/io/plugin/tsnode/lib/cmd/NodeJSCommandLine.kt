@@ -43,12 +43,12 @@ object MyNodeCommandLineUtil
 			usePtyWithTerminalConsole = Registry.`is`("nodejs.console.use.terminal")
 		}
 
-		val commandLine = NodeCommandLineUtil.createCommandLine(usePtyWithTerminalConsole)
+		var commandLine = NodeCommandLineUtil.createCommandLine(usePtyWithTerminalConsole)
 
 		if (NodeCommandLineUtil.isTerminalCommandLine(commandLine))
 		{
 			// do something
-			(commandLine as PtyCommandLine)
+			(commandLine as PtyCommandLine).withConsoleMode(true);
 		}
 		else
 		{
@@ -125,7 +125,7 @@ object MyNodeCommandLineUtil
 
 	fun createProcessHandler(commandLine: GeneralCommandLine, project: Project?, debugConfigurator: CommandLineDebugConfigurator?): OSProcessHandler
 	{
-		val processHandler = if (NodeCommandLineUtil.isTerminalCommandLine(commandLine))
+		val processHandler = if (false && NodeCommandLineUtil.isTerminalCommandLine(commandLine))
 		{
 			val p = NodeCommandLineUtil.createKillableColoredProcessHandler(commandLine, true)
 
