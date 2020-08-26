@@ -11,6 +11,8 @@ buildscript {
 plugins {
     id 'org.jetbrains.intellij' version '0.4.21'
     id 'net.researchgate.release' version '2.6.0'
+    id "org.jetbrains.kotlin.jvm" version "1.3.71"
+    id "idea"
 }
 
 group pluginGroup
@@ -30,14 +32,29 @@ sourceSets {
     main.resources.srcDirs = ['resources']
 }
 
-sourceCompatibility = 1.8
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+idea {
+    project {
+        jdkName = javaVersion
+        languageLevel = javaVersion
+    }
+}
 
 compileKotlin {
-    kotlinOptions.jvmTarget = 1.8
+    kotlinOptions.jvmTarget = javaVersion
 }
 
 compileTestKotlin {
-    kotlinOptions.jvmTarget = 1.8
+    kotlinOptions.jvmTarget = javaVersion
 }
 
 intellij {
@@ -67,17 +84,6 @@ buildPlugin {
 
 verifyPlugin {
 
-}
-
-repositories {
-    jcenter()
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-
-    testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
 patchPluginXml {

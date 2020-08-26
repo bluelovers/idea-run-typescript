@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="idea-run-typescript" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="io.plugin.tsnode" external.system.module.version="2020.08.23.0" type="PLUGIN_MODULE" version="4">
+<module external.linked.project.id="idea-run-typescript" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="io.plugin.tsnode" external.system.module.version="2020.08.26-0" type="PLUGIN_MODULE" version="4">
   <component name="DevKit.ModuleBuildProperties" url="file://$MODULE_DIR$/resources/META-INF/plugin.xml" />
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
