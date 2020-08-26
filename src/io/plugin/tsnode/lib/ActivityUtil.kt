@@ -14,9 +14,9 @@ object ActivityUtil
 
 		if (delayCount > 0)
 		{
-			ToolWindowManager.getInstance(project).invokeLater(Runnable {
-				this.runLater(project, delayCount - 1, action)
-			})
+			ToolWindowManager.getInstance(project).invokeLater {
+				runLater(project, delayCount - 1, action)
+			}
 		}
 		else
 		{
