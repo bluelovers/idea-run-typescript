@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2020.8.26-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.08.25-0...idea-run-typescript@2020.8.26-0) (2020-08-26)
+
+
+### 🗑　Reverts
+
+* pick changes from https://github.com/bluelovers/idea-run-typescript/pull/14 ([bd11dbe](https://github.com/bluelovers/idea-run-typescript/commit/bd11dbe814912c924dbe0b0ada24632061d8422b))
+
+
+
+
+
 ## [2020.8.25-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.08.24-0...idea-run-typescript@2020.8.25-0) (2020-08-24)
 
 
