@@ -76,7 +76,7 @@ Windows 10 10.0
     ]]></description>
   <change-notes><![CDATA[
   <ul>
-  <li>via jetbrains <a href="https://github.com/bluelovers/idea-run-typescript/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+  <li><a href="https://github.com/bluelovers/idea-run-typescript/blob/master/CHANGELOG.md">CHANGELOG</a></li>
   <li>Build Plugin in IntelliJ IDEA 2019.3.5#IU-193.7288.26</li>
   <li>support debug mode</li>
   <li>allow use env var `NODEJS_CONSOLE_USE_TERMINAL` for control Registry `nodejs.console.use.terminal` in Run Configuration bu this plugin</li>
