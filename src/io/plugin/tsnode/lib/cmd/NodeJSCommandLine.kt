@@ -6,17 +6,21 @@ import com.intellij.execution.process.OSProcessHandler
 import com.intellij.execution.process.ProcessTerminatedListener
 import com.intellij.javascript.debugger.CommandLineDebugConfigurator
 import com.intellij.javascript.nodejs.NodeCommandLineUtil
+import com.intellij.javascript.nodejs.NodeCommandLineUtil.shouldUseTerminalConsole
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.registry.Registry
 import com.intellij.openapi.util.text.StringUtil
+import com.intellij.terminal.TerminalExecutionConsole
 import com.intellij.util.ThrowableConsumer
 import io.plugin.tsnode.execution.TsRunConfiguration
 import io.plugin.tsnode.execution.TsRunSettings
 import io.plugin.tsnode.execution.TsUtil
+import io.plugin.tsnode.lib.TsLog
 import java.nio.charset.Charset
 
 object MyNodeCommandLineUtil
 {
+	val LOG = TsLog(javaClass)
 
 	fun createCommandLine(runConfig: TsRunConfiguration?, project: Project?): GeneralCommandLine
 	{
@@ -125,7 +129,7 @@ object MyNodeCommandLineUtil
 
 	fun createProcessHandler(commandLine: GeneralCommandLine, project: Project?, debugConfigurator: CommandLineDebugConfigurator?): OSProcessHandler
 	{
-		val processHandler = if (false && NodeCommandLineUtil.isTerminalCommandLine(commandLine))
+		val processHandler = if (NodeCommandLineUtil.isTerminalCommandLine(commandLine))
 		{
 			val p = NodeCommandLineUtil.createKillableColoredProcessHandler(commandLine, true)
 
