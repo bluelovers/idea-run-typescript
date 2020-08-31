@@ -31,6 +31,8 @@ export function updatePluginXml(pkg: typeof pluginPkg)
 			prettyPrint: true,
 		})
 		.replace(/^\<\?xml version="1\.0"\?\>\s*/, '')
+		.concat('\n')
+		.replace(/\n\n+$/, '\n')
 	;
 
 	console.log(`update`, `resources/META-INF/plugin.xml`);
