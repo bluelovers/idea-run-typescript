@@ -72,7 +72,7 @@ intellij {
 runIde {
 //    systemProperty("idea.auto.reload.plugins", true)
 
-//    ideDirectory "C:\\Users\\User\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-2\\202.6948.46"
+//    ideDirectory "C:\\Users\\User\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-2\\202.6948.73"
 //    ideDirectory "../../.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/201.8538.32/"
 
     jvmArgs '-Xmx2G'

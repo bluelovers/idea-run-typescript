@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2020.9.1-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.08.26-0...idea-run-typescript@2020.9.1-0) (2020-08-31)
+
+
+### 🐛　Bug Fixes
+
+* use `createKillableColoredProcessHandler` again ([64d797c](https://github.com/bluelovers/idea-run-typescript/commit/64d797c7b25aeb340216480ea0af940b921e66a8))
+* `\n` ([968d7ac](https://github.com/bluelovers/idea-run-typescript/commit/968d7ac95411f485a0a66f388ae698393baf376f))
+
+
+### 📚　Documentation
+
+* fix change-notes ([6f52a90](https://github.com/bluelovers/idea-run-typescript/commit/6f52a90976bd64ede50465a9a18d296be112ceac))
+
+
+### 🔖　Miscellaneous
+
+* update setting ([05aed69](https://github.com/bluelovers/idea-run-typescript/commit/05aed694a9f35a84f4f6e150c54c6611b47b2eab))
+
+
+
+
+
 ## [2020.8.26-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.08.25-0...idea-run-typescript@2020.8.26-0) (2020-08-26)
 
 
