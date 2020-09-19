@@ -22,10 +22,12 @@ jobs:
         run: |
           ./gradlew buildPlugin
           ./gradlew verifyPlugin
-#      - uses: thepieterdc/intellij-plugin-verifier-action@v1.1.2
-#        with:
-#          plugin: '/build/distributions/*.*'
-#          versions: |
-#            2019.3.3
-#            2020.2
-#            LATEST-EAP-SNAPSHOT
+      - uses: ChrisCarini/intellij-platform-plugin-verifier-action@v1.0.3
+        with:
+          ide-versions: |
+            ideaIC:2019.3.3
+            ideaIU:2019.3.3
+            ideaIC:2020.2
+            ideaIU:2020.2
+            ideaIC:LATEST-EAP-SNAPSHOT
+            ideaIU:LATEST-EAP-SNAPSHOT
