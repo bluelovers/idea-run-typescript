@@ -51,6 +51,6 @@
   "peerDependencies": {},
   "engines": {
     "idea-version": "193.4932.9",
-    "kotlin": "1.4.0"
+    "kotlin": "1.4.10"
   }
 }
