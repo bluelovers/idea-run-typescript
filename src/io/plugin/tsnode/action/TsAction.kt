@@ -88,7 +88,7 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 	{
 		//LOG.info("""[update]""")
 
-		val virtualFile = event.getData(VIRTUAL_FILE) as VirtualFile
+		val virtualFile = event.getData(VIRTUAL_FILE) as VirtualFile?
 
 		//val conf = getExistedConfiguration(event)
 		//LOG.info("[update] ${conf}")
@@ -98,7 +98,7 @@ event.inputEvent.modifiers: ${event.inputEvent.modifiers.toString()}
 			if (!event.presentation.isEnabledAndVisible)
 			{
 				event.presentation.isEnabledAndVisible = true
-				event.presentation.text = _getText(virtualFile)
+				event.presentation.text = _getText(virtualFile!!)
 			}
 		}
 		else if (event.presentation.isEnabledAndVisible)
