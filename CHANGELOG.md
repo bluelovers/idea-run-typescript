@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2021.6.6-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.09.01-0...idea-run-typescript@2021.6.6-0) (2021-06-06)
+
+
+### 🐛　Bug Fixes
+
+* null cannot be cast to non-null type https://github.com/bluelovers/idea-run-typescript/issues/24 ([1c948ab](https://github.com/bluelovers/idea-run-typescript/commit/1c948ab309d883b57cb5fd0c45b081d30e141b79))
+
+
+### ✨　Features
+
+* update kotlin to `1.4.10` ([7b8a5b5](https://github.com/bluelovers/idea-run-typescript/commit/7b8a5b5e96a411dfdf2c40dc2c59fcee23315e6a))
+
+
+### 🔖　Miscellaneous
+
+* Delete intellij-plugin-verifier.yml ([421ae9e](https://github.com/bluelovers/idea-run-typescript/commit/421ae9e1daf3a574154ba860d5402aac117888ff))
+* Enable and update GitHub Action to test both IC & IU ([6473496](https://github.com/bluelovers/idea-run-typescript/commit/6473496f41ddc5e6d2379c1d561cf226b171647b))
+
+
+
+
+
 ## [2020.9.1-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.08.26-0...idea-run-typescript@2020.9.1-0) (2020-08-31)
 
 
