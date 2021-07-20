@@ -52,7 +52,7 @@ object MyNodeCommandLineUtil
 		if (NodeCommandLineUtil.isTerminalCommandLine(commandLine))
 		{
 			// do something
-			(commandLine as PtyCommandLine).withConsoleMode(true);
+			//(commandLine as PtyCommandLine).withConsoleMode(true);
 		}
 		else
 		{
@@ -121,7 +121,8 @@ object MyNodeCommandLineUtil
 
 	fun configureCharset(commandLine: GeneralCommandLine)
 	{
-		if (commandLine.charset.toString() == "x-windows-950" || commandLine.charset.toString() == "x-windows-936")
+		val charset = commandLine.charset.toString()
+		if (charset == "x-windows-950" || charset == "x-windows-936")
 		{
 			commandLine.withCharset(Charset.forName("UTF-8"))
 		}
