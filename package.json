@@ -18,6 +18,7 @@
   "scripts": {
     "pretest": "echo pretest",
     "test": "echo test",
+    "test:ide": "gradlew runIde",
     "posttest": "echo posttest",
     "prebuild": "yarn run plugin:sync:config",
     "build": "gradlew buildPlugin --warning-mode all",
