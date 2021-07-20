@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2021.7.20-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2021.06.06-0...idea-run-typescript@2021.7.20-0) (2021-07-20)
+
+
+### 🐛　Bug Fixes
+
+* **console:** https://github.com/bluelovers/idea-run-typescript/issues/25#issuecomment-883005401 ([3fbea78](https://github.com/bluelovers/idea-run-typescript/commit/3fbea78130e29ba2ae7091259611f40b38da0238)), closes [/github.com/bluelovers/idea-run-typescript/issues/25#issuecomment-883005401](https://github.com//github.com/bluelovers/idea-run-typescript/issues/25/issues/issuecomment-883005401)
+
+
+### ♻️　Chores
+
+* update script ([292fbd0](https://github.com/bluelovers/idea-run-typescript/commit/292fbd06b908af4a558fe6e4a5f29c29e2bd10f6))
+
+
+
+
+
 ## [2021.6.6-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2020.09.01-0...idea-run-typescript@2021.6.6-0) (2021-06-06)
 
 
