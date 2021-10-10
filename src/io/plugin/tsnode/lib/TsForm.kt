@@ -103,25 +103,7 @@ class TsForm
 			{
 				val textField: JTextField? = field.textField
 
-				if (textField != null && textField is ComponentWithEmptyText)
-				{
-					val emptyText = textField.emptyText
-
-					/**
-					 * @FIXME 不知道為什麼要寫成這樣才能成功更新文字
-					 */
-					if (StringUtil.isEmptyOrSpaces(emptyText?.text))
-					{
-						if (!StringUtil.isEmptyOrSpaces(options?.emptyText))
-						{
-							emptyText?.text = options?.emptyText as String
-						}
-						else if (!StringUtil.isEmptyOrSpaces(label))
-						{
-							emptyText?.text = Util.stripTitle(label)
-						}
-					}
-				}
+				Util.initTextFieldEmptyText(textField, label, options?.emptyText)
 			}
 		}
 
@@ -183,25 +165,7 @@ class TsForm
 			{
 				val textField: JTextField? = field.textField
 
-				if (textField != null && textField is ComponentWithEmptyText)
-				{
-					val emptyText = textField.emptyText
-
-					/**
-					 * @FIXME 不知道為什麼要寫成這樣才能成功更新文字
-					 */
-					if (StringUtil.isEmptyOrSpaces(emptyText?.text))
-					{
-						if (!StringUtil.isEmptyOrSpaces(options?.emptyText))
-						{
-							emptyText?.text = options?.emptyText as String
-						}
-						else if (!StringUtil.isEmptyOrSpaces(label))
-						{
-							emptyText?.text = Util.stripTitle(label)
-						}
-					}
-				}
+				Util.initTextFieldEmptyText(textField, label, options?.emptyText)
 			}
 		}
 
@@ -276,25 +240,7 @@ class TsForm
 			{
 				val textField: JTextField? = field.textField
 
-				if (textField != null && textField is ComponentWithEmptyText)
-				{
-					val emptyText = textField.emptyText
-
-					/**
-					 * @FIXME 不知道為什麼要寫成這樣才能成功更新文字
-					 */
-					if (StringUtil.isEmptyOrSpaces(emptyText?.text))
-					{
-						if (!StringUtil.isEmptyOrSpaces(options?.emptyText))
-						{
-							emptyText?.text = options?.emptyText as String
-						}
-						else if (!StringUtil.isEmptyOrSpaces(label))
-						{
-							emptyText?.text = Util.stripTitle(label)
-						}
-					}
-				}
+				Util.initTextFieldEmptyText(textField, label, options?.emptyText)
 			}
 		}
 
@@ -381,25 +327,7 @@ class TsForm
 			{
 				val textField: JTextField? = field.textField
 
-				if (textField != null && textField is ComponentWithEmptyText)
-				{
-					val emptyText = textField.emptyText
-
-					/**
-					 * @FIXME 不知道為什麼要寫成這樣才能成功更新文字
-					 */
-					if (StringUtil.isEmptyOrSpaces(emptyText?.text))
-					{
-						if (!StringUtil.isEmptyOrSpaces(options?.emptyText))
-						{
-							emptyText?.text = options?.emptyText as String
-						}
-						else if (!StringUtil.isEmptyOrSpaces(label))
-						{
-							emptyText?.text = Util.stripTitle(label)
-						}
-					}
-				}
+				Util.initTextFieldEmptyText(textField, label, options?.emptyText)
 			}
 		}
 
@@ -530,6 +458,29 @@ class TsForm
 			return title
 				.replace("&(\\w)".toRegex(), "$1")
 				.replace(":\\s*$".toRegex(), "")
+		}
+
+		fun initTextFieldEmptyText(textField: JTextField?, label: String, defaultEmptyText: String?)
+		{
+			if (textField != null && textField is ComponentWithEmptyText)
+			{
+				val emptyText = textField.emptyText
+
+				/**
+				 * @FIXME 不知道為什麼要寫成這樣才能成功更新文字
+				 */
+				if (emptyText != null && StringUtil.isEmptyOrSpaces(emptyText.text))
+				{
+					if (!StringUtil.isEmptyOrSpaces(defaultEmptyText))
+					{
+						emptyText.text = defaultEmptyText as String
+					}
+					else if (!StringUtil.isEmptyOrSpaces(label))
+					{
+						emptyText.text = Util.stripTitle(label)
+					}
+				}
+			}
 		}
 	}
 }
