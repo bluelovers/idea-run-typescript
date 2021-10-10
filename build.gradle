@@ -74,7 +74,7 @@ runIde {
 
 //    ideDirectory "C:\\Users\\User\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-2\\202.6948.73"
 //    ideDirectory "../../.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/201.8538.32/"
-//    ideDirectory "C:\\Users\\User\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-2\\212.4638.10"
+//    ideDirectory "V:/AppData/Local/JetBrains/Toolbox/apps/IDEA-U/ch-0/213.4631.20"
 
     jvmArgs '-Xmx2G'
 }

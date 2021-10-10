@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2021.10.11-1](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2021.07.20-0...idea-run-typescript@2021.10.11-1) (2021-10-10)
+
+
+### ✨　Features
+
+* support ts-node esm loader [#27](https://github.com/bluelovers/idea-run-typescript/issues/27) ([2c8bad4](https://github.com/bluelovers/idea-run-typescript/commit/2c8bad442636b26edb7d2215eb7d3976bd42fca7))
+
+
+### 📦　Code Refactoring
+
+* initTextFieldEmptyText ([2c91e2f](https://github.com/bluelovers/idea-run-typescript/commit/2c91e2ff097d519652bea9911294516ffe5e9ed5))
+
+
+
+
+
 ## [2021.7.20-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2021.06.06-0...idea-run-typescript@2021.7.20-0) (2021-07-20)
 
 

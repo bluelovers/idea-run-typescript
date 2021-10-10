@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/idea-run-typescript.iml" filepath="$PROJECT_DIR$/idea-run-typescript.iml" group="idea-run-typescript" />
+      <module fileurl="file://$PROJECT_DIR$/idea-run-typescript.iml" filepath="$PROJECT_DIR$/idea-run-typescript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/idea-run-typescript.main.iml" filepath="$PROJECT_DIR$/.idea/modules/idea-run-typescript.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/idea-run-typescript.test.iml" filepath="$PROJECT_DIR$/.idea/modules/idea-run-typescript.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/idea-run-typescript_main.iml" filepath="$PROJECT_DIR$/.idea/modules/idea-run-typescript_main.iml" group="idea-run-typescript" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/idea-run-typescript_test.iml" filepath="$PROJECT_DIR$/.idea/modules/idea-run-typescript_test.iml" group="idea-run-typescript" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/io.plugin.tsnode-idea-run-typescript_main.iml" filepath="$PROJECT_DIR$/.idea/modules/io.plugin.tsnode-idea-run-typescript_main.iml" group="idea-run-typescript" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/io.plugin.tsnode-idea-run-typescript_test.iml" filepath="$PROJECT_DIR$/.idea/modules/io.plugin.tsnode-idea-run-typescript_test.iml" group="idea-run-typescript" />
     </modules>
   </component>
 </project>

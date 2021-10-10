@@ -1,6 +1,6 @@
 {
   "name": "idea-run-typescript",
-  "version": "2021.07.20-0",
+  "version": "2021.10.11-1",
   "private": true,
   "description": "[![jetbrains.svg](jetbrains.svg)](https://www.jetbrains.com/?from=novel-segment)",
   "keywords": [],
@@ -18,10 +18,10 @@
   "scripts": {
     "pretest": "echo pretest",
     "test": "echo test",
-    "test:ide": "gradlew runIde",
+    "test:ide": "dotenv -- gradlew runIde",
     "posttest": "echo posttest",
     "prebuild": "yarn run plugin:sync:config",
-    "build": "gradlew buildPlugin --warning-mode all",
+    "build": "dotenv -- gradlew buildPlugin --warning-mode all",
     "postbuild": "ts-node ./scripts/copy-build-plugin.ts",
     "version": "ts-node ./scripts/update-version.ts",
     "prepublishOnly:update": "yarn run ncu && yarn run sort-package-json",
@@ -41,6 +41,7 @@
   "dependencies": {
     "debug-color2": "^1.2.3",
     "dot-properties-loader": "^1.0.5",
+    "dotenv-cli": "^4.0.0",
     "fs-extra": "^9.0.1",
     "xmlbuilder2": "^2.3.1"
   },

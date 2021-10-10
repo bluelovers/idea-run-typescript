@@ -1,7 +1,7 @@
 <idea-plugin url="https://github.com/bluelovers/idea-run-typescript">
   <id>io.plugin.tsnode</id>
   <name>Run Configuration for TypeScript</name>
-  <version>2021.07.20-0</version>
+  <version>2021.10.11-1</version>
   <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">bluelovers</vendor>
   <category>JavaScript</category>
   <idea-version since-build="193.4932.9"/>
@@ -77,9 +77,8 @@ Windows 10 10.0
   <change-notes><![CDATA[
   <ul>
   <li><a href="https://github.com/bluelovers/idea-run-typescript/blob/master/CHANGELOG.md">CHANGELOG</a></li>
-  <li>Build Plugin in IntelliJ IDEA 2019.3.5#IU-193.7288.26</li>
-  <li>support debug mode</li>
-  <li>allow use env var `NODEJS_CONSOLE_USE_TERMINAL` for control Registry `nodejs.console.use.terminal` in Run Configuration bu this plugin</li>
+  <li>Build Plugin in IntelliJ IDEA 2019.3.3 (Ultimate Edition) Build #IU-193.6494.35, built on February 11, 2020</li>
+  <li>ssupport ts-node esm loader</li>
   </ul>
   ]]></change-notes>
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
