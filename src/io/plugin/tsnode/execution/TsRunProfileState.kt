@@ -23,6 +23,7 @@ import com.intellij.lang.javascript.buildTools.base.JsbtUtil.foldCommandLine
 import com.intellij.openapi.util.Disposer
 import com.intellij.util.ThrowableConsumer
 import io.plugin.tsnode.execution.TsUtil.isEmptyOrSpacesOrNull
+import io.plugin.tsnode.execution.TsUtil.tsnodePathEsmLoader
 import io.plugin.tsnode.lib.cmd.MyNodeCommandLineUtil
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.concurrency.Promise
@@ -52,29 +53,47 @@ class TsRunProfileState(protected var project: Project,
 		val nodeOptionsList = ParametersListUtil.parse(runSettings.interpreterOptions.trim())
 		commandLine.addParameters(nodeOptionsList)
 
+		val enabledTsNodeEsmLoader = runSettings.enabledTsNodeEsmLoader
+
 		val tsnode = tsnodePath(runConfig)
 
-		if (isEmptyOrSpacesOrNull(tsnode))
+		if (enabledTsNodeEsmLoader)
 		{
-			commandLine.addParameter("--require")
-			commandLine.addParameter("ts-node/register")
-
-			if (!StringUtil.isEmptyOrSpaces(runSettings.tsconfigFile))
+			if (isEmptyOrSpacesOrNull(tsnode))
 			{
-				commandLine.environment.putIfAbsent("TS_NODE_PROJECT", runSettings.tsconfigFile)
+				commandLine.addParameter("--loader")
+				commandLine.addParameter("ts-node/esm")
+			}
+			else
+			{
+				commandLine.addParameter("--loader")
+				commandLine.addParameter(tsnodePathEsmLoader(runConfig))
 			}
 		}
 		else
 		{
-			commandLine.addParameter(tsnode)
-
-			val typescriptOptionsList = ParametersListUtil.parse(runSettings.extraTypeScriptOptions.trim())
-			commandLine.addParameters(typescriptOptionsList)
-
-			if (!StringUtil.isEmptyOrSpaces(runSettings.tsconfigFile))
+			if (isEmptyOrSpacesOrNull(tsnode))
 			{
-				commandLine.addParameter("--project")
-				commandLine.addParameter(runSettings.tsconfigFile)
+				commandLine.addParameter("--require")
+				commandLine.addParameter("ts-node/register")
+
+				if (!StringUtil.isEmptyOrSpaces(runSettings.tsconfigFile))
+				{
+					commandLine.environment.putIfAbsent("TS_NODE_PROJECT", runSettings.tsconfigFile)
+				}
+			}
+			else
+			{
+				commandLine.addParameter(tsnode)
+
+				val typescriptOptionsList = ParametersListUtil.parse(runSettings.extraTypeScriptOptions.trim())
+				commandLine.addParameters(typescriptOptionsList)
+
+				if (!StringUtil.isEmptyOrSpaces(runSettings.tsconfigFile))
+				{
+					commandLine.addParameter("--project")
+					commandLine.addParameter(runSettings.tsconfigFile)
+				}
 			}
 		}
 

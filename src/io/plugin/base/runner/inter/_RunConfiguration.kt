@@ -134,6 +134,16 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 		runSettings.interpreterOptions = value
 	}
 
+	fun getEnabledTsNodeEsmLoader(): Boolean
+	{
+		return runSettings.enabledTsNodeEsmLoader
+	}
+
+	fun setEnabledTsNodeEsmLoader(value: Boolean?)
+	{
+		runSettings.enabledTsNodeEsmLoader = value ?: false
+	}
+
 	/*
 	fun getEnvData(): EnvironmentVariablesData
 	{
@@ -212,6 +222,8 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 		setScriptName(JDOMExternalizerUtil.readField(element, "scriptName"))
 		setWorkingDirectory(JDOMExternalizerUtil.readField(element, "workingDirectory"))
 
+		runSettings.enabledTsNodeEsmLoader = JDOMExternalizerUtil.readField(element, "enabledTsNodeEsmLoader")?.toBoolean() ?: false
+
 		runSettings.interpreterOptions = JDOMExternalizerUtil.readField(element, "interpreterOptions") ?: ""
 
 		runSettings.tsconfigFile = JDOMExternalizerUtil.readField(element, "tsconfigFile") ?: ""
@@ -238,6 +250,9 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 		EnvironmentVariablesComponent.writeExternal(element, envs)
 
 		JDOMExternalizerUtil.writeField(element, "interpreterRef", getInterpreterRef().referenceName)
+
+		JDOMExternalizerUtil.writeField(element, "enabledTsNodeEsmLoader", getEnabledTsNodeEsmLoader().toString())
+
 		JDOMExternalizerUtil.writeField(element, "interpreterOptions", getInterpreterOptions())
 		JDOMExternalizerUtil.writeField(element, "workingDirectory", getWorkingDirectory())
 		JDOMExternalizerUtil.writeField(element, "tsconfigFile", runSettings.tsconfigFile)

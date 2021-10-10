@@ -16,6 +16,7 @@ import com.intellij.util.ui.ComponentWithEmptyText
 import com.intellij.util.ui.SwingHelper
 import io.plugin.base.runner._ConfigurationEditor
 import io.plugin.tsnode.lib.TsForm
+import io.plugin.tsnode.lib.TsForm.Util.createTsNodeEsmLoaderSettingPanel
 import io.plugin.tsnode.lib.TsLog
 import javax.swing.JComponent
 import javax.swing.JPanel
@@ -92,6 +93,15 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	override val form: JPanel
 
+	val compTsNodeEsmLoaderSettingPanel = createTsNodeEsmLoaderSettingPanel()
+
+	override var enabledTsNodeEsmLoader
+		get() = compTsNodeEsmLoaderSettingPanel.checkBox.isSelected()
+		set(value)
+		{
+			compTsNodeEsmLoaderSettingPanel.checkBox.setSelected(value)
+		}
+
 	init
 	{
 		//LOG.info("[init] $this")
@@ -115,6 +125,8 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			.addLabeledComponent(programParametersField)
 
 			.addLabeledComponent(envVars)
+
+			.addLabeledComponent("ESM Loader", compTsNodeEsmLoaderSettingPanel)
 
 			.panel
 	}
@@ -225,6 +237,9 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 		config.runSettings = config.runSettings.copy(
 			interpreterRef = interpreterField.interpreterRef,
+
+			enabledTsNodeEsmLoader = enabledTsNodeEsmLoader,
+
 			interpreterOptions = interpreterOptionsField.text,
 			workingDirectory = workingDirectoryField.text,
 			envData = envVars.data,
@@ -254,6 +269,9 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 		val runSettings = config.runSettings
 		interpreterField.interpreterRef = runSettings.interpreterRef
+
+		enabledTsNodeEsmLoader = runSettings.enabledTsNodeEsmLoader
+
 		interpreterOptionsField.text = runSettings.interpreterOptions
 		workingDirectoryField.text = FileUtil.toSystemDependentName(runSettings.workingDirectory)
 

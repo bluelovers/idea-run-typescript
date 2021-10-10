@@ -6,6 +6,8 @@ package io.plugin.tsnode.execution
 interface TsRunConfigurationParams
 {
 
+	var enabledTsNodeEsmLoader: Boolean
+
 	var interpreterOptions: String
 
 	var workingDirectory: String

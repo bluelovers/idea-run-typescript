@@ -7,6 +7,9 @@ import com.intellij.javascript.nodejs.util.NodePackageRef
 
 data class TsRunSettings(
 	var interpreterRef: NodeJsInterpreterRef = NodeJsInterpreterRef.createProjectRef(),
+
+	var enabledTsNodeEsmLoader: Boolean = false,
+
 	var interpreterOptions: String = "",
 
 	var workingDirectory: String = "",

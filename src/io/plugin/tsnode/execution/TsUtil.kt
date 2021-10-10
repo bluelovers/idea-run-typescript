@@ -223,6 +223,23 @@ object TsUtil
 		return true
 	}
 
+	fun tsnodePathEsmLoader(runConfig: TsRunConfiguration): String
+	{
+		val pkg = runConfig.selectedTsNodePackage()
+		var file: Path? = null
+
+		if (!isEmptyOrSpacesOrNull(pkg))
+		{
+			file = TsUtil.NodePackagePathResolve(pkg!!, """esm.mjs""").toAbsolutePath();
+
+			return """file://${file.toString()}"""
+		}
+
+		//LOG.info("""[tsnodePath] ${file}""");
+
+		return ""
+	}
+
 	fun tsnodePath(runConfig: TsRunConfiguration): String
 	{
 		val pkg = runConfig.selectedTsNodePackage()

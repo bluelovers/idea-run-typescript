@@ -5,9 +5,11 @@ import com.intellij.execution.configuration.EnvironmentVariablesTextFieldWithBro
 import com.intellij.openapi.fileChooser.FileChooserDescriptor
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.CheckBoxWithDescription
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.ui.RawCommandLineEditor
+import com.intellij.ui.components.JBCheckBox
 import com.intellij.util.ui.ComponentWithEmptyText
 import com.intellij.util.ui.FormBuilder
 import com.intellij.util.ui.StatusText
@@ -451,6 +453,36 @@ class TsForm
 					FileChooserDescriptorFactory.createSingleFolderDescriptor())
 
 			return field
+		}
+
+		/*
+		enum class EnumTsNodeEsmLoader {
+			NONE, ENABLE
+		}
+
+		fun createTsNodeEsmLoaderSettingField(): RadioButtonEnumModel<EnumTsNodeEsmLoader>
+		{
+			val group = ButtonGroup()
+			enumValues<EnumTsNodeEsmLoader>().map {
+				JBRadioButton(it.name)
+			}.forEach {
+				group.add(it)
+			}
+
+			return RadioButtonEnumModel.bindEnum(EnumTsNodeEsmLoader::class.java, group).apply {
+				selected = enumValues<EnumTsNodeEsmLoader>().first()
+			}
+		}
+		 */
+
+		fun createTsNodeEsmLoaderSettingPanel(): CheckBoxWithDescription
+		{
+			return createCheckBoxWithDescription("Enable ts-node build-in ESM loader (require: ts-node >= 10)", null)
+		}
+
+		fun createCheckBoxWithDescription(text: String, desc: String?): CheckBoxWithDescription
+		{
+			return CheckBoxWithDescription(JBCheckBox(text), desc)
 		}
 
 		fun stripTitle(title: String): String
