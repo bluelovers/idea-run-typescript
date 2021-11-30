@@ -233,8 +233,6 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 	{
 		//LOG.info("[applyEditorTo] $this $config")
 
-		val runSettings = config.runSettings
-
 		config.runSettings = config.runSettings.copy(
 			interpreterRef = interpreterField.interpreterRef,
 
