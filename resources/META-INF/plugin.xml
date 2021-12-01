@@ -1,7 +1,7 @@
 <idea-plugin url="https://github.com/bluelovers/idea-run-typescript">
   <id>io.plugin.tsnode</id>
   <name>Run Configuration for TypeScript</name>
-  <version>2021.10.11-1</version>
+  <version>2021.12.02-0</version>
   <vendor email="codelovers@users.sourceforge.net" url="https://github.com/bluelovers/idea-run-typescript">bluelovers</vendor>
   <category>JavaScript</category>
   <idea-version since-build="193.4932.9"/>
@@ -77,8 +77,7 @@ Windows 10 10.0
   <change-notes><![CDATA[
   <ul>
   <li><a href="https://github.com/bluelovers/idea-run-typescript/blob/master/CHANGELOG.md">CHANGELOG</a></li>
-  <li>Build Plugin in IntelliJ IDEA 2019.3.3 (Ultimate Edition) Build #IU-193.6494.35, built on February 11, 2020</li>
-  <li>ssupport ts-node esm loader</li>
+  <li>Build Plugin in Build #IU-213.5744.223, built on November 27, 2021</li>
   </ul>
   ]]></change-notes>
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

@@ -1,6 +1,6 @@
 {
   "name": "idea-run-typescript",
-  "version": "2021.10.11-1",
+  "version": "2021.12.02-0",
   "private": true,
   "description": "[![jetbrains.svg](jetbrains.svg)](https://www.jetbrains.com/?from=novel-segment)",
   "keywords": [],
@@ -53,6 +53,6 @@
   "peerDependencies": {},
   "engines": {
     "idea-version": "193.4932.9",
-    "kotlin": "1.4.10"
+    "kotlin": "1.6.0"
   }
 }
