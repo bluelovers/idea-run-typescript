@@ -39,4 +39,10 @@ class TsConfigurationFactory(configurationType: TsConfigurationType) : Configura
 	{
 		return RunConfigurationModule(project)
 	}
+
+	override fun getId(): String
+	{
+		return this.name
+	}
+
 }
