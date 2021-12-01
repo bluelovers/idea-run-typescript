@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2021.12.2-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2021.10.11-1...idea-run-typescript@2021.12.2-0) (2021-12-01)
+
+
+### 🐛　Bug Fixes
+
+* method 'getId' is deprecated [#29](https://github.com/bluelovers/idea-run-typescript/issues/29) ([7eec5aa](https://github.com/bluelovers/idea-run-typescript/commit/7eec5aa7eebc7640756a7da62d82ac559a5a78b4))
+
+
+### 📦　Code Refactoring
+
+* Variable 'runSettings' is never used ([8bd65d2](https://github.com/bluelovers/idea-run-typescript/commit/8bd65d2dfe6e388fb0ebefdc2b309084d73b4986))
+
+
+### 🛠　Build System
+
+* **deps:** #IU-213.5744.223, built on November 27, 2021 ([da990b5](https://github.com/bluelovers/idea-run-typescript/commit/da990b59115f52ec35e7316094566191aeb631e8)), closes [#IU-213](https://github.com/bluelovers/idea-run-typescript/issues/IU-213)
+
+
+
+
+
 ## [2021.10.11-1](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2021.07.20-0...idea-run-typescript@2021.10.11-1) (2021-10-10)
 
 
