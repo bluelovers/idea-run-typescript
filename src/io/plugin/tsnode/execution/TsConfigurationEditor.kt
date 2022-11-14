@@ -45,7 +45,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 
 	//val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", interpreterField, "ts-node")
 
-	val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", interpreterField, listOf("ts-node", "esm-ts-node"))
+	val tsnodePackageField = TsForm.LazyNodePackageField("&TypeScript Node package:", interpreterField, listOf("tsx", "esno", "ts-node", "esm-ts-node"))
 
 
 	val extraTypeScriptOptionsField = TsForm.LazyRawCommandLineEditor("E&xtra ts-node options:")
