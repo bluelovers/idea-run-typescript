@@ -6,9 +6,7 @@
       <script value="plugin:publish" />
     </scripts>
     <node-interpreter value="project" />
-    <envs>
-      <env name="JAVA_HOME" value="C:/Program Files/Java/jdk1.8.0_202" />
-    </envs>
+    <envs />
     <method v="2" />
   </configuration>
 </component>

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2022.11.14-1](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2021.12.02-0...idea-run-typescript@2022.11.14-1) (2022-11-14)
+
+
+
+### ✨　Features
+
+* add detect tsx / esno ([09aa303](https://github.com/bluelovers/idea-run-typescript/commit/09aa303f50121b0074c3d6161e94f6a7f92d4ffb))
+
+
+
 ## [2021.12.2-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2021.10.11-1...idea-run-typescript@2021.12.2-0) (2021-12-01)
 
 
