@@ -20,6 +20,7 @@ data class TsRunSettings(
 	var programParameters: String = "",
 
 	var tsnodePackage: NodePackage? = null,
+	var tsnodePackageRef: NodePackageRef? = null,
 
 	var extraTypeScriptOptions: String = "",
 	var tsconfigFile: String = ""

@@ -1,5 +1,6 @@
 package io.plugin.tsnode.execution
 
+import com.intellij.javascript.nodejs.util.NodePackageRef
 import com.intellij.json.JsonFileType
 import com.intellij.lang.javascript.library.JSLibraryUtil
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
@@ -245,6 +246,7 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 			programParameters = this.programParameters,
 
 			tsnodePackage = tsnodePackageField.selected,
+			tsnodePackageRef = tsnodePackageField.selectedRef,
 
 			tsconfigFile = tsconfigFileField.text,
 			extraTypeScriptOptions = extraTypeScriptOptionsField.text
@@ -277,7 +279,10 @@ class TsConfigurationEditor(runConfig: TsRunConfiguration, project: Project) : _
 		//		envVars.envs = config.envs2
 
 		envVars.envs = config.envs;
+
 		tsnodePackageField.selected = config.selectedTsNodePackage()!!
+		tsnodePackageField.selectedRef = NodePackageRef.create(tsnodePackageField.selected)
+
 		tsconfigFileField.text = runSettings.tsconfigFile
 		extraTypeScriptOptionsField.text = runSettings.extraTypeScriptOptions
 
