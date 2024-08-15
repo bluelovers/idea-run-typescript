@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2024.8.16-1](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2024.08.16-0...idea-run-typescript@2024.8.16-1) (2024-08-15)
+
+**Note:** Version bump only for package idea-run-typescript
+
+
+
+
+
 ## [2024.8.16-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2024.08.15-0...idea-run-typescript@2024.8.16-0) (2024-08-15)
 
 
