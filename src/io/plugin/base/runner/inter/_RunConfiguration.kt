@@ -10,6 +10,7 @@ import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreter
 import com.intellij.javascript.nodejs.interpreter.NodeJsInterpreterRef
 import com.intellij.javascript.nodejs.interpreter.local.NodeJsLocalInterpreter
 import com.intellij.javascript.nodejs.util.NodePackage
+import com.intellij.javascript.nodejs.util.NodePackageRef
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.util.InvalidDataException
 import com.intellij.openapi.util.JDOMExternalizerUtil
@@ -219,6 +220,23 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 			runSettings.interpreterRef = NodeJsInterpreterRef.create(interpreterRef_referenceName);
 		}
 
+		val tsnodePackageRef_referenceName = JDOMExternalizerUtil.readField(element, "tsnodePackageRef")
+		val tsnodePackage_referenceName = JDOMExternalizerUtil.readField(element, "tsnodePackage")
+
+		if (tsnodePackageRef_referenceName?.isNotBlank() == true)
+		{
+			runSettings.tsnodePackageRef = NodePackageRef.create(tsnodePackageRef_referenceName)
+			runSettings.tsnodePackage = runSettings.tsnodePackageRef?.constantPackage
+		}
+
+		if (runSettings.tsnodePackage?.isValid != true && tsnodePackage_referenceName?.isNotBlank() == true)
+		{
+			runSettings.tsnodePackageRef = NodePackageRef.create(tsnodePackage_referenceName)
+			runSettings.tsnodePackage = runSettings.tsnodePackageRef?.constantPackage
+		}
+
+		JDOMExternalizerUtil.readField(element, "scriptName")
+
 		setScriptName(JDOMExternalizerUtil.readField(element, "scriptName"))
 		setWorkingDirectory(JDOMExternalizerUtil.readField(element, "workingDirectory"))
 
@@ -250,6 +268,8 @@ abstract class _RunConfiguration<T : TsRunSettings>(runConfigurationModule: RunC
 		EnvironmentVariablesComponent.writeExternal(element, envs)
 
 		JDOMExternalizerUtil.writeField(element, "interpreterRef", getInterpreterRef().referenceName)
+
+		JDOMExternalizerUtil.writeField(element, "tsnodePackageRef", runSettings.tsnodePackageRef?.identifier)
 
 		JDOMExternalizerUtil.writeField(element, "enabledTsNodeEsmLoader", getEnabledTsNodeEsmLoader().toString())
 
