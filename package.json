@@ -39,16 +39,16 @@
     "sort-package-json": "yarn-tool sort"
   },
   "dependencies": {
-    "debug-color2": "^1.2.3",
+    "debug-color2": "^1.3.2",
     "dot-properties-loader": "^1.0.5",
-    "dotenv-cli": "^4.0.0",
-    "fs-extra": "^9.0.1",
-    "xmlbuilder2": "^2.3.1"
+    "dotenv-cli": "^7.4.2",
+    "fs-extra": "^11.2.0",
+    "xmlbuilder2": "^3.1.1"
   },
   "devDependencies": {
-    "@bluelovers/tsconfig": "^1.0.20",
-    "@types/fs-extra": "^9.0.1",
-    "@types/node": "*"
+    "@bluelovers/tsconfig": "^1.0.35",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.3.0"
   },
   "peerDependencies": {},
   "engines": {
