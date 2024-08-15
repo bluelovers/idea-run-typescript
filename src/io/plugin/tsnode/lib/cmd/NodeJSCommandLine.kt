@@ -155,6 +155,11 @@ object MyNodeCommandLineUtil
 
 		configureProcess(processHandler, project)
 
+		try {
+			// https://youtrack.jetbrains.com/issue/IJSDK-917/NodeCommandLineUtil.createCommandLine-not-support-ctrlc-when-nodejs.console.use.terminal-is-enable
+			TerminalExecutionConsole(project!!, processHandler)
+		} catch (_: Exception) {}
+
 		return processHandler
 	}
 
