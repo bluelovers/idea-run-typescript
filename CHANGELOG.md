@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2024.8.16-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2024.08.15-0...idea-run-typescript@2024.8.16-0) (2024-08-15)
+
+
+
+### 🐛　Bug Fixes
+
+* Invalid plugin descriptor 'description'. All the links in the plugin description must be HTTPS ([4c5d98d](https://github.com/bluelovers/idea-run-typescript/commit/4c5d98df6d69021341c918591e31eae1168b89c9))
+
+
+
 ## [2024.8.15-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2022.11.14-1...idea-run-typescript@2024.8.15-0) (2024-08-15)
 
 
