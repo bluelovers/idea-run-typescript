@@ -295,4 +295,14 @@ object TsUtil
 		}
 	}
 
+	fun envDataValueToBoolean(v: Any?): Boolean?
+	{
+		if (!isEmptyOrSpacesOrNull(v))
+		{
+			return v.toString().toBoolean()
+		}
+
+		return null
+	}
+
 }

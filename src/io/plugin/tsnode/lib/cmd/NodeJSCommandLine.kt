@@ -126,11 +126,13 @@ object MyNodeCommandLineUtil
 	{
 		var charset = commandLine.charset.toString().lowercase()
 
+		val force_utf8 = TsUtil.envDataValueToBoolean(commandLine.environment.get("IDEA_NODEJS_CONSOLE_FORCE_UTF8"))
+
 		LOG.info("current commandLine.charset ${charset}")
 
 		charset = charset.lowercase()
 
-		if (true || charset == "x-windows-950" || charset == "x-windows-936" || charset == "gbk")
+		if (force_utf8 == true || charset == "x-windows-950" || charset == "x-windows-936" || charset == "gbk")
 		{
 			commandLine.withCharset(Charset.forName("UTF-8"))
 		}
