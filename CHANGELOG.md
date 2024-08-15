@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2024.8.15-0](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2022.11.14-1...idea-run-typescript@2024.8.15-0) (2024-08-15)
+
+
+### BREAKING CHANGES
+
+* use `tsx` as default
+
+
+
+### 🐛　Bug Fixes
+
+* can't set commandLine.charset to utf-8 when sys is gbk ([17e25ce](https://github.com/bluelovers/idea-run-typescript/commit/17e25ce375a4b7c8c01335e0b9fda90441d66ced)), closes [NT_kwDOAAKQHrIxMTk1MTQ2MjQ2MzoxNjc5NjY#issuecomment-2291094308](https://github.com/NT_kwDOAAKQHrIxMTk1MTQ2MjQ2MzoxNjc5NjY/issues/issuecomment-2291094308)
+
+
+### ✨　Features
+
+* use `tsx` as default ([a4fe218](https://github.com/bluelovers/idea-run-typescript/commit/a4fe2187a1416fcc2fd82f65be9cce7b3b693262)), closes [/github.com/bluelovers/idea-run-typescript/issues/48#issuecomment-2288484151](https://github.com//github.com/bluelovers/idea-run-typescript/issues/48/issues/issuecomment-2288484151) [/github.com/bluelovers/idea-run-typescript/issues/48#issuecomment-2288797989](https://github.com//github.com/bluelovers/idea-run-typescript/issues/48/issues/issuecomment-2288797989)
+* allow force utf8 by `IDEA_NODEJS_CONSOLE_FORCE_UTF8` ([c6aa98c](https://github.com/bluelovers/idea-run-typescript/commit/c6aa98c6c787f599bdad234473980e62174de7e9)), closes [NT_kwDOAAKQHrIxMTk1MTQ2MjQ2MzoxNjc5NjY#issuecomment-2291094308](https://github.com/NT_kwDOAAKQHrIxMTk1MTQ2MjQ2MzoxNjc5NjY/issues/issuecomment-2291094308)
+* **todo:** save `tsnodePackageRef` ([dc28143](https://github.com/bluelovers/idea-run-typescript/commit/dc2814369c50cb4ff0162dd46d33b93d6cf99f3f))
+* **todo:** `TerminalExecutionConsole` ([64fac54](https://github.com/bluelovers/idea-run-typescript/commit/64fac54eff9158c5aced9ada583cf43fac62f6ee))
+* **todo:** add `tsnodePackageRef` ([3afc6f1](https://github.com/bluelovers/idea-run-typescript/commit/3afc6f1f78502a5549e6f6ecca3c14df3b4d8fab))
+
+
+### 📌　Dependencies
+
+* update deps ([e5026b4](https://github.com/bluelovers/idea-run-typescript/commit/e5026b4e762322b85e2ec41e6fabcc57e16757bd))
+
+
+
 ## [2022.11.14-1](https://github.com/bluelovers/idea-run-typescript/compare/idea-run-typescript@2021.12.02-0...idea-run-typescript@2022.11.14-1) (2022-11-14)
 
 
