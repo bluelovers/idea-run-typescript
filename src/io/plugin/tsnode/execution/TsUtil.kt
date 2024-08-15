@@ -38,6 +38,8 @@ object TsUtil
 
 	private val configurations = HashMap<String, RunnerAndConfigurationSettingsImpl>()
 
+	val tsPreferredPackageList: List<String> = listOf("tsx", "esno", "ts-node", "esm-ts-node")
+
 	fun isScratchFileType(psiFile: PsiFile): Boolean
 	{
 		return ScratchUtil.isScratch(psiFile.virtualFile)

@@ -55,11 +55,27 @@ class TsRunConfiguration(runConfigurationModule: RunConfigurationModule, factory
 		}
 	}
 
-	fun selectedTsNodePackage(name: String = "ts-node"): NodePackage?
+	fun selectedTsNodePackage(name: String = "tsx"): NodePackage?
 	{
 		if (_tsPackage == null)
 		{
-			val pkg = findPreferredPackage(listOf(name, "ts-node", "esm-ts-node"))
+			val _my_list: List<String> = if (runSettings.tsnodePackage?.isValid == true)
+			{
+				_tsPackage = runSettings.tsnodePackage
+				return _tsPackage
+
+//				listOf(runSettings.tsnodePackage!!.name)
+			}
+			else if (name.isNotBlank())
+			{
+				listOf(name)
+			}
+			else
+			{
+				listOf()
+			}
+
+			val pkg = findPreferredPackage(_my_list + TsUtil.tsPreferredPackageList)
 
 			_tsPackage = pkg
 
