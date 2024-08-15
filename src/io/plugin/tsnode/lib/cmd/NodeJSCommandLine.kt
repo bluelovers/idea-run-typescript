@@ -119,10 +119,18 @@ object MyNodeCommandLineUtil
 		 */
 	}
 
+	/**
+	 * [gbk system issues #49](https://github.com/bluelovers/idea-run-typescript/issues/49?notification_referrer_id=NT_kwDOAAKQHrIxMTk1MTQ2MjQ2MzoxNjc5NjY#issuecomment-2291094308)
+	 */
 	fun configureCharset(commandLine: GeneralCommandLine)
 	{
-		val charset = commandLine.charset.toString()
-		if (charset == "x-windows-950" || charset == "x-windows-936")
+		var charset = commandLine.charset.toString().lowercase()
+
+		LOG.info("current commandLine.charset ${charset}")
+
+		charset = charset.lowercase()
+
+		if (true || charset == "x-windows-950" || charset == "x-windows-936" || charset == "gbk")
 		{
 			commandLine.withCharset(Charset.forName("UTF-8"))
 		}
